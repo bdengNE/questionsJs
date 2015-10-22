@@ -1,0 +1,105 @@
+body{
+	background-color: rgb(252,250,242);
+	height:100%;
+}
+
+#title h1{
+	font-size: 40px;
+	text-align: center;
+}
+
+.space{
+	margin-bottom:80px;
+	background-color:rgb(125,185,222);
+	height:70px;
+}
+.space .loginIcon{
+	display: inline;
+	height:50px;
+	width:50px;
+	float:right;
+	margin-right:10px; 
+	margin-left:10px;
+	margin-top: 10px;
+}
+.nav .container{
+
+	margin-left: auto;
+    margin-right: auto;
+    font-family:Trebuchet MS;
+
+}
+
+.nav img{
+	height:130px;
+	width:130px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.searchingBox{
+	font-family: Optima;
+}
+.search{
+	text-align: center;
+}
+
+.searchingBox a{
+	height:35px;
+	font-size:18px;
+}
+
+.searchingBox .btn{
+	height:35px;
+	text-align: center;
+	line-height: 12px;
+	background-color: rgb(250,250,250);
+
+}
+.searchingBox .btn:hover{
+	box-shadow: 1.5px 1.5px 5px grey;
+}
+
+.searchingBox input[type="text"]{
+	height:35px;
+	font-size:18px;
+	width:205px;
+	margin-left:13px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+
+}
+
+.discover .btn {
+	background-color: rgb(252,250,242);
+	-moz-border-radius:25px;
+	-webkit-border-radius:25px;
+	border-radius:25px;
+	border:3px solid #57484d;
+	display:block;
+	cursor:pointer;
+	color:#574747;
+	font-family:Trebuchet MS;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	margin: auto auto;
+	width:300px;
+}
+.discover .btn:hover {
+	background-color:#ffffff;
+}
+
+.backImage{
+	height:300px;
+/*	background-image: url("backImage.jpg");	
+	background-size: 100% 80%;
+	background-repeat: no-repeat;
+*/}
+
+.bottom{
+	text-align: center;
+}

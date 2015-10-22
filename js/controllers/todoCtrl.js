@@ -117,15 +117,17 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		}
 	};
 
+	//ADAPTED for RESTAPI
 	$scope.addEcho = function (todo) {
-		$scope.editedTodo = todo;
-		todo.echo = todo.echo + 1;
-		// Hack to order using this order.
-		todo.order = todo.order -1;
-		$scope.todos.$save(todo);
-
-		// Disable the button
-		$scope.$storage[todo.$id] = "echoed";
+		$http.get(backendUrl+'/api/questions/' + todo._id + "/add-echo")
+		.success(function(data) {
+			$scope.todos = data;
+			// Disable the button
+			$scope.$storage[todo._id] = "echoed";
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
 	};
 
 	$scope.revertEditing = function (todo) {
