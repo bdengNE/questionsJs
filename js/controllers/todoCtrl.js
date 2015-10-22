@@ -90,6 +90,16 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.originalTodo = angular.extend({}, $scope.editedTodo);
 	};
 
+	$scope.doneEditing = function (todo) {
+		$scope.editedTodo = null;
+		var wholeMsg = todo.wholeMsg.trim();
+		if (wholeMsg) {
+			$scope.todos.$save(todo);
+		} else {
+			$scope.removeTodo(todo);
+		}
+	};
+
 	$scope.addEcho = function (todo) {
 		$scope.editedTodo = todo;
 		todo.echo = todo.echo + 1;
@@ -99,16 +109,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 		// Disable the button
 		$scope.$storage[todo.$id] = "echoed";
-	};
-
-	$scope.doneEditing = function (todo) {
-		$scope.editedTodo = null;
-		var wholeMsg = todo.wholeMsg.trim();
-		if (wholeMsg) {
-			$scope.todos.$save(todo);
-		} else {
-			$scope.removeTodo(todo);
-		}
 	};
 
 	$scope.revertEditing = function (todo) {
