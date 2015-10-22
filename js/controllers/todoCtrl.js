@@ -15,7 +15,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
 	//DEBUG ONLY
-	//var backendUrl = "http://localhost:8080";
+	var backendUrl = "";
 
 	/*
 	$(window).scroll(function(){
