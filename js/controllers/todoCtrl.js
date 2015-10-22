@@ -15,6 +15,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
 
+	var backendUrl = "http://localhost:8080";
+
 	/*
 	$(window).scroll(function(){
 	if($(window).scrollTop() > 0) {
@@ -29,16 +31,22 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	if (!roomId || roomId.length === 0) {
 		roomId = "all";
 	}
-
-	// TODO: Please change this URL for your app
-	var firebaseURL = "https://classquestion.firebaseio.com/";
-
 	$scope.roomId = roomId;
-
 	// Should we limit?
 	//.limitToFirst(1000);
 
-	//$scope.input.wholeMsg = '';
+	//initialize the todos list
+	$scope.todos = [];
+	//request from backend about the todo
+	$http.get(backendUrl+'/api/questions')
+	.success(function(data) {
+		$scope.todos = data;
+	})
+	.error(function(data) {
+		console.log('Error: ' + data);
+	});
+
+	
 	$scope.editedTodo = null;
 
 	// pre-precessing for collection
@@ -73,7 +81,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			return;
 		};
 
-		$http.post('/api/questions', {wholeMsg: $scope.input.wholeMsg})
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
@@ -90,12 +98,21 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.originalTodo = angular.extend({}, $scope.editedTodo);
 	};
 
+	//CUSTOM method for our new RESTAPI
 	$scope.doneEditing = function (todo) {
-		$scope.editedTodo = null;
-		var wholeMsg = todo.wholeMsg.trim();
-		if (wholeMsg) {
-			$scope.todos.$save(todo);
+		todo.wholeMsg = todo.wholeMsg.trim();
+		if (todo.wholeMsg) {
+			//update the todo
+			$http.post(backendUrl+'/api/questions/'+todo._id, todo)
+			.success(function(data) {
+				$scope.editedTodo = null;
+				$scope.todos = data;
+			})
+			.error(function(data) {
+				console.log('Error: ' + data);
+			});
 		} else {
+			//remove the todo
 			$scope.removeTodo(todo);
 		}
 	};
@@ -116,8 +133,17 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.doneEditing(todo);
 	};
 
+	//CUSTOM method for new RESTAPI
 	$scope.removeTodo = function (todo) {
-		$scope.todos.$remove(todo);
+		$http.delete('/api/questions/'+todo._id)
+		.success(function(data) {
+			//reload the todos
+	        $scope.todos = data;
+	        console.log(data);
+	    })
+	    .error(function(data) {
+	        console.log('Error: ' + data);
+	    });
 	};
 
 	$scope.clearCompletedTodos = function () {
@@ -130,13 +156,13 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 	$scope.toggleCompleted = function (todo) {
 		todo.completed = !todo.completed;
-		$scope.todos.$save(todo);
+		$scope.doneEditing(todo);
 	};
 
 	$scope.markAll = function (allCompleted) {
 		$scope.todos.forEach(function (todo) {
 			todo.completed = allCompleted;
-			$scope.todos.$save(todo);
+			$scope.doneEditing(todo);
 		});
 	};
 
