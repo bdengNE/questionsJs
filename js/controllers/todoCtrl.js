@@ -14,8 +14,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
-
-	var backendUrl = "http://localhost:8080";
+	//DEBUG ONLY
+	//var backendUrl = "http://localhost:8080";
 
 	/*
 	$(window).scroll(function(){
@@ -46,7 +46,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		console.log('Error: ' + data);
 	});
 
-	
+
 	$scope.editedTodo = null;
 
 	// pre-precessing for collection
