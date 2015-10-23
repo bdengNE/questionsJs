@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html ng-app>
-	<head>	
+<html ng-app="app">
+	<head>
 		<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
 		<link rel="stylesheet" href="css/font.css">
@@ -8,8 +8,8 @@
 		<title>CarryRoom</title>
 		<link rel="shortcut icon" href="css/icon1.png" />
 	</head>
-	
-	<body>
+
+	<body ng-controller="controller">
 		<div class="space">
 			<div class="container">
 					<!--Student login button-->
@@ -73,5 +73,26 @@
 				<p>Copyright &copy Why Naming Again. All Rights Reserved</p>
 			</div>
 		</div>
+		<!-- Bootstrap core JavaScript
+			================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="js/lib/jquery.min.js"></script>
+		<script src="js/lib/bootstrap.min.js"></script>
+
+		<!-- 1.4.2 -->
+		<script src="js/lib/angular.min.js"></script>
+
+		<script>
+		angular.module('app', [])
+		.controller('controller', ['$scope', '$location', '$window', function($scope, $location, $window) {
+			$scope.example = {
+				text: '',
+				word: /^\s*\w*\s*$/
+			};
+			$scope.join = function () {
+				$window.location.href = 'question.html#/' + $scope.example.text;
+			}
+		}]);
+		</script>
 	</body>
 </html>
