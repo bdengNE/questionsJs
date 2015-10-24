@@ -1,5 +1,5 @@
 body{
-	background-color: rgb(170, 168, 161);
+	background-color: rgb(235, 233, 226);
 	height:100%;
 }
 
@@ -150,3 +150,7 @@ body{
 .questionBar{
 	padding: 30px 0px 30px 0px;
 }
+.postQuestion{
+	padding: 30px 0px 30px 30px;
+}
+
