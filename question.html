@@ -105,6 +105,7 @@
     </div>
 
     <div class="col-lg-8 col-md-8">
+        <!-- PLACE FOR FUTURE SEARCH -->
         <!--
         <div class="searchQuestion">
                 <form action="#" method="post" class="form">
@@ -120,8 +121,10 @@
                 </form>
         </div>
         -->
+        <!-- NEW DESIGN OF POSTING QUESTIONS -->
+
         <div class="input-group">
-            <!-- POST -->
+            <!-- POST QUESTION -->
             <div class="post">
                 <form action="#" class="form newtopic" method="post">
                     <div class="topwrap">
@@ -207,13 +210,13 @@
                         <div class="clearfix"></div>
                     </div>
                 </form>
-            </div><!-- POST -->
-
-
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="addTodo()">Ask</button>
-            </span>
+            </div><!-- POST QUESTION -->
         </div>
+
+
+
+        <!-- NEW DESIGN OF TODO LIST -->
+
         <div class="list-group" id="todo-list">
 
             <span class="listgroup-item" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
