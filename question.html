@@ -24,12 +24,13 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="css/icon1.png" />
     <link rel="stylesheet" href="css/font.css">
-   
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
 </head>
-<body ng-controller="TodoCtrl">
+<body ng-controller="TodoCtrl" style="background-color: #e8e8e8">
     <div class="space">
-        <div class="container">
+        <div class="container" >
                 <!--Student login button-->
                 <img class="logo" src="css/icon1.png">
                 <img class="loginIcon" src="css/stu.png">
@@ -104,32 +105,173 @@
     </div>
 
     <div class="col-lg-8 col-md-8">
+        <!--
+        <div class="searchQuestion">
+                <form action="#" method="post" class="form">
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" laceholder="Search for question"
+                               ng-model="input.wholeMsg" autofocus="autofocus">
+                        </input>
+                    </div>
+
+                    <div class="col-md-2"><button class="btn btn-alarm" type="button"  ng-click="addTodo()">
+                        <i class="glyphicon glyphicon-search"></i></button></div>
+                    <div class="clearfix"></div>
+                </form>
+        </div>
+        -->
         <div class="input-group">
-            <textarea type="text" id="new-todo" class="form-control"
-            placeholder="Post Question"
-            ng-model="input.wholeMsg" autofocus></textarea>
+            <!-- POST -->
+            <div class="post">
+                <form action="#" class="form newtopic" method="post">
+                    <div class="topwrap">
+                        <div class="userinfo pull-left">
+                            <div class="avatar">
+                                <img src="img/avatar.png" height="42" width="42" alt="" />
+                                <div class="status green">&nbsp;</div>
+                            </div>
+
+                            <div class="icons">
+
+                            </div>
+                        </div>
+                        <div class="posttext pull-left">
+                            <div class ="row questionBar">
+                            <form action="#" method="post" class="form">
+                                    <textarea type="text" class="form-control" placeholder="Post for question"
+                                           ng-model="input.wholeMsg" autofocus="autofocus">
+                                    </textarea>
+                                <div class="clearfix"></div>
+                            </form>
+                            </div>
+                            <!--
+                            <div>
+                                <input type="text" placeholder="Enter Topic Title" class="form-control" />
+                            </div>
+
+                            <div>
+                                <textarea name="desc" id="desc" placeholder="Description"
+                                          class="form-control" ></textarea>
+                            </div>
+                            -->
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <select name="category" id="category"  class="form-control" >
+                                        <option value="" disabled selected>Select Category</option>
+                                        <option value="op1">Question</option>
+                                        <option value="op2">Instruction</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div><p>Who can see this?</p></div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" id="everyone" /> Everyone</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="checkbox">
+                                                <label><input type="checkbox" id="friends"  /> Only Instructors</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="postinfobot">
+
+                        <div class="notechbox pull-left">
+                            <input type="checkbox" name="note" id="note" class="form-control" />
+                        </div>
+
+                        <div class="pull-left">
+                            <label for="note"> Email me when some one post a reply</label>
+                        </div>
+
+                        <div class="pull-right postreply">
+                            <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
+                            <div class="pull-left"><button type="button" class="btn btn-primary"
+                                    ng-click="addTodo()">Post</button></div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div><!-- POST -->
+
+
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="addTodo()">Ask</button>
             </span>
         </div>
         <div class="list-group" id="todo-list">
-            <span class="list-group-item" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-        <h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-            <span class="label label-danger" ng-show="todo.new">New</span>
-            <span class="badge">{{todo.echo}}</span>
-            <!-- switch -->
-            <span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
-            <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-            <span ng-class="{completed: todo.completed}">{{todo.head}}</span>
-        </h4>
-        <p class="list-group-item-text"><span>{{todo.linkedDesc}}</span> created: {{todo.createdAt}}
-            <span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
 
-            <button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo._id]">Like</button>
-            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
-            &nbsp;
-            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-        </span>
+            <span class="listgroup-item" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
+                  ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+
+                <div class="post list-group-item-heading" ng-switch on="todo.headLastChar">
+                    <div class="wrap-ut pull-left">
+                        <div class="userinfo pull-left">
+                            <div class="avatar">
+                                <img src="img/avatar.png" height="42" width="42" alt="" />
+                                <div class="status green">&nbsp;</div>
+                            </div>
+
+                            <div class="icons">
+
+                            </div>
+                        </div>
+                        <div class="posttext pull-left">
+                            <h2 ng-class="{completed: todo.completed}">
+                                <span class="label label-danger" ng-show="todo.new">New</span>
+                                <span class="iconStyle glyphicon glyphicon-question-sign"></span>
+                                <a href="#">{{todo.head}}</a>
+                                <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
+                                <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
+                            </h2>
+                            <p>{{todo.linkedDesc}}</p>
+                            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check"
+                                    ng-click="toggleCompleted(todo)">Toggle Completed</button>
+                            &nbsp;
+                            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash"
+                                    aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="postinfo pull-left">
+                        <div class="comments">
+                            <div class="commentbg">
+                                560
+                                <div class="mark"></div>
+                            </div>
+
+                        </div>
+                        <div class="views row">
+                            <span class="col-md-5 glyphicon glyphicon-thumbs-up voteup" style="font-size: 20px;"
+                                  ng-click="addEcho(todo)" ng-disabled="$storage[todo._id]"></span>
+                            <span class="col-md-2 label label-warning"> {{todo.echo}} </span>
+                            <span class="col-md-5 glyphicon glyphicon-thumbs-down votedown"
+                                  ng-click="subtractEcho(todo)" ng-disabled="$storage[todo._id]"></span>
+                        </div>
+
+                        <div class="time"><span class="glyphicon glyphicon-time"></span>
+                            {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div><!-- POST -->
+
+            </span>
         </div>
     </div>
 
