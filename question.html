@@ -1,109 +1,175 @@
+
 <!doctype html>
 <html lang="en" ng-app="todomvc" scroll data-framework="firebase">
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
 
-	<!-- http://stackoverflow.com/questions/1341089/using-meta-tags-to-turn-off-caching-in-all-browsers -->
-	<meta http-equiv="cache-control" content="max-age=0" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-	<meta http-equiv="pragma" content="no-cache" />
+    <title>Question Room</title>
 
-	<title>Question Room: {{roomId}}</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
-	<link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" type="text/css" href="style1.css" media="screen" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="css/icon1.png" />
+    <link rel="stylesheet" href="css/font.css">
+   
 
 </head>
 <body ng-controller="TodoCtrl">
-	<font size="10">Questions for {{roomId}}?</font>&nbsp;
+    <div class="space">
+        <div class="container">
+                <!--Student login button-->
+                <img class="logo" src="css/icon1.png">
+                <img class="loginIcon" src="css/stu.png">
+                <!--Professor login button-->
+                <img class="loginIcon" src="css/prof.png">
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4">
+        <div class="sidebarblock">
+            <h3>Poll of the Week</h3>
 
-	<!--
+            <div class="blocktxt">
+                <p>Polling question</p>
+                <form action="#" method="post" class="form">
+                    <table class="poll">
+                        <tr>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar color1" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
+                                        Choice 1
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="chbox">
+                                <input id="opt1" type="radio" name="opt" value="1">  
+                                <label for="opt1"></label>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar color2" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 63%">
+                                        Choice 2
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="chbox">
+                                <input id="opt2" type="radio" name="opt" value="2" checked>  
+                                <label for="opt2"></label>  
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <p class="smal">Voting ends on times </p>
+            </div>
+        </div>
+        <div class="sidebarblock">
+            <h3>Categories</h3>
+            <div class="divline"></div>
+            <div class="blocktxt">
+                <ul class="cats">
+                    <li><a href="#">Instrutor's posts <span class="badge pull-right">20</span></a></li>
+                    <li><a href="#">TA's posts<span class="badge pull-right">10</span></a></li>
+                    <li><a href="#">Hot answers <span class="badge pull-right">50</span></a></li>
+                    <li><a href="#">Others<span class="badge pull-right">36</span></a></li>
+                </ul>
+            </div>
+        </div>
+       <div class="sidebarblock">
+            <h3>Other classrooms</h3>
+            <div class="divline"></div>
+            <div class="blocktxt">
+                <ul class="cats">
+                    <li><a href="#">COMP2011</a></li>
+                    <li><a href="#">COMP2012</a></li>
+                    <li><a href="#">COMP4331</a></li>
+                    <li><a href="#">COMP3021</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- -->
+    </div>
 
-	<a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
-	<a ng-class="{selected: location.path() == '/tags'}" class="btn btn-success" href="#/tags">Tags</a>
-	<a ng-class="{selected: location.path() == '/users'}" class="btn btn-info" href="#/users">Users</a>
-	<a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
--->
-
-<small>Share room url: {{absurl}}</small> &nbsp;
-<a class="btn btn-default" href="/index.html">Main</a>
-<button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Want Admin? Sign in with Facebook</button>
-
-<!-- after login -->
-<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
-{{$authData.facebook.displayName}}
-<button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>
-
-
-
-<div class="input-group">
-	<!--
-	<form id="todo-form" ng-submit="addTodo()">
--->
-<textarea type="text" id="new-todo" class="form-control"
-placeholder="Search or Post Question"
-ng-model="input.wholeMsg" autofocus></textarea>
-<span class="input-group-btn">
-	<button class="btn btn-default" type="button" ng-click="addTodo()">Ask</button>
-</span>
-</div><!-- /input-group -->
-
-
-<div class="list-group" id="todo-list">
-	<span class="list-group-item" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-		<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-			<span class="label label-danger" ng-show="todo.new">New</span>
-			<span class="badge">{{todo.echo}}</span>
-			<!-- switch -->
-			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
-			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
-		</h4>
+    <div class="col-lg-8 col-md-8">
+        <div class="input-group">
+            <textarea type="text" id="new-todo" class="form-control"
+            placeholder="Post Question"
+            ng-model="input.wholeMsg" autofocus></textarea>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="addTodo()">Ask</button>
+            </span>
+        </div>
+        <div class="list-group" id="todo-list">
+            <span class="list-group-item" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+        <h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
+            <span class="label label-danger" ng-show="todo.new">New</span>
+            <span class="badge">{{todo.echo}}</span>
+            <!-- switch -->
+            <span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
+            <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
+            <span ng-class="{completed: todo.completed}">{{todo.head}}</span>
+        </h4>
         <p class="list-group-item-text"><span>{{todo.linkedDesc}}</span> created: {{todo.createdAt}}
-			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
+            <span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
 
-			<button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo._id]">Like</button>
-			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
-			&nbsp;
-			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-		</span>
-	</div>
-
-	<!--
-
-	<div id="toTop" class="btn btn-info"><span class="fa fa-arrow-up">Back to Top</span></div>
-
-	<button ng-hide="totalCount<=maxQuestion"
-	class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
-	type="button" ng-click="increaseMax()"> Show more</button>
--->
+            <button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo._id]">Like</button>
+            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
+            &nbsp;
+            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+        </span>
+        </div>
+    </div>
 
 
+    <script src="js/lib/Autolinker.min.js"></script>
+           <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script type="text/javascript" src="js/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="js/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript">
+                
+        var revapi;
 
-<!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
-<script src="js/lib/Autolinker.min.js"></script>
+                jQuery(document).ready(function() {
+                    "use strict";
+                    revapi = jQuery('.tp-banner').revolution(
+                            {
+                                delay: 15000,
+                                startwidth: 1200,
+                                startheight: 278,
+                                hideThumbs: 10,
+                                fullWidth: "on"
+                            });
 
-<!-- 2.2.2 -->
-<script src="js/lib/firebase.js"></script>
-<script src="js/lib/angular.min.js"></script>
-<script src="js/lib/angularfire.js"></script>
+                }); //ready
 
-<!-- Ng storage 0.3.6  -->
-<script src="js/lib/ngStorage.min.js"></script>
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- 2.2.2 -->
+    <script src="js/lib/firebase.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angularfire.js"></script>
 
-<script src="js/app.js"></script>
-<script src="js/filters/questionFilter.js"></script>
-<script src="js/controllers/todoCtrl.js"></script>
-<script src="js/directives/todoFocus.js"></script>
-<script src="js/directives/todoBlur.js"></script>
-<script src="js/directives/todoEscape.js"></script>
+    <!-- Ng storage 0.3.6  -->
+    <script src="js/lib/ngStorage.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/filters/questionFilter.js"></script>
+    <script src="js/controllers/todoCtrl.js"></script>
+    <script src="js/directives/todoFocus.js"></script>
+    <script src="js/directives/todoBlur.js"></script>
+    <script src="js/directives/todoEscape.js"></script>
 </body>
 </html>

@@ -9,16 +9,30 @@ body{
 }
 
 .space{
-	margin-bottom:80px;
+	margin-bottom:25px;
 	background-color:rgb(125,185,222);
 	height:70px;
+}
+.space .container{
+	margin-bottom:25px;
+	background-color:rgb(125,185,222);
+	height:55px;
+}
+.space .logo{
+	display: inline;
+	height:50px;
+	width:50px;
+	float:left;
+    margin-right:0px; 
+	
+	margin-top: 10px;
 }
 .space .loginIcon{
 	display: inline;
 	height:50px;
 	width:50px;
 	float:right;
-	margin-right:10px; 
+	margin-right:0px; 
 	margin-left:10px;
 	margin-top: 10px;
 }
