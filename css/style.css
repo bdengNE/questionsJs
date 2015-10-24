@@ -141,10 +141,11 @@ body{
 }
 
 .list-group{
-	padding: 30px 30px 30px 30px;
+	padding: 30px 30px 30px 25px;
+	padding-right:25px;
 }
 .listgroup-item{
-	padding: 30px 30px 30px 30px;
+	padding: 30px 30px 30px 25px;
 }
 
 .questionBar{

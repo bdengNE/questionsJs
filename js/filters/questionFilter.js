@@ -6,6 +6,9 @@
 * Show the new questions on the top and show only max questions 
 *
 */
+function parseTwitterDate(text) {
+return new Date(Date.parse(text.replace(/( +)/, ' UTC$1')));
+}
 todomvc.filter('questionFilter', function () {
   return function (input, max) {
     var sorted = [];
@@ -13,7 +16,7 @@ todomvc.filter('questionFilter', function () {
     var sortedCount = 0;
 
     angular.forEach(input, function (todo) {
-      if (todo.timestamp > new Date().getTime() - 180000) { // 3min
+      if (parseTwitterDate(todo.createdAt)> new Date().getTime() - 180000) { // 3min
         todo.new = true;
         newQuestions.push(todo);
       } else if (sortedCount++<=max){  // show top n only.
@@ -25,7 +28,7 @@ todomvc.filter('questionFilter', function () {
       // Newer ones are on the top
       newQuestions.sort(function(a, b) {
         if (a.echo == b.echo) {
-          return b.timestamp - a.timestamp;
+          return b.createdAt - a.createdAt;
         }
         return b.echo - a.echo;
       });
