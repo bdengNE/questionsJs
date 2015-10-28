@@ -38,7 +38,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	//initialize the todos list
 	$scope.todos = [];
 	//request from backend about the todo
-	$http.get(backendUrl+'/api/questions')
+	$http.get(backendUrl+'/api/questions?roomId='+roomId)
 	.success(function(data) {
 		$scope.todos = data;
 	})
@@ -81,7 +81,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			return;
 		};
 
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo})
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
