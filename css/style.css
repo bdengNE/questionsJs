@@ -23,8 +23,8 @@ body{
 	height:50px;
 	width:50px;
 	float:left;
-    margin-right:0px; 
-	
+    margin-right:0px;
+
 	margin-top: 10px;
 }
 .space .loginIcon{
@@ -140,10 +140,12 @@ body{
 	padding: 10px 5px 10px 5px;
 }
 
+/** fix the alignment problem
 .list-group{
 	padding: 30px 30px 30px 25px;
 	padding-right:25px;
-}
+}*/
+
 .listgroup-item{
 	padding: 30px 30px 30px 25px;
 }
@@ -155,3 +157,6 @@ body{
 	padding: 30px 0px 30px 30px;
 }
 
+.input-group {
+	display: block !important;
+}
