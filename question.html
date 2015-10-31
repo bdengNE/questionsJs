@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="css/font.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <script src="src/js/angular-socialshare.js"></script>
 
 </head>
 <body ng-controller="TodoCtrl" style="background-color: #e8e8e8">
@@ -138,7 +139,7 @@
                         <div class="userinfo pull-left">
                             <div class="avatar">
                                 <img src="img/avatar.png" height="42" width="42" alt="" />
-                                <div class="status green">&nbsp;</div>
+                                <div class="status green"></div>
                             </div>
 
                             <div class="icons">
@@ -243,10 +244,12 @@
                                 <div class="status green">&nbsp;</div>
                             </div>
 
-                            <div class="icons">
 
+                            <div class="icons" >
+                             <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" >delete</a>
                             </div>
                         </div>
+
                         <div class="posttext pull-left">
                             <h2 ng-class="{completed: todo.completed}">
                                 <span class="label label-danger" ng-show="todo.new">New</span>
