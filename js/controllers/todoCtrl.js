@@ -129,6 +129,17 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	};
+	$scope.minusEcho = function (todo) {
+		$http.get(backendUrl+'/api/questions/' + todo._id + "/minus-echo")
+		.success(function(data) {
+			$scope.todos = data;
+			// Disable the button
+			$scope.$storage[todo._id] = "echoed";
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
 
 	$scope.revertEditing = function (todo) {
 		todo.wholeMsg = $scope.originalTodo.wholeMsg;
