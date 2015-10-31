@@ -206,6 +206,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	}
 	$scope.location = $location;
 
+
 	// autoscroll
 	angular.element($window).bind("scroll", function() {
 		if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
@@ -221,4 +222,10 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		}
 	});
 
+}]);
+
+
+emojiApp.controller('emojiController', ['$scope', function($scope) {
+
+    $scope.emojiMessage={};
 }]);
