@@ -206,7 +206,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			}
 		});
 	};
-
 	$scope.FBLogout = function () {
 		var ref = new Firebase(firebaseURL);
 		ref.unauth();
@@ -247,4 +246,3 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	});
 
 }]);
-
