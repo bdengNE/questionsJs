@@ -134,7 +134,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$http.get(backendUrl+'/api/rooms/'+roomId)
 		.success(function(data) {
 			$scope.roomList.push(data);
-			// Disable the button
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
