@@ -34,7 +34,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.roomId = roomId;
 	// Should we limit?
 	//.limitToFirst(1000);
-
+	// initialize the room list
+	$scope.roomList=[];
 	//initialize the todos list
 	$scope.todos = [];
 	//request from backend about the todo
@@ -129,6 +130,16 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	};
+	$scope.getRoomList = function (todo) {
+		$http.get(backendUrl+'/api/rooms/'+roomId)
+		.success(function(data) {
+			$scope.roomList.push(data);
+			// Disable the button
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
 	$scope.minusEcho = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/minus-echo")
 		.success(function(data) {
@@ -178,7 +189,10 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$scope.doneEditing(todo);
 		});
 	};
+	//ADAPTED for RESTAPI
 
+
+	/*
 	$scope.FBLogin = function () {
 		var ref = new Firebase(firebaseURL);
 		ref.authWithOAuthPopup("facebook", function(error, authData) {
@@ -200,6 +214,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		delete $scope.$authData;
 		$scope.isAdmin = false;
 	};
+	*/
 
 	$scope.increaseMax = function () {
 		if ($scope.maxQuestion < $scope.totalCount) {
@@ -233,3 +248,4 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	});
 
 }]);
+
