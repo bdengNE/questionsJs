@@ -7,7 +7,7 @@ body{
 	font-size: 40px;
 	text-align: center;
 }
-
+/*
 .space{
 	margin-bottom:25px;
 	background-color:rgb(125,185,222);
@@ -17,7 +17,7 @@ body{
 	margin-bottom:25px;
 	background-color:rgb(125,185,222);
 	height:55px;
-}
+}*/
 .space .logo{
 	display: inline;
 	height:50px;
@@ -26,6 +26,19 @@ body{
     margin-right:0px;
 
 	margin-top: 10px;
+}
+
+.space #quote{
+	text-align: center;
+	display: inline;	
+	font-size: 18px;
+	float: left;
+	width: 50%;
+	margin-top: 4px;
+}
+.space p{
+	font-family: 'Josefin Slab', serif;
+	font-weight: bold;
 }
 .space .loginIcon{
 	display: inline;
@@ -87,6 +100,16 @@ body{
 
 }
 
+#backImage{
+	height:500px;
+	
+	background-image: url("../img/sea.jpg");*/
+	background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: -40px;
+    box-shadow: 0 0 8px 3px;
+}
+
 .discover .btn {
 	background-color: rgb(252,250,242);
 	-moz-border-radius:25px;
@@ -105,17 +128,16 @@ body{
 }
 .discover .btn:hover {
 	background-color:#ffffff;
+
 }
 
-.backImage{
-	height:300px;
-/*	background-image: url("backImage.jpg");
-	background-size: 100% 80%;
-	background-repeat: no-repeat;
-*/}
 
 .bottom{
+	position: fixed; 
+	bottom: 0; 
+	width:100%; 
 	text-align: center;
+	color:rgb(250,250,250);
 }
 
 .iconStyle{

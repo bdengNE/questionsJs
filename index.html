@@ -3,10 +3,12 @@
 	<head>
 		<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+		<link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/font.css">
 		<link rel="stylesheet" href="css/style.css">
 		<title>CarryRoom</title>
 		<link rel="shortcut icon" href="css/icon1.png" />
+		<meta charset="utf-8"> 
 	</head>
 
 	<body ng-controller="controller">
@@ -130,6 +132,7 @@
 		<!-- fb end -->
 		<div class="space">
 			<div class="container">
+					<p id="quote" >"test" <br>--Norton Juster</p>
 					<!--Student login button-->
 					<img class="loginIcon" src="css/stu.png">
 					<!--Professor login button-->
@@ -151,8 +154,8 @@
 		        </div>
 		    </div>
 		</div>
-		<!-- this div is the searching box-->
-		<div class="backImage">
+		<div id="backImage">
+			<!-- this div is the searching box-->
 			<div class="searchingBox">
 			  <div class="container">
 				<p class="lead">
@@ -183,11 +186,12 @@
 			<div class="discover">
 				<a href="#" class="btn">Discover and Explore</a>
 			</div>
-		</div>
-		<div class="bottom">
-			<div class="container">
-				<br/>
-				<p>Copyright &copy Why Naming Again. All Rights Reserved</p>
+		
+			<div class="bottom">
+				<div class="container">
+					<br/>
+					<p>Copyright &copy Why Naming Again. All Rights Reserved</p>
+				</div>
 			</div>
 		</div>
 		<!-- Bootstrap core JavaScript
@@ -210,6 +214,34 @@
 				$window.location.href = 'question.html#/' + $scope.example.text;
 			}
 		}]);
+		</script>
+		<!--randomly show quote and background image-->
+		<script>
+			var image = [
+				"img/sea.jpg",
+				"img/faith.jpg",
+				"img/hkust.jpg",
+				"img/universe.jpg",
+				"img/candle.jpg",
+				"img/power.jpg",
+				"img/young.jpg"
+				];
+			var quote = [
+				"You can swim all day in the Sea of Knowledge and not get wet. <br>--Norton Juster",
+				"Sometimes life hits you in the head with a brick. Don't lose faith. <br>--Steve Jobs",
+				"求進，求新，創未來。<br>--HKUST Motto",
+				"One thing only I know, and that is that I know nothing. <br>--Socrates",
+				"If you have knowledge, let others light their candles with it. <br>--Winston Churchill",
+				"Knowledge is power. <br>--Francis Bacon",
+				"I am not young enough to know everything.<br>--Oscar Wilde"];
+			if(quote.length == image.length)
+			{
+				var size = image.length;
+				var x = Math.floor(size*Math.random());
+				document.getElementById("quote").innerHTML = quote[x];
+				var imgLocation = 'url(\"'+image[x]+'\")';
+				document.getElementById("backImage").style.backgroundImage = imgLocation;
+			}
 		</script>
 	</body>
 </html>
