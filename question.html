@@ -219,10 +219,11 @@
 
         <div class="list-group" id="todo-list">
 
-            <span class="listgroup-item" ng-repeat="todo in todos | questionFilter:maxQuestion"
+            <span class="listgroup-item" ng-repeat="todo in todos | filter: {roomId : roomId} | questionFilter:maxQuestion"
                   ng-class="{completed: todo.completed, editing: todo == editedTodo}">
 
-                <div class="post list-group-item-heading" ng-switch on="todo.headLastChar">
+                <div class="post list-group-item-heading" ng-switch on="todo.headLastChar"
+                     ng-style = "myStyle = {opacity: myOpacity}">
                     <div class="wrap-ut pull-left">
                         <div class="userinfo pull-left">
                             <div class="avatar">
@@ -252,7 +253,9 @@
                                     aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
                         </div>
                         <div class="clearfix"></div>
+
                     </div>
+
                     <div class="postinfo pull-left">
                         <div class="comments">
                             <div class="commentbg">
@@ -263,12 +266,13 @@
                         </div>
                         <div class="views row">
                             <span class="col-md-5 glyphicon glyphicon-thumbs-up voteup" style="font-size: 20px;"
-                                  ng-click="addEcho(todo)" ng-disabled="$storage[todo._id]"></span>
+                                  ng-click="addEcho(todo);"
+                                  ng-disabled="$storage[todo._id]"></span>
                             <span class="col-md-2 label label-warning"> {{todo.echo}} </span>
                             <span class="col-md-5 glyphicon glyphicon-thumbs-down votedown"
-                                  ng-click="minusEcho(todo)" ng-disabled="$storage[todo._id]"></span>
+                                  ng-click="minusEcho(todo);"
+                                  ng-disabled="$storage[todo._id]"></span>
                         </div>
-
                         <div class="time"><span class="glyphicon glyphicon-time"></span>
                             {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}
                         </div>
