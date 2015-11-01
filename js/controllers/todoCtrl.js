@@ -38,15 +38,32 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.roomList=[];
 	//initialize the todos list
 	$scope.todos = [];
-	//request from backend about the todo
-	$http.get(backendUrl+'/api/questions?roomId='+roomId)
-	.success(function(data) {
-		$scope.todos = data;
-	})
-	.error(function(data) {
-		console.log('Error: ' + data);
-	});
 
+	var getQuestions = function (query) {
+		//request from backend about the todo
+		query = query || {}
+		if (!query.roomId) query.roomId = roomId;
+		var params = $.param(query);
+		$http.get(`/api/questions?${params}`)
+		.success(function(data) {
+			$scope.todos = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	}
+	getQuestions();
+
+	var getRoomList = function () {
+		$http.get('/api/rooms')
+		.success(function(data) {
+			$scope.roomList = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
+	getRoomList();
 
 	$scope.editedTodo = null;
 
@@ -86,7 +103,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
-	        $scope.todos = data;
+			getQuestions();
 	        console.log(data);
 	    })
 	    .error(function(data) {
@@ -107,7 +124,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$http.post(backendUrl+'/api/questions/'+todo._id, todo)
 			.success(function(data) {
 				$scope.editedTodo = null;
-				$scope.todos = data;
+				getQuestions();
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
@@ -122,7 +139,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.addEcho = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/add-echo")
 		.success(function(data) {
-			$scope.todos = data;
+			getQuestions();
 			// Disable the button
 			$scope.$storage[todo._id] = "echoed";
 		})
@@ -133,7 +150,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.minusEcho = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/minus-echo")
 		.success(function(data) {
-			$scope.todos = data;
+			getQuestions();
 			delete $scope.$storage[todo._id];
 		})
 		.error(function(data) {
@@ -143,7 +160,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.voteDown = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/vote-down")
 		.success(function(data) {
-			$scope.todos = data;
+			getQuestions();
 			// Disable the button
 			$scope.$storage[todo._id] = "voteddown";
 		})
@@ -154,23 +171,13 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.voteDownCancel = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/vote-down-cancel")
 		.success(function(data) {
-			$scope.todos = data;
+			getQuestions();
 			delete $scope.$storage[todo._id];
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
 		});
 	};
-	$scope.getRoomList = function (todo) {
-		$http.get(backendUrl+'/api/rooms/'+roomId)
-		.success(function(data) {
-			$scope.roomList.push(data);
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
-	};
-
 
 	$scope.revertEditing = function (todo) {
 		todo.wholeMsg = $scope.originalTodo.wholeMsg;
@@ -182,7 +189,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$http.delete('/api/questions/'+todo._id)
 		.success(function(data) {
 			//reload the todos
-	        $scope.todos = data;
+	        getQuestions();
 	        console.log(data);
 	    })
 	    .error(function(data) {
