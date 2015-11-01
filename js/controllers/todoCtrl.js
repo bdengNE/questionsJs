@@ -130,6 +130,37 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	};
+	$scope.minusEcho = function (todo) {
+		$http.get(backendUrl+'/api/questions/' + todo._id + "/minus-echo")
+		.success(function(data) {
+			$scope.todos = data;
+			delete $scope.$storage[todo._id];
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
+	$scope.voteDown = function (todo) {
+		$http.get(backendUrl+'/api/questions/' + todo._id + "/vote-down")
+		.success(function(data) {
+			$scope.todos = data;
+			// Disable the button
+			$scope.$storage[todo._id] = "voteddown";
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
+	$scope.voteDownCancel = function (todo) {
+		$http.get(backendUrl+'/api/questions/' + todo._id + "/vote-down-cancel")
+		.success(function(data) {
+			$scope.todos = data;
+			delete $scope.$storage[todo._id];
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
 	$scope.getRoomList = function (todo) {
 		$http.get(backendUrl+'/api/rooms/'+roomId)
 		.success(function(data) {
@@ -139,17 +170,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	};
-	$scope.minusEcho = function (todo) {
-		$http.get(backendUrl+'/api/questions/' + todo._id + "/minus-echo")
-		.success(function(data) {
-			$scope.todos = data;
-			// Disable the button
-			$scope.$storage[todo._id] = "echoed";
-		})
-		.error(function(data) {
-			console.log('Error: ' + data);
-		});
-	};
+
 
 	$scope.revertEditing = function (todo) {
 		todo.wholeMsg = $scope.originalTodo.wholeMsg;

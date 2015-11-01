@@ -260,19 +260,19 @@
                     <div class="postinfo pull-left">
                         <div class="comments">
                             <div class="commentbg">
-                                560
+                                {{$storage[todo._id]}}
                                 <div class="mark"></div>
                             </div>
 
                         </div>
                         <div class="views row">
                             <span class="col-md-5 glyphicon glyphicon-thumbs-up voteup" style="font-size: 20px;"
-                                  ng-click="addEcho(todo);"
-                                  ng-disabled="$storage[todo._id]"></span>
+                                  ng-click="!$storage[todo._id]? addEcho(todo) : ($storage[todo._id] == 'echoed' ? minusEcho(todo) : void(0));"
+                                  ng-disabled="!!$storage[todo._id]"></span>
                             <span class="col-md-2 label label-warning"> {{todo.echo}} </span>
                             <span class="col-md-5 glyphicon glyphicon-thumbs-down votedown"
-                                  ng-click="minusEcho(todo);"
-                                  ng-disabled="$storage[todo._id]"></span>
+                                  ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
+                                  ng-disabled="!!$storage[todo._id]"></span>
                         </div>
                         <div class="time"><span class="glyphicon glyphicon-time"></span>
                             {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}
