@@ -13,20 +13,14 @@
 
 	<body ng-controller="controller">
 		<!-- fb start -->
-		<!--
-		Below we include the Login Button social plugin. This button uses
-		the JavaScript SDK to present a graphical Login button that triggers
-		the FB.login() function when clicked.
-		-->
 		<div class="container">
 			<div class="jumbotron text-center">
-				<!-- <h1><span class="fa fa-lock"></span> Log</h1> -->
 				<p>Login or Register with:</p>
 				<a href="/auth/login/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+				<a href="/auth/logout/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Logout</a>
 			</div>
 		</div>
-		<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-		</fb:login-button> -->
+		<!-- fb end -->
 
 		<div id="status">
 		</div>
