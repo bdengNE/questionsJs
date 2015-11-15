@@ -127,8 +127,8 @@
 				"求進，求新，創未來。<br>--HKUST Motto",
 				"One thing only I know, and that is that I know nothing. <br>--Socrates",
 				"If you have knowledge, let others light their candles with it. <br>--Winston Churchill",
-				"Knowledge is power. <br>--Francis Bacon",
-				"I am not young enough to know everything.<br>--Oscar Wilde"];
+				"I am not young enough to know everything.<br>--Oscar Wilde",
+				"Too young, too simple. <br>--The Elder Jiang"];
 			if(quote.length == image.length)
 			{
 				var size = image.length;
@@ -137,6 +137,15 @@
 				var imgLocation = 'url(\"'+image[x]+'\")';
 				document.getElementById("backImage").style.backgroundImage = imgLocation;
 			}
+		</script>
+		<script>
+			$(window).on('hashchange', function() {
+				if (window.location.hash == '#/_=_'){
+					history.replaceState
+						? history.replaceState(null, null, window.location.href.split('#')[0])
+						: window.location.hash = '';
+				}
+			});
 		</script>
 	</body>
 </html>
