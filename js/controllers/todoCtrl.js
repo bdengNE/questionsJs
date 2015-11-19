@@ -90,7 +90,11 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.allChecked = remaining === 0;
 		$scope.absurl = $location.absUrl();
 	}, true);
+	// dull function, and implement it later
+	$scope.selectTags=function(input){
+		return input;
 
+	}
 	//CUSTOM function adapted to new REST API
 	$scope.addTodo = function () {
 		var newTodo = $scope.input.wholeMsg.trim();
@@ -100,7 +104,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			return;
 		};
 
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId})
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId,tags:selecTags(input)})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
@@ -111,6 +115,19 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
+	$scope.selectChoice=function(){
+		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+"choice_id"+"/vote-up")
+		.success(function(data) {
+
+			getQuestions();
+			// Disable the button
+			$scope.$storage[todo._id] = "selected";
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+
+	}
 	$scope.addPolling = function () {
 		var newTodo = $scope.input.wholeMsg.trim();
 
