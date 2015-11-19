@@ -38,3 +38,17 @@ todomvc.filter('questionFilter', function () {
     return newQuestions.concat(sorted);
   };
 });
+
+todomvc.filter('questionFilter_1',function(){
+  return function(inputArray){
+        var array = [];
+        for(var i=0;i<inputArray.length;i++){
+            if(inputArray[i].type==='polling'){
+                console.log("filter done");
+                array.push(inputArray[i]);
+            }
+        }
+        return array;
+    }
+
+});
