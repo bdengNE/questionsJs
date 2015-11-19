@@ -38,7 +38,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.roomList=[];
 	//initialize the todos list
 	$scope.todos = [];
-
+    // return all questions
+    // get all questions
 	var getQuestions = function (query) {
 		//request from backend about the todo
 		query = query || {}
@@ -100,6 +101,26 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		};
 
 		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId})
+		.success(function(data) {
+			// remove the posted question in the input
+			$scope.input.wholeMsg = '';
+			getQuestions();
+	        console.log(data);
+	    })
+	    .error(function(data) {
+	        console.log('Error: ' + data);
+	    });
+	};
+	$scope.addPolling = function () {
+		var newTodo = $scope.input.wholeMsg.trim();
+
+		// No input, so just do nothing
+		if (!newTodo.length) {
+			return;
+		};
+		//var choices=[{names:'test1',votes: 20},{names:'test1',votes: 20}];
+		var temp=['choice1','choice2','choice3'];
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'polling',choices: temp})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';

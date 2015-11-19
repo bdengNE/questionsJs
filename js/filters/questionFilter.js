@@ -44,7 +44,6 @@ todomvc.filter('questionFilter_1',function(){
         var array = [];
         for(var i=0;i<inputArray.length;i++){
             if(inputArray[i].type==='polling'){
-                console.log("filter done");
                 array.push(inputArray[i]);
             }
         }
