@@ -272,5 +272,17 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$scope.$apply();
 		}
 	});
+	//Return facebook username
+	/*$scope.returnFBusername = function(){
+		$http.get('/api/users/current');
+		var username = req.user;
+		if(username==null){
+			$scope.loginStatus = false;
+		}
+		else{
+			$scope.loginStatus = true;
+			$scope.usernameString = username;
+		}
+	}*/
 
 }]);
