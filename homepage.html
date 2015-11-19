@@ -5,27 +5,21 @@
 
 
 <title>Your Personal Homepage</title>
-
-<meta name="apple-itunes-app" content="app-id=432274380, app-argument=zhihu://people/a-xi-55-72">
-
-
+<link rel="stylesheet" href="css/homepage.css">
 
 <link rel="stylesheet" href="http://static.zhihu.com/static/revved/-/css/z.5020d372.css">
 <link rel="stylesheet" href="http://static.zhihu.com/static/revved/-/css/pages/profile/main.a4ee1916.css">
-
-
-
-<!--[if lt IE 9]>
-<script src="http://static.zhihu.com/static/components/respond/dest/respond.min.js"></script>
-<link href="http://static.zhihu.com/static/components/respond/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
-<link href="/static/components/respond/cross-domain/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
-<script src="/static/components/respond/cross-domain/respond.proxy.js"></script>
-<![endif]-->
-<script src="http://static.zhihu.com/static/revved/-/js/instant.e1ff39cb.js"></script>
+<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
 
 </head>
 
 <body class="zhi">
+<div class="page-wraper">
+<div class="username">
+	<h1 id="username">{{}}</h1>
+	<a href="/auth/logout/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Logout</a>
+</div>
 
 <div class="profile-navbar clearfix">
 	<a class="item home first active"
@@ -47,11 +41,11 @@
 </div>
 
 
-
+<!-- Answer section-->
 
 <div class="zm-profile-section-wrap">
 	<div class="zm-profile-section-head">
-		<a class="zm-profile-section-title" href="/people/a-xi-55-72/answers">
+		<a class="zm-profile-section-title">
 			<h2 class="zm-profile-section-name">Answer</h2>
 			<i class="zg-right zg-icon zm-profile-section-more-btn"></i>
 		</a>
@@ -66,7 +60,7 @@
 <!-- want to have three most recent answers here-->
 	<div class="zm-profile-section-main">
 		<h2 class="zm-profile-question">
-			<a class="question_link" href="/question/22388731/answer/72026127">Question1</a>
+			<a class="question_link">Question1</a>
 		</h2>
 
 		<p class="zm-profile-item-text">Answer1</p>
@@ -81,10 +75,10 @@
 <!-- want to have three most recent answers here-->
 	<div class="zm-profile-section-main">
 		<h2 class="zm-profile-question">
-			<a class="question_link" href="/question/22388731/answer/72026127">Question2</a>
+			<a class="question_link" >Question2</a>
 		</h2>
 
-		<p class="zm-profile-item-text">Answer3</p>
+		<p class="zm-profile-item-text">Answer2</p>
 
 	</div>
 </div>
@@ -96,7 +90,7 @@
 <!-- want to have three most recent answers here-->
 	<div class="zm-profile-section-main">
 		<h2 class="zm-profile-question">
-			<a class="question_link" href="/question/22388731/answer/72026127">Question2</a>
+			<a class="question_link">Question3</a>
 		</h2>
 
 		<p class="zm-profile-item-text">Answer3</p>
@@ -104,14 +98,15 @@
 	</div>
 </div>
 
-<div class="zm-profile-section-wrap">
+<div class="zm-profile-section-wrap achievement">
 	<div class="zm-profile-section-head">
 		<a class="zm-profile-section-title">
 			<h2 class="zm-profile-section-name">Achievement</h2>
 		</a>
 	</div>
-	<div class="achievement">
-		<img href="">50 Knight
+	<div class="achievementimg">
+		<img class="medal" src="img/medal/50.png">50 Queen
+		<p>Answer more than 50 times!</p>
 	</div>
 </div>
 <!-- We have 20 JACK, 50 QUEEN, 100 KING-->
@@ -120,28 +115,32 @@
 	<div class="zg-clear"></div>
 </div>
 
+</div>
+
 <script>
-
+/*FB.api('/me', function(response) {
+    alert("Name: "+ response.name + "\nFirst name: "+ response.first_name + "ID: "+response.id);
+    var img_link = "http://graph.facebook.com/"+response.id+"/picture"
+    var temp = document.getElementById("username");
+    temp.value = response.name;
+});*/
 
 </script>
+   <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-<script type="text/json" class="json-inline" data-name="guiders2">{}</script>
-<script type="text/json" class="json-inline" data-name="current_user">["\u963f\u66e6","a-xi-55-72","https:\/\/pic3.zhimg.com\/257eac73f7613061ea67b0fafb45f8f2_s.jpg","845957b3e16e1dedd082af094e91235c","",0,0,1,"vincents_god@sina.cn","http:\/\/mail.sina.com.cn",0,true,false,false,"31677833281536"]</script>
-<script type="text/json" class="json-inline" data-name="env">["zhihu.com","comet.zhihu.com",false,null]</script>
-<script type="text/json" class="json-inline" data-name="permissions">[]</script>
+    <!-- angularJs -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
+    <script src="js/lib/Autolinker.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="webjs/bootstrap.min.js"></script>
 
-
-<script type="text/json" class="json-inline" data-name="ga_vars">{"user_created":1375456441000,"now":1447772518000,"abtest_mask":"---------0--------------------","user_attr":[1,0,0,"-",1],"user_hash":"845957b3e16e1dedd082af094e91235c"}</script>
-
-<script src="http://static.zhihu.com/static/revved/-/js/vendor.dcf5602d.js"></script>
-<script src="http://static.zhihu.com/static/revved/-/js/closure/app_core.0c1fc39a.js"></script>
-<script src="http://static.zhihu.com/static/revved/-/js/closure/sign.38c33731.js"></script>
-<script src="http://static.zhihu.com/static/revved/-/js/closure/app.8f3bb5e6.js"></script>
-<script src="http://static.zhihu.com/static/revved/-/js/closure/rich_text_editor.473ad27c.js"></script>
-
-<script type="text/zscript" znonce="afcbbcb0dc434a0d9f80e4079dfe6821">
-ZH.entryP();
-</script>
+    <!-- local scripts for our application -->
+    <script src="js/lib/ngStorage.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/filters/questionFilter.js"></script>
+    <script src="js/controllers/todoCtrl.js"></script>
 
 <input type="hidden" name="_xsrf" value="3d99b059b816aca9a5c5a74687857108"/>
 </body>
