@@ -48,13 +48,14 @@ function drawNetworkView(networkData, svgName, networkVar) {
             .range(["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"]);
 
         var curWidth = d3.select("#interactionOuter").style('width');
-        var offset = (parseInt(curWidth.substr(0, curWidth.length - 2)) - w) / 2;
+
+        var offset = (parseInt(curWidth.substr(0, curWidth.length - 2)) - w) / 2.5;
 
         d3.select(svgName).select("svg").remove();
 
         svg = d3.select(svgName)
             .append("svg")
-            .attr("width", w*2)
+            .attr("width", w * 2)
             .attr("height", h)
             .append("g")
             .attr("transform", "translate(" + offset + ",0)");

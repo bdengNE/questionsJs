@@ -188,23 +188,72 @@ body{
 }
 
 
+
 /*--- vis ---*/
 .chartLabel{
-	overflow:scroll;
-	width:100%;
-	height:100px;
-}
-
-#contentView {
 	overflow:scroll;
 	width:100%;
 	height:200px;
 }
 
-#interactionView {
+#contentView {
 	overflow:scroll;
-	width:100%;
+	width:1000px;
 	height:400px;
 }
+
+#interactionView {
+	overflow:scroll;
+	width:1000px;
+	height:400px;
+}
+
+#interactionOuter{
+	width: 1000px;
+}
+
+
+#chartLabel{
+	width: 1000px;
+}
+
+.tooltips{
+	padding: 5px;
+	border-radius: 5px;
+	background: #111111;
+	color: #FFFFFF
+}
+
+
+.parallelAxis line, .parallelAxis path, .axis line, .axis path {
+	fill: none;
+	stroke: #777;
+	stroke-width: 1;
+}
+.dark .parallelAxis line, .dark .parallelAxis path, .dark .axis line, .dark .axis path {
+	stroke: #777;
+}
+.parallelAxis .tick, .axis .tick {
+	width: 200px;
+}
+.parallelAxis text , .axis text {
+	fill: #111;
+	text-anchor: right;
+	font-size: 11px;
+	text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+.parallelAxis text.label , .axis text.label {
+	font-size: 12px;
+	cursor: move;
+	padding-bottom: 24px;
+}
+.dark .parallelAxis text , .dark .axis text {
+	fill: #f2f2f2;
+	text-shadow: 0 1px 0 #000, 1px 0 0 #000, 0 -1px 0 #000, -1px 0 0 #000;
+}
+.dark .parallelAxis text.label , .dark .axis text.label {
+	fill: #ddd;
+}
+
 
 /*-- end vis --*/

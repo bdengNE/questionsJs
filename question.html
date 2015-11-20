@@ -27,51 +27,43 @@
 
 <body ng-controller="TodoCtrl" style="background-color: #e8e8e8" ng-init="returnFBusername()">
 
-    <!-- VISUALIZATION PART BEGINS -->
-    <div id="myModal1" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg" id ="interactionOuter">
-            <!-- Modal content-->
-            <div class="modal-content visModule">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">CarryVis: <small>Visual Analytics for CarryRoom</small></h4>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-
-                    <!-- Here goes the content view -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Forum Flow View</div>
-                        <div class="panel-body">
-                            <div class="col-md-12">
-                                <div class="chartLabel"></div>
-                                <div id="contentView"></div>
-                            </div>
-                        </div>
-                    </div><!-- content view ends -->
-
-                    <!-- Here goes the interaction view -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Interaction View</div>
-                        <div class="panel-body" >
-                            <div class="col-md-12">
-                                <div id="interactionView"></div>
-                            </div>
-                        </div>
-                    </div><!-- interaction view ends -->
-
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+<!-- VISUALIZATION PART BEGINS -->
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg" id ="interactionOuter">
+        <!-- Modal content-->
+        <div class="modal-content visModule">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">CarryVis: <small>Visual Analytics for CarryRoom</small></h4>
             </div>
+            <div class="modal-body">
+                <!-- Here goes the content view -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Forum Flow View</div>
+                    <div class="panel-body">
+                        <div class = "row" id="contentView"></div>
+                    </div>
+                </div><!-- content view ends -->
 
+                <!-- Here goes the interaction view -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Interaction View</div>
+                    <div class="panel-body" >
+                        <div id="interactionView"></div>
+                    </div>
+                </div><!-- interaction view ends -->
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
-    </div>
-    <!-- VISUALIZATION PART ENDS -->
 
+    </div>
+</div>
+<!-- VISUALIZATION PART ENDS --->
 
     <div class="space">
         <div class="container" >
@@ -441,12 +433,14 @@
     <script src="js/controllers/todoCtrl.js"></script>
 
     <!-- this part goes for vis -->
-    <script src="js/vis/data/network.js"></script>
-
+    <script src="js/vis/data/networkData.js"></script>
+    <script src="js/vis/data/flowData.js"></script>
 
     <script src="js/lib/d3.js"></script>
     <script src="js/vis/main_vis.js"></script>
     <script src="js/vis/graph.js"></script>
+    <script src="js/vis/flow.js"></script>
+    <!-- end of vis -->
 
 
     <!-- CUSTOM CODE TO RELOAD UPON CHANGE OF ROOM -->

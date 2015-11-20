@@ -7,7 +7,6 @@
 
 jQuery(function($) {
     $(document).ready(function () {
-        console.log(networkData);
 
         var m = {left: 40, right: 10, top: 5, bottom: 20};
 
@@ -22,8 +21,10 @@ jQuery(function($) {
             totalH: totalH_network,
             interpolate: 'basis'
         };
+        console.log(flowData);
 
         drawNetworkView(networkData, '#interactionView', networkVar);
+        drawFlow(flowData, '#contentView');
 
     });
 });
