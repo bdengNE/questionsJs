@@ -107,7 +107,7 @@ body{
 #backImage{
 	height:500px;
 	
-	background-image: url("../img/sea.jpg");*/
+	background-image: url("../img/sea.jpg");
 	background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: -40px;
@@ -186,3 +186,25 @@ body{
 .input-group {
 	display: block !important;
 }
+
+
+/*--- vis ---*/
+.chartLabel{
+	overflow:scroll;
+	width:100%;
+	height:100px;
+}
+
+#contentView {
+	overflow:scroll;
+	width:100%;
+	height:200px;
+}
+
+#interactionView {
+	overflow:scroll;
+	width:100%;
+	height:400px;
+}
+
+/*-- end vis --*/
