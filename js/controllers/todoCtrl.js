@@ -322,12 +322,13 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			else{
 				console.log(result.fb.name);
 				$scope.username = result.fb.name;
-				document.getElementById("notLogin").style.display="none";
 				document.getElementById("loginWord").innerHTML="Carry the world "+result.fb.name;
 				document.getElementById("loginWord").style.fontSize="30px";
 				document.getElementById("logout").style.display="";
 				document.getElementById("logout").style.float="right";
 				document.getElementById("loginWord").style.color="rgb(120,120,120)";
+				document.getElementById("notLogin").innerHTML="Homepage";
+				document.getElementById("notLogin").setAttribute("href","homepage.html");
 			}
 		})
 		.error(function(result){
