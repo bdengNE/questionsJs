@@ -273,16 +273,19 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		}
 	});
 	//Return facebook username
-	/*$scope.returnFBusername = function(){
-		$http.get('/api/users/current');
-		var username = req.user;
-		if(username==null){
-			$scope.loginStatus = false;
-		}
-		else{
-			$scope.loginStatus = true;
-			$scope.usernameString = username;
-		}
-	}*/
+	$scope.returnFBusername = function(){
+		console.log("thishtisheih");
+		//var defer = $q.defer();
+		$http.get('/api/users/current')
+		.success(function(data){
+			var result = toString(data);
+			console.log(data.length+"++++++++++++++++++++");
+			$scope.username = data[0];
+			console.log('username:'+data[0]);
+		})
+		.error(function(data){
+			console.log("fffffffffffff");
+		});	
+	};
 
 }]);

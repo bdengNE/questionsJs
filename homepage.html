@@ -20,6 +20,9 @@
 	<h1 id="username">{{}}</h1>
 	<a href="/auth/logout/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Logout</a>
 </div>
+<div class="nav">
+	<a href="question.html">Go back to Carry Room</a>
+</div>
 
 <div class="profile-navbar clearfix">
 	<a class="item home first active"
@@ -27,16 +30,16 @@
 	<i class="icon icon-profile-tab-home"></i><span class="hide-text">Homepage</span>
 	</a>
 	<a class="item ">Like
-	<span class="num">0</span>
+	<span class="num">{{number of like recieve}}</span>
 	</a>
 	<a class="item ">Dislike
-	<span class="num">17</span>
+	<span class="num">{{number of dislike recieve}}</span>
 	</a>
 	<a class="item ">Ask
-	<span class="num">0</span>
+	<span class="num">{{number of questions that ask}}</span>
 	</a>
-	<a class="item ">Post/Reply
-	<span class="num">2</span>
+	<a class="item ">Reply
+	<span class="num">{{number of reply}}</span>
 	</a>
 </div>
 
@@ -53,8 +56,8 @@
 <div class="zm-profile-section-list" id="zh-profile-answers-inner-list">
 
 <div class="zm-profile-section-item zg-clear">
-	<a class="zm-profile-vote-count" href="javascript:void(0);">
-		<div class="zm-profile-vote-num">0</div>
+	<a class="zm-profile-vote-count" >
+		<div class="zm-profile-vote-num">{{likes that this answer get}}</div>
 		<div class="zm-profile-vote-type">Likes</div>
 	</a>
 <!-- want to have three most recent answers here-->
@@ -68,8 +71,8 @@
 	</div>
 </div>
 <div class="zm-profile-section-item zg-clear">
-	<a class="zm-profile-vote-count" href="javascript:void(0);">
-		<div class="zm-profile-vote-num">0</div>
+	<a class="zm-profile-vote-count" >
+		<div class="zm-profile-vote-num">{{likes that this answer get}}</div>
 		<div class="zm-profile-vote-type">Likes</div>
 	</a>
 <!-- want to have three most recent answers here-->
@@ -83,8 +86,8 @@
 	</div>
 </div>
 <div class="zm-profile-section-item zg-clear">
-	<a class="zm-profile-vote-count" href="javascript:void(0);">
-		<div class="zm-profile-vote-num">0</div>
+	<a class="zm-profile-vote-count">
+		<div class="zm-profile-vote-num">{{likes that this answer get}}</div>
 		<div class="zm-profile-vote-type">Likes</div>
 	</a>
 <!-- want to have three most recent answers here-->
@@ -105,8 +108,8 @@
 		</a>
 	</div>
 	<div class="achievementimg">
-		<img class="medal" src="img/medal/50.png">50 Queen
-		<p>Answer more than 50 times!</p>
+		<img class="medal" id="medal" src="">
+		<p id="achievementWords" style="font-size:20px">No ahievement now! You have to work harder!</p>
 	</div>
 </div>
 <!-- We have 20 JACK, 50 QUEEN, 100 KING-->
@@ -124,6 +127,27 @@
     var temp = document.getElementById("username");
     temp.value = response.name;
 });*/
+
+</script>
+<!-- change the acheivement medal-->
+<script>
+	var likes = {{number of likes get}}
+	if(likes > 20 && likes <50)
+	{
+		document.getElementById("medal").src = "img/medal/20.png";
+		document.getElementById("achievementWords").innerHTML = "You recieve more than 20 likes!"
+	}
+	else if(likes>50 && likes<100)
+	{
+		document.getElementById("medal").src = "img/medal/50.png";
+		document.getElementById("achievementWords").innerHTML = "You recieve more than 50 likes!"
+	}
+	else if(likes>100)
+	{
+		document.getElementById("medal").src = "img/medal/100.png";
+		document.getElementById("achievementWords").innerHTML = "You recieve more than 100 likes!"
+	}
+
 
 </script>
    <!-- jQuery -->
