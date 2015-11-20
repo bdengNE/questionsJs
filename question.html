@@ -25,7 +25,7 @@
 
 </head>
 
-<body ng-controller="TodoCtrl" style="background-color: #e8e8e8">
+<body ng-controller="TodoCtrl" style="background-color: #e8e8e8" ng-init="returnFBusername()">
 
     <!-- VISUALIZATION PART BEGINS -->
     <div id="myModal1" class="modal fade" role="dialog">
@@ -70,7 +70,7 @@
 
         </div>
     </div>
-    <!-- VISUALIZATION PART ENDS --->
+    <!-- VISUALIZATION PART ENDS -->
 
 
     <div class="space">
@@ -80,15 +80,15 @@
                 <!-- fb start -->
                     <div class="container">
                     <div class="text-center">
-                        <p>Login or Register with:</p>
-                        <a href="/auth/login/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-                        <a href="/auth/logout/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Logout</a>
-                        <div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>
+                        <p id="loginWord">Login or Register with:</p>
+                        <a href="/auth/login/facebook" class="btn btn-primary" id="notLogin"><span class="fa fa-facebook"></span> Facebook</a>
+                        <a href="/auth/logout/facebook" class="btn btn-primary" style="display:none" id="logout"><span class="fa fa-facebook"></span> Logout</a>
+                        <!--<div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>-->
                         <!-- Button for VIS -->
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">
                             Open CarryVis
                         </button>
-                        <!--end of VIS Button --->
+                        <!--end of VIS Button -->
                     </div>
                     </div>
                     <!-- fb end -->

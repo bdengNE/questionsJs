@@ -325,6 +325,9 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 				document.getElementById("notLogin").style.display="none";
 				document.getElementById("loginWord").innerHTML="Carry the world "+result.fb.name;
 				document.getElementById("loginWord").style.fontSize="30px";
+				document.getElementById("logout").style.display="";
+				document.getElementById("logout").style.float="right";
+				document.getElementById("loginWord").style.color="rgb(120,120,120)";
 			}
 		})
 		.error(function(result){
