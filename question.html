@@ -249,12 +249,12 @@
                         </div>
                         <div class="pull-right postreply">
                             <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
-                            <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#reply">Add choices</button></div>
+                            <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#choice">Add choices</button></div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                    <div id="reply" class="collapse">
+                    <div id="choice" class="collapse">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="choice1" aria-describedby="sizing-addon3" ng-model="choice1">
                             <input type="text" class="form-control" placeholder="choice2" aria-describedby="sizing-addon3" ng-model="choice2" >
@@ -297,8 +297,8 @@
 
                             <div class="icons" >
                              <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" >delete</a>
-                             <a class="btn btn-danger btn-xs" ng-click="replyTodo()" >reply</a>
-                            </div>
+                             <a class="btn btn-danger btn-xs" ng-click="addReply()"  data-toggle="collapse" data-target="#reply" >reply</a>
+                            </div>.
                         </div>
 
                         <div class="posttext pull-left">
@@ -342,7 +342,11 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
+
                 </div><!-- POST -->
+                <span class="listgroup-item" ng-repeat="reply in todo.reply">
+                    <div>reply.content</div>
+                </span>
 
             </span>
         </div>
@@ -396,6 +400,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <!-- angularJs -->
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
     <script src="js/lib/Autolinker.min.js"></script>

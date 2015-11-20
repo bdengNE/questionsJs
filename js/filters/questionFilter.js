@@ -64,3 +64,17 @@ todomvc.filter('questionFilter_2',function(){
     }
 
 });
+
+
+todomvc.filter('tagsFilter',function(tags){
+  return function(inputArray){
+        var array = [];
+        for(var i=0;i<inputArray.length;i++){
+            if(inputArray[i].type !=tags){
+                array.push(inputArray[i]);
+            }
+        }
+        return array;
+    }
+
+});

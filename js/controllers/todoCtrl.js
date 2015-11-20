@@ -128,6 +128,18 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
+	$scope.addReply=function(){
+		//var newReply=$scope.reply.trm();
+		var newReply="test";
+		$http.post(backendUrl + '/api/questions/'+todo_id+'/reply', {reply:newReply})
+		.success(function(data){
+			getQuestions();
+		})
+		.error(function(data) {
+	        console.log('Error: ' + data);
+	    });
+
+	}
 	$scope.selectChoice=function($index){
 		console.log($index);
 
