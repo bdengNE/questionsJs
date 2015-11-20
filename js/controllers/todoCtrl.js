@@ -315,15 +315,25 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		console.log("thishtisheih");
 		//var defer = $q.defer();
 		$http.get('/api/users/current')
-		.success(function(data){
-			var result = toString(data);
-			console.log(data.length+"++++++++++++++++++++");
-			$scope.username = data[0];
-			console.log('username:'+data[0]);
+		.success(function(result){
+			if(! result){
+				console.log("Sorry you have to login");
+			}
+			else{
+				console.log(result.fb.name);
+				$scope.username = result.fb.name;
+				document.getElementById("notLogin").style.display="none";
+				document.getElementById("loginWord").innerHTML="Carry the world "+result.fb.name;
+				document.getElementById("loginWord").style.fontSize="30px";
+			}
 		})
-		.error(function(data){
+		.error(function(result){
 			console.log("fffffffffffff");
 		});	
 	};
+	/*$scope.$on('$viewContentLoaded', function() {
+		returnFBusername();
+    //call it here
+	});*/
 
 }]);
