@@ -51,3 +51,16 @@ todomvc.filter('questionFilter_1',function(){
     }
 
 });
+
+todomvc.filter('questionFilter_2',function(){
+  return function(inputArray){
+        var array = [];
+        for(var i=0;i<inputArray.length;i++){
+            if(inputArray[i].type !='polling'){
+                array.push(inputArray[i]);
+            }
+        }
+        return array;
+    }
+
+});
