@@ -117,7 +117,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			return;
 		};
 
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, tags:"233333"})
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
@@ -128,13 +128,16 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
-	$scope.selectChoice=function(){
-		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+choice_id+"/vote-up")
-		.success(function(data) {
+	$scope.selectChoice=function($index){
+		console.log($index);
 
+		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+todo.choices[$index]._id+'/vote-up')
+		.success(function(data) {
+			
 			getQuestions();
 			// Disable the button
 			$scope.$storage[todo._id] = "selected";
+			
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -149,7 +152,12 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			return;
 		};
 		//var choices=[{names:'test1',votes: 20},{names:'test1',votes: 20}];
-		var temp=['choice1','choice2','choice3'];
+		var choice1=$scope.choice1.trim();
+		var choice2=$scope.choice2.trim();
+		console.log(choice1);
+		console.log(choice2);
+		var temp=[choice1,choice2];
+
 		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'polling',choices: temp})
 		.success(function(data) {
 			// remove the posted question in the input
@@ -161,7 +169,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
-
+	
 	$scope.editTodo = function (todo) {
 		$scope.editedTodo = todo;
 		$scope.originalTodo = angular.extend({}, $scope.editedTodo);

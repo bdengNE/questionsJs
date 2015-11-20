@@ -118,7 +118,7 @@
                                 </div>
                             </td>
                             <td class="chbox">
-                                <input id="opt1" type="radio" name="opt" value="1"checked>
+                                <input id="opt1" type="radio" name="opt" value="1" ng-click="selectChoice($index)">{{$index}}
                                 <label for="opt1"></label>
                             </td>
                         </tr>
@@ -257,13 +257,21 @@
                         </div>
                         <div class="pull-right postreply">
                             <div class="pull-left smile"><a href="#"><i class="fa fa-smile-o"></i></a></div>
-                            <div class="pull-left"><button type="button" class="btn btn-primary"
-                                    ng-click="addPolling()">Add poll</button></div>
+                            <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#reply">Add choices</button></div>
                             <div class="clearfix"></div>
                         </div>
-
-
                         <div class="clearfix"></div>
+                    </div>
+                    <div id="reply" class="collapse">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="choice1" aria-describedby="sizing-addon3" ng-model="choice1">
+                            <input type="text" class="form-control" placeholder="choice2" aria-describedby="sizing-addon3" ng-model="choice2" >
+                        </div>
+                        <div class = "col-md-1">
+                            <span class="reply-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="addPolling()">Post it!</button>
+                            </span>
+                        </div>
                     </div>
                 </form>
             </div><!-- POST -->
@@ -297,6 +305,7 @@
 
                             <div class="icons" >
                              <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" >delete</a>
+                             <a class="btn btn-danger btn-xs" ng-click="replyTodo()" >reply</a>
                             </div>
                         </div>
 
