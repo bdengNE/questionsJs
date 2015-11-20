@@ -141,13 +141,18 @@
                         </div>
                         
                         <div class="posttext pull-left">
+                            
                             <div class ="row questionBar">
                             <form action="#" method="post" class="form">
                                     <textarea type="text" class="form-control" placeholder="Post for a question"
                                            ng-model="input.wholeMsg" autofocus="autofocus">
                                     </textarea>
+
                             </form>
                             </div>
+                            
+
+
                             <!--
                             <div>
                                 <input type="text" placeholder="Enter Topic Title" class="form-control" />
@@ -159,7 +164,7 @@
                             
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
-                                    <select name="category" id="category"  class="form-control" >
+                                    <select name="category" id="category"  class="formcontrol" >
                                         <option value="" disabled selected>Select Category</option>
                                         <option value="op1">Question</option>
                                         <option value="op2">Instruction</option>
@@ -171,11 +176,18 @@
                             
                             <label>Hot Tag: </label>
                                 
-    
-                            <button class="btnTag" style="background-color:#FF6666, padding:10px" ng-click="tagToMsg('#Assignment')"> Assignment</button>
-                            <button class="btnTag" style="background-color:#FFCC00, padding:10px" ng-click="tagToMsg('#Final')"> Final</button>
-                            <button class="btnTag" style="background-color:#33CC33, padding:10px" ng-click="tagToMsg('#Mid-term')"> Mid-term</button>
-                        </div>
+                            <!--
+                            <button class="btnTag" style="background-color:#FF6666" ng-click="addTodo()"> Assignment</button>
+                            <button class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg()"> Final</button>
+                            <button class="btnTag" style="background-color:#33CC33" ng-click="tagToMsg()"> Mid-term</button>
+
+                            -->
+                            <button type="button" class="btnTag" style="background-color:#FF6666"
+                                    ng-click="selectTag('#Midterm')">Midterm</button>
+                            <button type="button" class="btnTag" style="background-color:#33cc33"
+                                    ng-click="selectTag('#final')">Final</button>
+                            <button type="button" class="btnTag" style="background-color:yellow"
+                                    ng-click="selectTag('#Assignment')">Assignment</button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="postinfobot">
@@ -217,7 +229,7 @@
 
         <div class="list-group" id="todo-list">
 
-            <span class="listgroup-item" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter:maxQuestion "
+            <span class="listgroup-item" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|questionFilter:maxQuestion "
                   ng-class="{completed: todo.completed, editing: todo == editedTodo}">
 
                 <div class="post list-group-item-heading" ng-switch on="todo.headLastChar"
@@ -280,6 +292,7 @@
 
             </span>
         </div>
+    </div>
     </div>
     <div class="col-lg-3 col-md-3">
 

@@ -1272,3 +1272,140 @@ table {
 .poll input[type="radio"]:checked + label {
     background: url(http://forum.azyrusthemes.com/images/radio.jpg) -31px 0 no-repeat;
 }
+.inputBox{
+	margin-top:60px; 
+	display:inline-block; 
+	position:relative; 
+	width:100%;
+	height:100px;
+}
+.inputAsk{
+	position:absolute; 
+	bottom:1px; 
+	right:0px;
+}
+.inputImgUpload{
+	position:absolute; 
+	bottom:1px; 
+	right:150px;
+}
+.inputClear{
+	position:absolute;
+	bottom:50px;
+	right:30px;
+}
+.btnClear{ 
+	width: 30px; 
+	height:30px;  
+	border:0;
+	background-color: rgba(0%,0%,0%,0);
+	color: #777;
+	font-size: 180%;
+}
+.btn-no-outline:focus{
+	outline: none !important;
+	box-shadow: none !important;
+}
+.btnAsk{ 
+	width: 150px; 
+	height:30px; 
+	background-color:#327AC0; 
+	color: #FFF; 
+	border:0;
+}
+.btnImgUpload{
+	width: 100px; 
+	height:30px; 
+	background-color:#28C783; 
+	color: #FFF; 
+	border:0;
+}
+.btnTag{
+	height:30px; 
+	background-color:#fff; 
+	color: #333; 
+	border: 1px solid #e3e3e3;
+	margin: 5px 5px;
+	padding: 0 10px;
+}
+.btnTag:hover{
+	background-color:#408FB2; 
+	color: #FFF; 
+}
+.questionBlock{
+	position:relative; 
+	width:100%;
+	margin:0;
+	padding:0;
+}
+.commentName{
+	color:#327AC0;
+}
+.stringTime{
+	margin: 0 10px;
+}
+.questionContent{
+	padding: 10px 10px 0;
+	width:100%;
+}
+.btnNav{ 
+	width:45px; 
+}
+.btnNav-long{
+	width:90px;
+}
+.rightContainer{
+	display:block;
+}
+@media screen and (max-width: 1200px) { 
+   .rightContainer{display:none;}
+}
+.roomItem{
+	font-size:110%;
+	text-align:left;
+	color: #555;
+	width:100%;
+	margin:5px 0;
+	padding:5px 5px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.roomItem:hover{
+	color: #555;
+	background-color:#FFE9CA;
+	text-decoration:none;
+}
+.rmBlock{
+	display:relative;
+	width:25px;
+	height:25px;
+	margin: 0 30px;
+}
+.imgUpload{
+	box-sizing: border-box;
+	background-color:#fff;
+	padding:10px;
+}
+.fileinput-button{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+.progress-bar{
+	color: 268CA7;
+}
+.imgFrame{
+    max-width:600px; 
+    height:auto
+}

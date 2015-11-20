@@ -91,20 +91,33 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.absurl = $location.absUrl();
 	}, true);
 	// dull function, and implement it later
-	$scope.selectTags=function(input){
-		return input;
-
+	
+	$scope.selectTag = function(input) {
+		var Msg;
+		try{
+			if ($scope.input.wholeMsg.trim()){
+				console.log(input)
+				Msg = $scope.input.wholeMsg.trim() + input;
+			}
+			else{
+				Msg = input;
+			}
+		}
+		catch(e){Msg=input;}
+			$scope.input = {wholeMsg: Msg};
+		
 	}
+
 	//CUSTOM function adapted to new REST API
 	$scope.addTodo = function () {
 		var newTodo = $scope.input.wholeMsg.trim();
-
+		
 		// No input, so just do nothing
 		if (!newTodo.length) {
 			return;
 		};
 
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId,tags:selecTags(input)})
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, tags:"233333"})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
@@ -116,7 +129,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	    });
 	};
 	$scope.selectChoice=function(){
-		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+"choice_id"+"/vote-up")
+		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+choice_id+"/vote-up")
 		.success(function(data) {
 
 			getQuestions();
