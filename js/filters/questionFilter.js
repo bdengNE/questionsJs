@@ -66,8 +66,8 @@ todomvc.filter('questionFilter_2',function(){
 });
 
 
-todomvc.filter('tagsFilter',function(tags){
-  return function(inputArray){
+todomvc.filter('tagsFilter',function(){
+  return function(inputArray,tags){
         var array = [];
         for(var i=0;i<inputArray.length;i++){
             if(inputArray[i].type !=tags){

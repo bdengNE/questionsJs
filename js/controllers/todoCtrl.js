@@ -96,7 +96,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		var Msg;
 		try{
 			if ($scope.input.wholeMsg.trim()){
-				console.log(input)
 				Msg = $scope.input.wholeMsg.trim() + input;
 			}
 			else{
@@ -127,20 +126,24 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	    .error(function(data) {
 	        console.log('Error: ' + data);
 	    });
+
 	};
-	$scope.addReply=function(){
-		//var newReply=$scope.reply.trm();
-		var newReply="test";
-		$http.post(backendUrl + '/api/questions/'+todo_id+'/reply', {reply:newReply})
+	$scope.addReply=function(todo){
+		var newReply=todo.newReply.trim();
+		
+		console.log(newReply);
+		$http.post(backendUrl + '/api/questions/'+ todo._id+'/reply', {replyContent: newReply})
 		.success(function(data){
 			getQuestions();
 		})
 		.error(function(data) {
 	        console.log('Error: ' + data);
 	    });
+	
 
 	}
-	$scope.selectChoice=function($index){
+	//vote up for a polling
+	$scope.selectChoice=function($index,todo){
 		console.log($index);
 
 		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+todo.choices[$index]._id+'/vote-up')
@@ -171,6 +174,25 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		var temp=[choice1,choice2];
 
 		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'polling',choices: temp})
+		.success(function(data) {
+			// remove the posted question in the input
+			$scope.input.wholeMsg = '';
+			getQuestions();
+	        console.log(data);
+	    })
+	    .error(function(data) {
+	        console.log('Error: ' + data);
+	    });
+	};
+	$scope.addImage = function () {
+		var newTodo= $scope.input.wholeMsg.trim();
+		var url=$scope.imgUrl.trim();
+		console.log(url);
+		// No input, so just do nothing
+		if (!newTodo.length) {
+			return;
+		};
+		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'image',attachment: url })
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
