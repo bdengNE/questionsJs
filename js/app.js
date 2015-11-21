@@ -7,7 +7,7 @@
 *
 * @type {angular.Module}
 */
-var todomvc = angular.module('todomvc', ['ngStorage',]);
+var todomvc = angular.module('todomvc', ['ngStorage', 'ngSanitize']);
 
 /*
 angular.module('todomvc').config(function($locationProvider){

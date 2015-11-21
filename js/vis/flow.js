@@ -63,7 +63,6 @@ function drawFlow(flowData, svgName) {
 
 
     function drawLabels(everyDate, minDate, maxDate) {
-        console.log("draw labels...");
         colDate = [];
         while (everyDate <= maxDate) {
             colDate.push(everyDate);

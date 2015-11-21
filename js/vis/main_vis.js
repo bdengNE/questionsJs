@@ -21,7 +21,6 @@ jQuery(function($) {
             totalH: totalH_network,
             interpolate: 'basis'
         };
-        console.log(flowData);
 
         drawNetworkView(networkData, '#interactionView', networkVar);
         drawFlow(flowData, '#contentView');

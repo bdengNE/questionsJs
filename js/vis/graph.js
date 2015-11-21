@@ -106,7 +106,6 @@ function drawNetworkView(networkData, svgName, networkVar) {
             })
             .on("mouseover", function (d) {
                 var selectedNodes = [];
-                console.log(d);
                 // selectedNodes.push(d);
                 // svg.selectAll(".")
                 svg.selectAll(".edge")

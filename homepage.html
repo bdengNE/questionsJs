@@ -31,18 +31,22 @@
 	href="index.html">
 	<i class="icon icon-profile-tab-home"></i><span class="hide-text">Homepage</span>
 	</a>
-	<a class="item ">Like
-	<span class="num">number of like recieve</span>
+	<a class="item ">Likes
+	<span class="num">{{likes}}</span>
+	received
 	</a>
 	<a class="item ">Dislike
-	<span class="num">number of dislike recieve</span>
+	<span class="num">{{dislikes}}</span>
+	received
 	</a>
 	<a class="item ">Ask
-	<span class="num">number of questions that ask</span>
+	<span class="num">{{totalQuestion}}</span>
+	questions
 	</a>
+	<!--
 	<a class="item ">Reply
 	<span class="num">number of reply</span>
-	</a>
+	</a>-->
 </div>
 
 
@@ -59,46 +63,43 @@
 
 <div class="zm-profile-section-item zg-clear">
 	<a class="zm-profile-vote-count" >
-		<div class="zm-profile-vote-num">likes that this answer get</div>
-		<div class="zm-profile-vote-type">Likes</div>
+		<div class="zm-profile-vote-num" style="display:none" id="likes0">Likes</div>
+		<div class="zm-profile-vote-type"><p id="like0" style="display:none" >Likes</p></div>
 	</a>
 <!-- want to have three most recent answers here-->
 	<div class="zm-profile-section-main">
 		<h2 class="zm-profile-question">
-			<a class="question_link">Question1</a>
+			<p class="question_link question" id="q0" style="display:none">You haven't aer question yet!</p>
 		</h2>
 
-		<p class="zm-profile-item-text">Answer1</p>
 
 	</div>
 </div>
 <div class="zm-profile-section-item zg-clear">
 	<a class="zm-profile-vote-count" >
-		<div class="zm-profile-vote-num">likes that this answer get</div>
-		<div class="zm-profile-vote-type">Likes</div>
+		<div class="zm-profile-vote-num" style="display:none" id="likes1">Likes</div>
+		<div class="zm-profile-vote-type"><p id="like1" style="display:none">Likes</p></div>
 	</a>
 <!-- want to have three most recent answers here-->
 	<div class="zm-profile-section-main">
 		<h2 class="zm-profile-question">
-			<a class="question_link" >Question2</a>
+			<p class="question_link question" id="q1" style="display:none">Question2</p>
 		</h2>
 
-		<p class="zm-profile-item-text">Answer2</p>
 
 	</div>
 </div>
 <div class="zm-profile-section-item zg-clear">
 	<a class="zm-profile-vote-count">
-		<div class="zm-profile-vote-num">likes that this answer get</div>
-		<div class="zm-profile-vote-type">Likes</div>
+		<div class="zm-profile-vote-num" style="display:none" id="likes2">Likes</div>
+		<div class="zm-profile-vote-type"><p id="like2"  style="display:none">Likes</p></div>
 	</a>
 <!-- want to have three most recent answers here-->
 	<div class="zm-profile-section-main">
 		<h2 class="zm-profile-question">
-			<a class="question_link">Question3</a>
+			<p class="question_link question" id="q2" style="display:none">Question3</p>
 		</h2>
 
-		<p class="zm-profile-item-text">Answer3</p>
 
 	</div>
 </div>
@@ -171,8 +172,169 @@
 				else{			
 					console.log(result.fb.name);
 					document.getElementById("username").innerHTML="This is your homepage "+result.fb.name+"! Enjoy your day!"; 
+					var temp = result.questionIds;
+					var totalQuestion = result.__v;
+					$scope.totalQuestion = totalQuestion;
+					var totalLike = 0;
+					var totalDislike = 0;
+					//var a = "2015-11-19T09:08:59.081Z";
+					//var b = "2015-11-19T09:05:17.692Z";
+					if(totalQuestion == 0){
+						console.log("I get into totalQuestion = 0 if ")
+						document.getElementById('q1').style.display="";
+						document.getElementById('q1').innerHTML="You haven't answer question yet!"
+					}
+					console.log("total question is "+ totalQuestion);
+					var questionid = result.questionIds;
+
+					var updateLike = function(i){
+						totalLike += i;
+					}
+					var updateDislike = function(i){
+						totalDislike += i;
+					} 
+					if(totalQuestion < 3)
+					{
+						
+						var getQuestion = function(i){
+							var address = "/api/questions/"+questionid[i];
+							console.log(address);
+							$http.get(address)
+								.success(function(data){
+									document.getElementById('q'+i).style.display="";
+									document.getElementById('q'+i).innerHTML=data.wholeMsg;
+									document.getElementById('q'+i).style.fontSize="20px";
+									document.getElementById('q'+i).style.color="rgb(80,80,80)";
+									document.getElementById('like'+i).style.display="";
+									$scope.thisecho = data.upVote - data.downVote;
+									console.log("this question has "+$scope.thisecho);
+									document.getElementById('like'+i).innerHTML=$scope.thisecho;
+									document.getElementById('likes'+i).style.display='';
+									//docoument.get
+									console.log('q'+i+' '+data.wholeMsg);
+									updateLike(data.upVote);
+									updateDislike(data.downVote);
+								})
+								.error(function(data){console.log("error!!")});
+						}
+						for(var i=0; i<totalQuestion;i++){
+							getQuestion(i);
+						}
+
+
+					}
+					else{
+						var date = [];
+						var likenumber = [];
+						var dislikenumber = [];
+						var findlargest = function(array){
+							if(array){
+								var index = 0;
+								var max = array[0];
+								var length = array.length;
+								for(var i=1; i<length;i++){
+									if(array[i]>max){
+										max = array[i];
+										index = i;
+									}
+								}
+								return index;
+							}
+						}
+						var findsecond = function(array){
+							if(array){
+								var index = 0;
+								var max = findlargest(array);
+								var second = array[0];
+								var length = array.length;
+								for(var i=1;i<length;i++){
+									if(array[i] > second && array[i] < max){
+										second = array[i];
+										index = i;
+									}
+								}
+								return index;
+							}
+						}
+						var findthird = function(array){
+							if(array){
+								var index = 0;
+								var second = findsecond(array);
+								var length = array.length;
+								var thrid = array[0];
+								for(var i=1; i<length;i++){
+									if(array[i]>third && array[i]<second){
+										third = array[i];
+										index = i;
+									}
+								}
+								return index;
+							}
+						}
+						var getQuestion = function(i){
+							var address ="/api/questions/"+questionid[i];
+							$http.get(address)
+								.success(function(data){
+									date.push(data.createdAt);
+									likenumber.push(data.upVote);
+									dislikenumber.push(data.downVote);
+								})
+								.error(function(data){
+									console.log("error!");
+								});
+						}
+
+						var firstIndex = findlargest(date);
+						document.getElementById('q0').style.display="";
+						document.getElementById('q0').innerHTML=date[firstIndex];
+						document.getElementById('like0').style.display="";
+						document.getElementById('like0').innerHTML= likenumber[firstIndex]-dislikenumber[firstIndex];
+						document.getElementById('likes0').style.display="";
+						var secondIndex = findsecond(date);
+						document.getElementById('q1').style.display="";
+						document.getElementById('q1').innerHTML=date[secondIndex];
+						document.getElementById('like1').style.display="";
+						document.getElementById('like1').innerHTML= likenumber[secondIndex]-dislikenumber[secondIndex];
+						document.getElementById('likes1').style.display="";
+						var thirdIndex = findthrid(date); 
+						document.getElementById('q2').style.display="";
+						document.getElementById('q2').innerHTML=date[thirdIndex];
+						document.getElementById('like2').style.display="";
+						document.getElementById('like2').innerHTML= likenumber[thirdIndex]-dislikenumber[thirdIndex];
+						document.getElementById('likes2').style.display="";
+					}
+					/*for(var i=0; i<totalQuestion;i++){
+						var address = 'api/questions/'+result.questionIds[i];
+						$http.get(address)
+						.success(function(data){
+							if(!data){
+								console.log("no question!");
+							}
+							else{
+								var likes = data.upVote;
+								totalLike += likes;
+								var dislikes = data.downVote;
+								totalDislike += data.downVote;
+							}
+						})
+					}*/
+					$scope.likes = totalLike;
+					$scope.dislikes = totalDislike;
+					if(totalLike > 20 && totalLike < 50){
+						document.getElementById("medal").src = "img/medal/20.png";
+						document.getElementById("achievementWords").innerHTML = "You recieve more than 20 likes!"
+					}
+					else if(totalLike>50 && totalLike < 100){
+						document.getElementById("medal").src = "img/medal/50.png";
+						document.getElementById("achievementWords").innerHTML = "You recieve more than 50 likes!"	
+					}
+					else if(totalLike > 100){
+						document.getElementById("medal").src = "img/medal/100.png";
+						document.getElementById("achievementWords").innerHTML = "You recieve more than 100 likes!"		
+					}
 				}
 				})
+				
 			}
 		}]);
     </script>
