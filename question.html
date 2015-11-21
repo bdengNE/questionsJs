@@ -134,7 +134,7 @@
                     <li>Final</li>
                     <li>Assignment</li>
                     <li>All</li>
-                </ul>P
+                </ul>
             </div>
         </div>
     </div>
@@ -308,6 +308,7 @@
 
                 <div class="post list-group-item-heading" ng-switch on="todo.headLastChar"
                      ng-style = "{'opacity': (1 + todo.echo * 0.05 >= 0.1) ? 1 + todo.echo * 0.05 : 0.1}">
+                     <img ng-src="{{todo.attachment}}"/>
                     <div class="wrap-ut pull-left">
                         <div class="userinfo pull-left">
                             <div class="avatar">

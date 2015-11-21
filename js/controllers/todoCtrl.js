@@ -163,20 +163,28 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		var newTodo = $scope.input.wholeMsg.trim();
 
 		// No input, so just do nothing
-		if (!newTodo.length) {
-			return;
-		};
+	
 		//var choices=[{names:'test1',votes: 20},{names:'test1',votes: 20}];
 		var choice1=$scope.choice1.trim();
 		var choice2=$scope.choice2.trim();
 		console.log(choice1);
 		console.log(choice2);
 		var temp=[choice1,choice2];
-
+		if (!newTodo.length) {
+			return;
+		};
+		if(!choice1.length){
+			return;
+		}
+		if(!choice2.length){
+			return;
+		}
 		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'polling',choices: temp})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
+			$scope.choice1='';
+			$scope.choice2='';
 			getQuestions();
 	        console.log(data);
 	    })
@@ -186,18 +194,22 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	};
 	$scope.addImage = function () {
 		var newTodo= $scope.input.wholeMsg.trim();
-		var url=$scope.imgUrl.trim();
+		var url=$scope.imgUrl;
 		console.log(url);
 		// No input, so just do nothing
 		if (!newTodo.length) {
+			return;
+		};
+		if (!url.length) {
 			return;
 		};
 		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'image',attachment: url })
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
+			$scope.imgUrl='';
 			getQuestions();
-	        console.log(data);
+	       
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
