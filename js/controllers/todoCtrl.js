@@ -38,6 +38,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.roomList=[];
 	//initialize the todos list
 	$scope.todos = [];
+	$scope.users=[];
     // return all questions
     // get all questions
 	var getQuestions = function (query) {
@@ -53,7 +54,22 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	}
+
 	getQuestions();
+
+	var getUsers = function (query) {
+		//request from backend about the todo
+		query = query || {}
+		$http.get('/api/users')
+		.success(function(data) {
+			$scope.users = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	}
+	
+	getUsers();
 
 	var getRoomList = function () {
 		$http.get('/api/rooms')
@@ -91,6 +107,29 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.absurl = $location.absUrl();
 	}, true);
 	// dull function, and implement it later
+	$scope.getAdmin=function(user){
+		console.log("testAdmin");
+		$http.post(backendUrl + '/api/users/'+user._id, {type:"admin"})
+		.success(function(data) {
+
+	    })
+	    .error(function(data) {
+	        console.log('Error: ' + data);
+	    });
+	    return true;
+
+	}
+	$scope.quitAdmin=function(user){
+		$http.post(backendUrl + '/api/users/'+user._id, {type:"normal"})
+		.success(function(data) {
+
+	    })
+	    .error(function(data) {
+	        console.log('Error: ' + data);
+	    });
+	    return false;
+
+	}
 	
 	$scope.selectTag = function(input) {
 		var Msg;

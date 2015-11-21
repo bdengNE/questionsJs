@@ -63,22 +63,28 @@
 
     </div>
 </div>
-<!-- VISUALIZATION PART ENDS --->
+<!-- VISUALIZATION PART ENDS -->
 
     <div class="space">
-        <div class="container" >
+        <div class="container" ng-repeat="user in users">
                 <!--Student login button-->
                 <a href="/index.html"><img class="logo" src="css/icon1.png" ></a>
                 <!-- fb start -->
                     <div class="container">
-                    <div class="text-center">
+                    <div class="text-center" >
                         <p id="loginWord">Login or Register with:</p>
                         <a href="/auth/login/facebook" class="btn btn-primary" id="notLogin"><span class="fa fa-facebook"></span> Facebook</a>
                         <a href="/auth/logout/facebook" class="btn btn-primary" style="display:none" id="logout"><span class="fa fa-facebook"></span> Logout</a>
                         <!--<div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>-->
                         <!-- Button for VIS -->
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">
-                            Open CarryVis
+                            Open CarryVis 
+                        </button>
+                        <button type="button" class="btn btn-info btn-lg"  ng-click="getAdmin(user)">
+                            Admin 
+                        </button>
+                        <button type="button" class="btn btn-info btn-lg"  ng-click="quitAdmin(user)">
+                            Normal 
                         </button>
                         <!--end of VIS Button -->
                     </div>
@@ -94,6 +100,7 @@
         <div>
         <h3>Poll of this Week</h3>
         <div class="divline"></div>
+
         <div class="sidebarblock" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1 |questionFilter:maxQuestion "
                   ng-class="{completed: todo.completed, editing: todo == editedTodo}" >
             
@@ -118,7 +125,7 @@
                     </table>
                 </form>
                 <div class="icons" >
-                     <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)">delete</a>
+                     <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)">delete </a>
                 </div>
                 
             </div>
@@ -129,11 +136,14 @@
             <div class="divline"></div>
             <div class="blocktxt">
 
-                <ul class="cats" ng-model="tagFilter">
+                <ul class="cats" ng-model="tagFilter" ng-repeat="user in users">
+                    
+                    
                     <li>Midterm</li>
                     <li>Final</li>
                     <li>Assignment</li>
                     <li>All</li>
+                
                 </ul>
             </div>
         </div>
