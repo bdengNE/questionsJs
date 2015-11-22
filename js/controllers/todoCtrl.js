@@ -36,7 +36,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.input = {
 		type: 'question',
 		choices: ["a","b"],
-		tags: "",
+		tags: [],
 		title: "",
 		desc: "",
 	}
@@ -184,12 +184,16 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		var newTodo = {
 			type: $scope.input.type,
 			choices: $scope.input.choices,
-			tags: $scope.input.tags,
+			tags: [],
 			head: $scope.input.title,
 			desc: $scope.input.desc,
 			roomId: $scope.roomId,
 		}
-
+		//transform the tags
+		for (var key in $scope.input.tags) {
+			newTodo.tags.push($scope.input.tags[key].text);
+		}
+		console.log(newTodo.tags);
 		// No input, so just do nothing
 		if (!newTodo.head.length) {
 			return;
@@ -201,7 +205,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$scope.input = {
 				type: $scope.input.type, //keep it unchanged
 				choices: ["",],
-				tags: "",
+				tags: [],
 				title: "",
 				desc: "",
 			}
@@ -268,29 +272,29 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 
 
-	$scope.addImage = function () {
-		var newTodo= $scope.input.wholeMsg.trim();
-		var url=$scope.imgUrl;
-		console.log(url);
-		// No input, so just do nothing
-		if (!newTodo.length) {
-			return;
-		};
-		if (!url.length) {
-			return;
-		};
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'image',attachment: url })
-		.success(function(data) {
-			// remove the posted question in the input
-			$scope.input.wholeMsg = '';
-			$scope.imgUrl='';
-			getQuestions();
-
-	    })
-	    .error(function(data) {
-	        console.log('Error: ' + data);
-	    });
-	};
+	// $scope.addImage = function () {
+	// 	var newTodo= $scope.input.wholeMsg.trim();
+	// 	var url=$scope.imgUrl;
+	// 	console.log(url);
+	// 	// No input, so just do nothing
+	// 	if (!newTodo.length) {
+	// 		return;
+	// 	};
+	// 	if (!url.length) {
+	// 		return;
+	// 	};
+	// 	$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'image',attachment: url })
+	// 	.success(function(data) {
+	// 		// remove the posted question in the input
+	// 		$scope.input.wholeMsg = '';
+	// 		$scope.imgUrl='';
+	// 		getQuestions();
+	//
+	//     })
+	//     .error(function(data) {
+	//         console.log('Error: ' + data);
+	//     });
+	// };
 
 	$scope.editTodo = function (todo) {
 		$scope.editedTodo = todo;
@@ -298,23 +302,23 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	};
 
 	//CUSTOM method for our new RESTAPI
-	$scope.doneEditing = function (todo) {
-		todo.wholeMsg = todo.wholeMsg.trim();
-		if (todo.wholeMsg) {
-			//update the todo
-			$http.post(backendUrl+'/api/questions/'+todo._id, todo)
-			.success(function(data) {
-				$scope.editedTodo = null;
-				getQuestions();
-			})
-			.error(function(data) {
-				console.log('Error: ' + data);
-			});
-		} else {
-			//remove the todo
-			$scope.removeTodo(todo);
-		}
-	};
+	// $scope.doneEditing = function (todo) {
+	// 	todo.desc = todo.desc.trim();
+	// 	if (todo.desc) {
+	// 		//update the todo
+	// 		$http.post(backendUrl+'/api/questions/'+todo._id, todo)
+	// 		.success(function(data) {
+	// 			$scope.editedTodo = null;
+	// 			getQuestions();
+	// 		})
+	// 		.error(function(data) {
+	// 			console.log('Error: ' + data);
+	// 		});
+	// 	} else {
+	// 		//remove the todo
+	// 		$scope.removeTodo(todo);
+	// 	}
+	// };
 
 	//ADAPTED for RESTAPI
 	$scope.addEcho = function (todo) {
@@ -361,10 +365,10 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		});
 	};
 
-	$scope.revertEditing = function (todo) {
-		todo.wholeMsg = $scope.originalTodo.wholeMsg;
-		$scope.doneEditing(todo);
-	};
+	// $scope.revertEditing = function (todo) {
+	// 	todo.wholeMsg = $scope.originalTodo.wholeMsg;
+	// 	$scope.doneEditing(todo);
+	// };
 
 	//CUSTOM method for new RESTAPI
 	$scope.removeTodo = function (todo) {
@@ -393,12 +397,12 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	};
 */
 
-	$scope.markAll = function (allCompleted) {
-		$scope.todos.forEach(function (todo) {
-			todo.completed = allCompleted;
-			$scope.doneEditing(todo);
-		});
-	};
+	// $scope.markAll = function (allCompleted) {
+	// 	$scope.todos.forEach(function (todo) {
+	// 		todo.completed = allCompleted;
+	// 		$scope.doneEditing(todo);
+	// 	});
+	// };
 	//ADAPTED for RESTAPI
 
 
