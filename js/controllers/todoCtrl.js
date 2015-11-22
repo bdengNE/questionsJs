@@ -39,6 +39,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	//initialize the todos list
 	$scope.todos = [];
 	$scope.users=[];
+	$scope.currentUser=null;
+	$scope.isAdmin=false;
     // return all questions
     // get all questions
 	var getQuestions = function (query) {
@@ -82,6 +84,21 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	};
 	getRoomList();
 
+	$scope.getCurrentUser = function () {
+		$http.get(backendUrl+'/api/users/current')
+		.success(function(data) {
+			$scope.currentUser=data;
+
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+			
+		});
+	};
+	$scope.getCurrentUser();
+
+
+
 	$scope.editedTodo = null;
 
 	// pre-precessing for collection
@@ -108,13 +125,15 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	}, true);
 	// dull function, and implement it later
 	$scope.getAdmin=function(user){
-		console.log("testAdmin");
+		
 		$http.post(backendUrl + '/api/users/'+user._id, {type:"admin"})
 		.success(function(data) {
-
+			console.log("admin")
+			$scope.isAdmin=true;
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
+	        $scope.isAdmin=false;
 	    });
 	    return true;
 
@@ -122,14 +141,19 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.quitAdmin=function(user){
 		$http.post(backendUrl + '/api/users/'+user._id, {type:"normal"})
 		.success(function(data) {
+			console.log("normal");
+			$scope.isAdmin=false;
 
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
+	        $scope.isAdmin=true;
 	    });
 	    return false;
 
 	}
+	
+	
 	
 	$scope.selectTag = function(input) {
 		var Msg;
@@ -145,6 +169,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$scope.input = {wholeMsg: Msg};
 		
 	}
+
 
 	//CUSTOM function adapted to new REST API
 	$scope.addTodo = function () {
@@ -291,6 +316,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	};
+
 	$scope.minusEcho = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/minus-echo")
 		.success(function(data) {
@@ -418,7 +444,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	});
 	//Return facebook username
 	$scope.returnFBusername = function(){
-		console.log("thishtisheih");
+		
 		//var defer = $q.defer();
 		$http.get('/api/users/current')
 		.success(function(result){
@@ -438,7 +464,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			}
 		})
 		.error(function(result){
-			console.log("fffffffffffff");
+			console.log("error");
 		});	
 	};
 	/*$scope.$on('$viewContentLoaded', function() {

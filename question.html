@@ -66,7 +66,7 @@
 <!-- VISUALIZATION PART ENDS -->
 
     <div class="space">
-        <div class="container" ng-repeat="user in users">
+        <div class="container">
                 <!--Student login button-->
                 <a href="/index.html"><img class="logo" src="css/icon1.png" ></a>
                 <!-- fb start -->
@@ -80,11 +80,11 @@
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">
                             Open CarryVis 
                         </button>
-                        <button type="button" class="btn btn-info btn-lg"  ng-click="getAdmin(user)">
+                        <button type="button" class="btn btn-info btn-lg"  ng-click="getAdmin(currentUser)">
                             Admin 
                         </button>
-                        <button type="button" class="btn btn-info btn-lg"  ng-click="quitAdmin(user)">
-                            Normal 
+                        <button type="button" class="btn btn-info btn-lg"  ng-click="quitAdmin(currentUser)">
+                            Normal
                         </button>
                         <!--end of VIS Button -->
                     </div>
@@ -125,7 +125,7 @@
                     </table>
                 </form>
                 <div class="icons" >
-                     <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)">delete </a>
+                     <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show='isAdmin'>delete </a>
                 </div>
                 
             </div>
@@ -328,7 +328,7 @@
 
 
                             <div class="icons" >
-                             <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" >delete</a>
+                             <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show="isAdmin" >delete</a>
                              <a class="btn btn-danger btn-xs" ng-click=""  data-toggle="collapse" data-target="#reply{{ $index + 1}}" >reply</a>
                             </div>                       
                         </div>
@@ -341,12 +341,14 @@
                                 <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
                                 <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
                             </h2>
+                            <!--
                             <p ng-bind-html="todo.linkedDesc"></p>
                             <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check"
                                     ng-click="toggleCompleted(todo)">Toggle Completed</button>
                             &nbsp;
                             <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash"
                                     aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+                            -->
                         </div>
                         <div class="clearfix"></div>
  
