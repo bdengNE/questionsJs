@@ -31,82 +31,82 @@
 
 <body ng-controller="TodoCtrl" style="background-color: #e8e8e8" ng-init="returnFBusername()">
 
-<!-- VISUALIZATION PART BEGINS -->
-<div id="myModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg" id ="interactionOuter">
-        <!-- Modal content-->
-        <div class="modal-content visModule">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">CarryVis: <small>Visual Analytics for CarryRoom</small></h4>
+    <!-- VISUALIZATION PART BEGINS -->
+    <div id="myModal1" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" id ="interactionOuter">
+            <!-- Modal content-->
+            <div class="modal-content visModule">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">CarryVis: <small>Visual Analytics for CarryRoom</small></h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Here goes the content view -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Forum Flow View</div>
+                        <div class="panel-body">
+                            <div class = "row" id="contentView"></div>
+                        </div>
+                    </div><!-- content view ends -->
+
+                    <!-- Here goes the interaction view -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Interaction View</div>
+                        <div class="panel-body" >
+                            <div id="interactionView"></div>
+                        </div>
+                    </div><!-- interaction view ends -->
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <!-- Here goes the content view -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">Forum Flow View</div>
-                    <div class="panel-body">
-                        <div class = "row" id="contentView"></div>
-                    </div>
-                </div><!-- content view ends -->
 
-                <!-- Here goes the interaction view -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">Interaction View</div>
-                    <div class="panel-body" >
-                        <div id="interactionView"></div>
-                    </div>
-                </div><!-- interaction view ends -->
-
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
         </div>
-
     </div>
-</div>
-<!-- VISUALIZATION PART ENDS -->
+    <!-- VISUALIZATION PART ENDS -->
 
     <div class="space">
         <div class="container">
-                <!--Student login button-->
-                <a href="/index.html"><img class="logo" src="css/icon1.png" ></a>
-                <!-- fb start -->
-                    <div class="container">
-                    <div class="text-center" >
-                        <p id="loginWord">Login or Register with:</p>
-                        <a href="/auth/login/facebook" class="btn btn-primary" id="notLogin"><span class="fa fa-facebook"></span> Facebook</a>
-                        <a href="/auth/logout/facebook" class="btn btn-primary" style="display:none" id="logout"><span class="fa fa-facebook"></span> Logout</a>
-                        <!--<div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>-->
-                        <!-- Button for VIS -->
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">
-                            Open CarryVis
-                        </button>
-                        <button type="button" class="btn btn-info btn-lg"  ng-click="getAdmin(currentUser)">
-                            Admin
-                        </button>
-                        <button type="button" class="btn btn-info btn-lg"  ng-click="quitAdmin(currentUser)">
-                            Normal
-                        </button>
-                        <!--end of VIS Button -->
-                    </div>
-                    </div>
-                    <!-- fb end -->
+            <!--Student login button-->
+            <a href="/index.html"><img class="logo" src="css/icon1.png" ></a>
+            <!-- fb start -->
+            <div class="container">
+                <div class="text-center" >
+                    <p id="loginWord">Login or Register with:</p>
+                    <a href="/auth/login/facebook" class="btn btn-primary" id="notLogin"><span class="fa fa-facebook"></span> Facebook</a>
+                    <a href="/auth/logout/facebook" class="btn btn-primary" style="display:none" id="logout"><span class="fa fa-facebook"></span> Logout</a>
+                    <!--<div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>-->
+                    <!-- Button for VIS -->
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">
+                        Open CarryVis
+                    </button>
+                    <button type="button" class="btn btn-info btn-lg"  ng-click="getAdmin(currentUser)">
+                        Admin
+                    </button>
+                    <button type="button" class="btn btn-info btn-lg"  ng-click="quitAdmin(currentUser)">
+                        Normal
+                    </button>
+                    <!--end of VIS Button -->
+                </div>
+            </div>
+            <!-- fb end -->
 
-                    <div id="status">
-                    </div>
-                    <!-- fb end -->
+            <div id="status">
+            </div>
+            <!-- fb end -->
         </div>
     </div>
     <div class="col-lg-3 col-md-3">
         <div>
-        <h3>Poll of this Week</h3>
-        <div class="divline"></div>
+            <h3>Poll of this Week</h3>
+            <div class="divline"></div>
 
-        <div class="sidebarblock" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1 |questionFilter:maxQuestion "
-                  ng-class="{completed: todo.completed, editing: todo == editedTodo}" >
+            <div class="sidebarblock" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1 |questionFilter:maxQuestion "
+            ng-class="{completed: todo.completed, editing: todo == editedTodo}" >
 
             <div class="blocktxt">
                 <p>{{todo.wholeMsg}}</p>
@@ -129,7 +129,7 @@
                     </table>
                 </form>
                 <div class="icons" >
-                     <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show='isAdmin'>delete </a>
+                    <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show='isAdmin'>delete </a>
                 </div>
 
             </div>
@@ -153,330 +153,330 @@
         </div>
     </div>
 
-        <!-- -->
+    <!-- -->
+</div>
+
+<div class="col-lg-6 col-md-6">
+    <!-- LEAVE SPACE FOR FUTURE SEARCH -->
+    <!--
+    <div class="searchQuestion">
+    <form action="#" method="post" class="form">
+    <div class="col-md-10">
+    <input type="text" class="form-control" laceholder="Search for question"
+    ng-model="input.wholeMsg" autofocus="autofocus">
+</input>
+</div>
+<div class="col-md-2"><button class="btn btn-alarm" type="button"  ng-click="addTodo()">
+<i class="glyphicon glyphicon-search"></i></button></div>
+<div class="clearfix"></div>
+</form>
+</div>
+-->
+
+
+
+
+
+
+<!-- NEW DESIGN FOR POSTING QUESTIONS -->
+
+
+<div class="input-group">
+    <!-- POST -->
+    <div class="post" id="collapse1">
+
+        <form action="#" class="form newtopic" method="post" >
+            <div class="topwrap">
+
+                <div class="userinfo pull-left">
+                    <!--
+                    <div class="avatar">
+                    <img src="img/avatar.png" height="42" width="42" alt="" />
+                    <div class="status green"></div>
+                </div>
+
+                <div class="icons">
+
+            </div>
+        -->
     </div>
 
-    <div class="col-lg-6 col-md-6">
-        <!-- LEAVE SPACE FOR FUTURE SEARCH -->
+    <div class="posttext pull-left">
+        <!-- text-angular richtext editor -->
+        <input type="text" class="form-control" ng-model="input.title" placeholder="title">
+        <div text-angular ng-model="input.wholeMsg">
+        </div>
+
+
+
+
         <!--
-        <div class="searchQuestion">
-                <form action="#" method="post" class="form">
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" laceholder="Search for question"
-                               ng-model="input.wholeMsg" autofocus="autofocus">
-                        </input>
-                    </div>
-                    <div class="col-md-2"><button class="btn btn-alarm" type="button"  ng-click="addTodo()">
-                        <i class="glyphicon glyphicon-search"></i></button></div>
-                    <div class="clearfix"></div>
-                </form>
+        <div>
+        <input type="text" placeholder="Enter Topic Title" class="form-control" />
+    </div>
+    <div>
+    <textarea name="desc" id="desc" placeholder="Description"
+    class="form-control" ></textarea>
+</div>
+
+<div class="row">
+<div class="col-lg-6 col-md-6">
+<select name="category" id="category"  class="formcontrol" >
+<option value="" disabled selected>Select Category</option>
+<option value="op1">Question</option>
+<option value="op2">Instruction</option>
+</select>
+</div>
+
+</div>
+-->
+
+<label>Hot Tag: </label>
+
+<!--
+<button class="btnTag" style="background-color:#FF6666" ng-click="addTodo()"> Assignment</button>
+<button class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg()"> Final</button>
+<button class="btnTag" style="background-color:#33CC33" ng-click="tagToMsg()"> Mid-term</button>
+
+-->
+<button type="button" class="btnTag" style="background-color:#FF6666"
+ng-click="selectTag('#Midterm')">Midterm</button>
+<button type="button" class="btnTag" style="background-color:#33cc33"
+ng-click="selectTag('#final')">Final</button>
+<button type="button" class="btnTag" style="background-color:yellow"
+ng-click="selectTag('#Assignment')">Assignment</button>
+<div class="clearfix"></div>
+</div>
+<div class="postinfobot">
+    <!--
+    <div class="notechbox pull-left">
+    <input type="checkbox" name="note" id="note" class="form-control" />
+</div>
+-->
+<div class="pull-right postreply">
+    <div class="pull-left"><button type="button" class="btn btn-primary"
+        ng-click="addTodo()">Post</button></div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="pull-right postreply">
+        <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#choice">Add choices</button></div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="pull-right postreply">
+        <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#img">Import Photo</button></div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div id="choice" class="collapse">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="choice1" aria-describedby="sizing-addon3" ng-model="choice1">
+        <input type="text" class="form-control" placeholder="choice2" aria-describedby="sizing-addon3" ng-model="choice2" >
+    </div>
+    <div class = "col-md-1">
+        <span class="reply-group-btn">
+            <button class="btn btn-default" type="button" ng-click="addPolling()">Post it!</button>
+        </span>
+    </div>
+</div>
+<div id="img" class="collapse">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="URL of image" aria-describedby="sizing-addon3" ng-model="imgUrl">
+
+    </div>
+    <div class = "col-md-1">
+        <span class="reply-group-btn">
+            <button class="btn btn-default" type="button" ng-click="addImage()">Import it!</button>
+        </span>
+    </div>
+</div>
+</form>
+</div><!-- POST -->
+<!--
+<span class="input-group-btn">
+<button class="btn btn-default" type="button" style="opacity:0"></button>
+</span>
+-->
+
+
+</div>
+
+
+
+<!-- NEW DESIGN FOR TODOLIST -->
+
+
+
+<div class="list-group" id="todo-list">
+
+
+    <span class="listgroup-item" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|questionFilter:maxQuestion "
+    ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+
+
+    <div class="post list-group-item-heading" ng-switch on="todo.headLastChar"
+    ng-style = "{'opacity': (1 + todo.echo * 0.05 >= 0.1) ? 1 + todo.echo * 0.05 : 0.1}">
+    <img ng-src="{{todo.attachment}}"/>
+    <div class="wrap-ut pull-left">
+        <div class="userinfo pull-left">
+            <div class="avatar">
+                <img src="img/avatar.png" height="42" width="42" alt="" />
+                <div class="status green">&nbsp;</div>
+            </div>
+
+
+            <div class="icons" >
+                <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show="isAdmin" >delete</a>
+                <a class="btn btn-danger btn-xs" ng-click=""  data-toggle="collapse" data-target="#reply{{ $index + 1}}" >reply</a>
+            </div>
         </div>
-        -->
 
-
-
-
-
-
-        <!-- NEW DESIGN FOR POSTING QUESTIONS -->
-
-
-        <div class="input-group">
-            <!-- POST -->
-            <div class="post" id="collapse1">
-
-                <form action="#" class="form newtopic" method="post" >
-                    <div class="topwrap">
-
-                        <div class="userinfo pull-left">
-                        <!--
-                            <div class="avatar">
-                                <img src="img/avatar.png" height="42" width="42" alt="" />
-                                <div class="status green"></div>
-                            </div>
-
-                            <div class="icons">
-
-                            </div>
-                        -->
-                        </div>
-
-                        <div class="posttext pull-left">
-                            <!-- text-angular richtext editor -->
-                            <input type="text" class="form-control" ng-model="input.title" placeholder="title">
-                            <div text-angular ng-model="input.wholeMsg">
-                            </div>
-
-
-
-
-                            <!--
-                            <div>
-                                <input type="text" placeholder="Enter Topic Title" class="form-control" />
-                            </div>
-                            <div>
-                                <textarea name="desc" id="desc" placeholder="Description"
-                                          class="form-control" ></textarea>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <select name="category" id="category"  class="formcontrol" >
-                                        <option value="" disabled selected>Select Category</option>
-                                        <option value="op1">Question</option>
-                                        <option value="op2">Instruction</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                            -->
-
-                            <label>Hot Tag: </label>
-
-                            <!--
-                            <button class="btnTag" style="background-color:#FF6666" ng-click="addTodo()"> Assignment</button>
-                            <button class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg()"> Final</button>
-                            <button class="btnTag" style="background-color:#33CC33" ng-click="tagToMsg()"> Mid-term</button>
-
-                            -->
-                            <button type="button" class="btnTag" style="background-color:#FF6666"
-                                    ng-click="selectTag('#Midterm')">Midterm</button>
-                            <button type="button" class="btnTag" style="background-color:#33cc33"
-                                    ng-click="selectTag('#final')">Final</button>
-                            <button type="button" class="btnTag" style="background-color:yellow"
-                                    ng-click="selectTag('#Assignment')">Assignment</button>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="postinfobot">
-                        <!--
-                        <div class="notechbox pull-left">
-                            <input type="checkbox" name="note" id="note" class="form-control" />
-                        </div>
-                        -->
-                        <div class="pull-right postreply">
-                            <div class="pull-left"><button type="button" class="btn btn-primary"
-                                    ng-click="addTodo()">Post</button></div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="pull-right postreply">
-                            <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#choice">Add choices</button></div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="pull-right postreply">
-                            <div class="pull-left"><button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#img">Import Photo</button></div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div id="choice" class="collapse">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="choice1" aria-describedby="sizing-addon3" ng-model="choice1">
-                            <input type="text" class="form-control" placeholder="choice2" aria-describedby="sizing-addon3" ng-model="choice2" >
-                        </div>
-                        <div class = "col-md-1">
-                            <span class="reply-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="addPolling()">Post it!</button>
-                            </span>
-                        </div>
-                    </div>
-                    <div id="img" class="collapse">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="URL of image" aria-describedby="sizing-addon3" ng-model="imgUrl">
-
-                        </div>
-                        <div class = "col-md-1">
-                            <span class="reply-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="addImage()">Import it!</button>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div><!-- POST -->
+        <div class="posttext pull-left">
+            <h2 ng-class="{completed: todo.completed}">
+                <span class="label label-danger" ng-show="todo.new">New</span>
+                <span class="iconStyle glyphicon glyphicon-question-sign"></span>
+                <span ng-bind-html="todo.head"></span>
+                <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
+                <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
+            </h2>
+            <p ng-bind-html="todo.linkedDesc"></p>
             <!--
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" style="opacity:0"></button>
-            </span>
+            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check"
+            ng-click="toggleCompleted(todo)">Toggle Completed</button>
+            &nbsp;
+            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash"
+            aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
         -->
+    </div>
+    <div class="clearfix"></div>
 
 
+</div>
+
+<div class="postinfo pull-left">
+    <div class="comments">
+        <div class="commentbg">
+            {{$storage[todo._id]}}
+            <div class="mark"></div>
         </div>
 
-
-
-        <!-- NEW DESIGN FOR TODOLIST -->
-
-
-
-        <div class="list-group" id="todo-list">
-
-
-            <span class="listgroup-item" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|questionFilter:maxQuestion "
-                  ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-
-
-                <div class="post list-group-item-heading" ng-switch on="todo.headLastChar"
-                     ng-style = "{'opacity': (1 + todo.echo * 0.05 >= 0.1) ? 1 + todo.echo * 0.05 : 0.1}">
-                     <img ng-src="{{todo.attachment}}"/>
-                    <div class="wrap-ut pull-left">
-                        <div class="userinfo pull-left">
-                            <div class="avatar">
-                                <img src="img/avatar.png" height="42" width="42" alt="" />
-                                <div class="status green">&nbsp;</div>
-                            </div>
-
-
-                            <div class="icons" >
-                             <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show="isAdmin" >delete</a>
-                             <a class="btn btn-danger btn-xs" ng-click=""  data-toggle="collapse" data-target="#reply{{ $index + 1}}" >reply</a>
-                            </div>
-                        </div>
-
-                        <div class="posttext pull-left">
-                            <h2 ng-class="{completed: todo.completed}">
-                                <span class="label label-danger" ng-show="todo.new">New</span>
-                                <span class="iconStyle glyphicon glyphicon-question-sign"></span>
-                                <span ng-bind-html="todo.head"></span>
-                                <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
-                                <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-                            </h2>
-                            <p ng-bind-html="todo.linkedDesc"></p>
-                            <!--
-                            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check"
-                                    ng-click="toggleCompleted(todo)">Toggle Completed</button>
-                            &nbsp;
-                            <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash"
-                                    aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-                            -->
-                        </div>
-                        <div class="clearfix"></div>
-
-
-                    </div>
-
-                    <div class="postinfo pull-left">
-                        <div class="comments">
-                            <div class="commentbg">
-                                {{$storage[todo._id]}}
-                                <div class="mark"></div>
-                            </div>
-
-                        </div>
-                        <div class="views row">
-                            <span class="col-md-5 glyphicon glyphicon-thumbs-up voteup" style="font-size: 20px;"
-                                  ng-click="!$storage[todo._id]? addEcho(todo) : ($storage[todo._id] == 'echoed' ? minusEcho(todo) : void(0));"
-                                  ng-disabled="!!$storage[todo._id]"></span>
-                            <span class="col-md-2 label label-warning"> {{todo.echo}} </span>
-                            <span class="col-md-5 glyphicon glyphicon-thumbs-down votedown"
-                                  ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
-                                  ng-disabled="!!$storage[todo._id]"></span>
-                        </div>
-                        <div class="time"><span class="glyphicon glyphicon-time"></span>
-                            {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}
-                        </div>
-                        <div class="blocktxt">
-                            <ul class="cats" ng-repeat="reply in todo.reply">
-                            <li>{{reply.replyContent}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                        <span class="listgroup-item" ng-repeat="replyItem in todo.reply">
-                                <li>{{replyItem.content}}</li>
-                        </span>
+    </div>
+    <div class="views row">
+        <span class="col-md-5 glyphicon glyphicon-thumbs-up voteup" style="font-size: 20px;"
+        ng-click="!$storage[todo._id]? addEcho(todo) : ($storage[todo._id] == 'echoed' ? minusEcho(todo) : void(0));"
+        ng-disabled="!!$storage[todo._id]"></span>
+        <span class="col-md-2 label label-warning"> {{todo.echo}} </span>
+        <span class="col-md-5 glyphicon glyphicon-thumbs-down votedown"
+        ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
+        ng-disabled="!!$storage[todo._id]"></span>
+    </div>
+    <div class="time"><span class="glyphicon glyphicon-time"></span>
+        {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}
+    </div>
+    <div class="blocktxt">
+        <ul class="cats" ng-repeat="reply in todo.reply">
+            <li>{{reply.replyContent}}</li>
+        </ul>
+    </div>
+</div>
+<span class="listgroup-item" ng-repeat="replyItem in todo.reply">
+    <li>{{replyItem.content}}</li>
+</span>
 
 
 
 
-                    <div class="clearfix"></div>
-               <!-- Add Reply here-->
-                    <div id="reply{{ $index + 1}}" class="collapse">
+<div class="clearfix"></div>
+<!-- Add Reply here-->
+<div id="reply{{ $index + 1}}" class="collapse">
 
-                        <form action="#" class="form newtopic input-group" method="post" >
-                        <textarea type="text" class="form-control" placeholder="Reply for the question{{$index}}"
-                            ng-model="todo.newReply" autofocus="autofocus">
-                        </textarea>
-                        <button class="btn btn-default" type="button" ng-click="addReply(todo)">Submit it</button>
+    <form action="#" class="form newtopic input-group" method="post" >
+        <textarea type="text" class="form-control" placeholder="Reply for the question{{$index}}"
+        ng-model="todo.newReply" autofocus="autofocus">
+    </textarea>
+    <button class="btn btn-default" type="button" ng-click="addReply(todo)">Submit it</button>
 
-                        </form>
-                    </div>
-                </div>
+</form>
+</div>
+</div>
 
-            </span>
+</span>
 
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3">
+
+    <div class="sidebarblock">
+        <h3>Sort by</h3>
+        <div class="divline"></div>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default">Likes</button>
+            <button type="button" class="btn btn-default">Times</button>
         </div>
     </div>
-    </div>
-    <div class="col-lg-3 col-md-3">
-
-        <div class="sidebarblock">
-            <h3>Sort by</h3>
-            <div class="divline"></div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default">Likes</button>
-                <button type="button" class="btn btn-default">Times</button>
-            </div>
+    <div class="sidebarblock">
+        <h3>Try more classrooms</h3>
+        <div class="divline"></div>
+        <div class="blocktxt">
+            <ul class="cats" ng-repeat="room in roomList">
+                <li><a ng-href="#{{room.name}}" ng-bind="room.name"></a></li>
+            </ul>
         </div>
-       <div class="sidebarblock">
-            <h3>Try more classrooms</h3>
-            <div class="divline"></div>
-            <div class="blocktxt">
-                <ul class="cats" ng-repeat="room in roomList">
-                    <li><a ng-href="#{{room.name}}" ng-bind="room.name"></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="bottom">
-                <div class="container">
-                    <br/>
-                    <p>Copyright &copy Why Naming Again. All Rights Reserved</p>
-                </div>
-            </div>
-        <!-- -->
     </div>
+    <div class="bottom">
+        <div class="container">
+            <br/>
+            <p>Copyright &copy Why Naming Again. All Rights Reserved</p>
+        </div>
+    </div>
+    <!-- -->
+</div>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-    <!-- angularJs -->
+<!-- angularJs -->
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script> NO NEED FOR textAngular-->
-    <script src="js/lib/Autolinker.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script> NO NEED FOR textAngular-->
+<script src="js/lib/Autolinker.min.js"></script>
 
-    <!-- emoji -->
-    <!-- <script type="text/javascript" src="webjs/config.js"></script>
-    <script type="text/javascript" src="webjs/emoji.min.js"></script>
-    <link type="text/stylesheet" rel="stylesheet" href="css/emoji.min.css" /> -->
+<!-- emoji -->
+<!-- <script type="text/javascript" src="webjs/config.js"></script>
+<script type="text/javascript" src="webjs/emoji.min.js"></script>
+<link type="text/stylesheet" rel="stylesheet" href="css/emoji.min.css" /> -->
 
-    <!-- Bootstrap -->
-    <script src="webjs/bootstrap.min.js"></script>
+<!-- Bootstrap -->
+<script src="webjs/bootstrap.min.js"></script>
 
-    <!-- local scripts for our application -->
-    <script src="js/lib/ngStorage.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/filters/questionFilter.js"></script>
-    <script src="js/controllers/todoCtrl.js"></script>
+<!-- local scripts for our application -->
+<script src="js/lib/ngStorage.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/filters/questionFilter.js"></script>
+<script src="js/controllers/todoCtrl.js"></script>
 
-    <!-- this part goes for vis -->
-    <script src="js/vis/data/networkData.js"></script>
-    <script src="js/vis/data/flowData.js"></script>
+<!-- this part goes for vis -->
+<script src="js/vis/data/networkData.js"></script>
+<script src="js/vis/data/flowData.js"></script>
 
-    <script src="js/lib/d3.js"></script>
-    <script src="js/vis/main_vis.js"></script>
-    <script src="js/vis/graph.js"></script>
-    <script src="js/vis/flow.js"></script>
-    <!-- end of vis -->
+<script src="js/lib/d3.js"></script>
+<script src="js/vis/main_vis.js"></script>
+<script src="js/vis/graph.js"></script>
+<script src="js/vis/flow.js"></script>
+<!-- end of vis -->
 
-    <!-- rich text editor -->
-    <script src='/node_modules/textangular/dist/textAngular-rangy.min.js'></script>
-    <script src='/node_modules/textangular/dist/textAngular-sanitize.min.js'></script>
-    <script src='/node_modules/textangular/dist/textAngular.min.js'></script>
-    <!-- /rich text editor -->
+<!-- rich text editor -->
+<script src='/node_modules/textangular/dist/textAngular-rangy.min.js'></script>
+<script src='/node_modules/textangular/dist/textAngular-sanitize.min.js'></script>
+<script src='/node_modules/textangular/dist/textAngular.min.js'></script>
+<!-- /rich text editor -->
 
-    <!-- CUSTOM CODE TO RELOAD UPON CHANGE OF ROOM -->
-    <script>
-        window.onhashchange = function() {
-            window.location.reload();
-        }
-    </script>
+<!-- CUSTOM CODE TO RELOAD UPON CHANGE OF ROOM -->
+<script>
+window.onhashchange = function() {
+    window.location.reload();
+}
+</script>
 </body>
 </html>
