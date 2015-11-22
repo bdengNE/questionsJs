@@ -26,6 +26,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	}
 	});
 	*/
+	var sortType="createdAt";
+	var sortReverse=false;
 	var splits = $location.path().trim().split("/");
 	var roomId = angular.lowercase(splits[1]);
 	if (!roomId || roomId.length === 0) {
@@ -41,6 +43,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.users=[];
 	$scope.currentUser=null;
 	$scope.isAdmin=false;
+
     // return all questions
     // get all questions
 	var getQuestions = function (query) {
@@ -152,7 +155,16 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	    return false;
 
 	}
+	$scope.getQuestionsByTag=function(tag){
+		$http.get (backendUrl + '/api/questions/?tags='+tag)
+		.success(function(data) {
+			console.log("normal");
 
+	    })
+	    .error(function(data) {
+	        console.log('Error: ' + data);
+	    });
+	}
 
 
 	$scope.selectTag = function(input) {
@@ -258,6 +270,19 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
+	$scope.totalVotes=0;
+	$scope.totalVotes=function(todo){
+		$http.get(backendUrl + '/api/questions/')
+		.success(function(data) {
+			data.choices.forEach(choice){
+				$scope.totalVotes=$scope.totalVotes+choice.votes；
+			}
+	    })
+	}
+
+
+
+
 	$scope.addImage = function () {
 		var newTodo= $scope.input.wholeMsg.trim();
 		var url=$scope.imgUrl;
