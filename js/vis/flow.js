@@ -473,8 +473,8 @@ function drawFlow(flowData, svgName) {
     }
     function processDate(date){
         var newDate = new Date(date * 1000);
-        var year = newDate.getFullYear();
-        var month = newDate.getMonth();
+        var year = newDate.getFullYear() + 2;
+        var month = newDate.getMonth() + 3;
         var date = newDate.getDate();
         var text = year + " / " + month + " / " + date;
         return text;

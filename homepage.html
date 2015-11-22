@@ -16,14 +16,13 @@
 
 <body class="zhi" ng-controller="homepageMani" ng-init="returnFBusername()">
 
-<div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>
 <div class="page-wraper">
 <div class="username">
 	<h1 id="username" style="color:rgb(80,80,80);"></h1>
 	<a href="/auth/logout/facebook" class="btn btn-primary" style="float:right;"><span class="fa fa-facebook"></span> Logout</a>
 </div>
 <div class="nav">
-	<a href="question.html">Go back to General Carry Room</a>
+	<a href="question.html#/comp3111h">Go back to comp3111h to Carry</a>
 </div>
 
 <div class="profile-navbar clearfix">
@@ -80,6 +79,7 @@
 		<!-- want to have three most recent answers here-->
 			<div class="zm-profile-section-main">
 				<h2 class="zm-profile-question">
+					<p id="question0">test
 					<p class="question_link question" id="q0" style="display:none">You haven't aer question yet!</p>
 				</h2>
 
@@ -94,6 +94,7 @@
 		<!-- want to have three most recent answers here-->
 			<div class="zm-profile-section-main">
 				<h2 class="zm-profile-question">
+					<p id="question1">test
 					<p class="question_link question" id="q1" style="display:none">Question2</p>
 				</h2>
 
@@ -108,6 +109,7 @@
 		<!-- want to have three most recent answers here-->
 			<div class="zm-profile-section-main">
 				<h2 class="zm-profile-question">
+					<p id="question2">test
 					<p class="question_link question" id="q2" style="display:none">Question3</p>
 				</h2>
 	</div>
@@ -202,7 +204,7 @@
 					{
 						for(var i=0; i<totalQuestion;i++){
 							document.getElementById('q'+i).style.display="";
-							document.getElementById('q'+i).innerHTML=result.questions[i].wholeMsg;
+							document.getElementById('q'+i).innerHTML=result.questions[i].desc;
 							document.getElementById('q'+i).style.fontSize="20px";
 							document.getElementById('q'+i).style.color="rgb(80,80,80)";
 							document.getElementById('like'+i).style.display="";
@@ -275,22 +277,38 @@
 						console.log("first index is" +firstIndex);
 						console.log(result.questions[firstIndex].wholeMsg);
 						document.getElementById('q0').style.display="";
-						document.getElementById('q0').innerHTML=result.questions[firstIndex].wholeMsg;
+						document.getElementById('q0').innerHTML=result.questions[firstIndex].desc;
 						document.getElementById('like0').style.display="";
 						document.getElementById('like0').innerHTML= likenumber[firstIndex]-dislikenumber[firstIndex];
 						document.getElementById('likes0').style.display="";
 						var secondIndex = findsecond(date);
 						document.getElementById('q1').style.display="";
-						document.getElementById('q1').innerHTML=result.questions[secondIndex].wholeMsg;
+						document.getElementById('q1').innerHTML=result.questions[secondIndex].desc;
 						document.getElementById('like1').style.display="";
 						document.getElementById('like1').innerHTML= likenumber[secondIndex]-dislikenumber[secondIndex];
 						document.getElementById('likes1').style.display="";
 						var thirdIndex = findthird(date); 
 						document.getElementById('q2').style.display="";
-						document.getElementById('q2').innerHTML=result.questions[thirdIndex].wholeMsg;
+						document.getElementById('q2').innerHTML=result.questions[thirdIndex].desc;
 						document.getElementById('like2').style.display="";
 						document.getElementById('like2').innerHTML= likenumber[thirdIndex]-dislikenumber[thirdIndex];
 						document.getElementById('likes2').style.display="";
+						//questoin font size
+						document.getElementById('q0').style.fontSize="20px";
+						document.getElementById('q1').style.fontSize="20px";
+						document.getElementById('q2').style.fontSize="20px";
+						//question font color
+						document.getElementById('q0').style.color="rgb(100,100,100)";
+						document.getElementById('q1').style.color="rgb(100,100,100)";
+						document.getElementById('q2').style.color="rgb(100,100,100)";
+						//question title
+						document.getElementById('question0').style.color="rgb(70,70,70)";
+						document.getElementById('question1').style.color="rgb(70,70,70)";
+						document.getElementById('question2').style.color="rgb(70,70,70)";
+						//question tille color
+						document.getElementById('question0').style.fontSize="18px";
+						document.getElementById('question1').style.fontSize="18px";
+						document.getElementById('question2').style.fontSize="18px";
 					}
 					
 					$scope.likes = totalLike;
