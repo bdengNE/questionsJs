@@ -70,7 +70,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	}
-	
+
 	getUsers();
 
 	var getRoomList = function () {
@@ -92,7 +92,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
-			
+
 		});
 	};
 	$scope.getCurrentUser();
@@ -125,7 +125,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	}, true);
 	// dull function, and implement it later
 	$scope.getAdmin=function(user){
-		
+
 		$http.post(backendUrl + '/api/users/'+user._id, {type:"admin"})
 		.success(function(data) {
 			console.log("admin")
@@ -152,9 +152,9 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	    return false;
 
 	}
-	
-	
-	
+
+
+
 	$scope.selectTag = function(input) {
 		var Msg;
 		try{
@@ -167,23 +167,25 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		}
 		catch(e){Msg=input;}
 			$scope.input = {wholeMsg: Msg};
-		
+
 	}
 
 
 	//CUSTOM function adapted to new REST API
 	$scope.addTodo = function () {
+		var title = $scope.input.title.trim();
 		var newTodo = $scope.input.wholeMsg.trim();
-		
+
 		// No input, so just do nothing
 		if (!newTodo.length) {
 			return;
 		};
 
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId})
+		$http.post(backendUrl + '/api/questions', {head: title, desc: newTodo, roomId: $scope.roomId})
 		.success(function(data) {
 			// remove the posted question in the input
 			$scope.input.wholeMsg = '';
+			$scope.input.title = '';
 			getQuestions();
 	        console.log(data);
 	    })
@@ -194,7 +196,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	};
 	$scope.addReply=function(todo){
 		var newReply=todo.newReply.trim();
-		
+
 		console.log(newReply);
 		$http.post(backendUrl + '/api/questions/'+ todo._id+'/reply', {replyContent: newReply})
 		.success(function(data){
@@ -203,7 +205,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		.error(function(data) {
 	        console.log('Error: ' + data);
 	    });
-	
+
 
 	}
 	//vote up for a polling
@@ -212,11 +214,11 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+todo.choices[$index]._id+'/vote-up')
 		.success(function(data) {
-			
+
 			getQuestions();
 			// Disable the button
 			$scope.$storage[todo._id] = "selected";
-			
+
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -227,7 +229,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		var newTodo = $scope.input.wholeMsg.trim();
 
 		// No input, so just do nothing
-	
+
 		//var choices=[{names:'test1',votes: 20},{names:'test1',votes: 20}];
 		var choice1=$scope.choice1.trim();
 		var choice2=$scope.choice2.trim();
@@ -273,13 +275,13 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$scope.input.wholeMsg = '';
 			$scope.imgUrl='';
 			getQuestions();
-	       
+
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
 	    });
 	};
-	
+
 	$scope.editTodo = function (todo) {
 		$scope.editedTodo = todo;
 		$scope.originalTodo = angular.extend({}, $scope.editedTodo);
@@ -444,7 +446,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	});
 	//Return facebook username
 	$scope.returnFBusername = function(){
-		
+
 		//var defer = $q.defer();
 		$http.get('/api/users/current')
 		.success(function(result){
@@ -465,7 +467,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		})
 		.error(function(result){
 			console.log("error");
-		});	
+		});
 	};
 	/*$scope.$on('$viewContentLoaded', function() {
 		returnFBusername();
