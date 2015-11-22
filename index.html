@@ -6,6 +6,8 @@
 		<link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/font.css">
 		<link rel="stylesheet" href="css/style.css">
+		<!-- font-awesome: dependency of textangular -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<title>CarryRoom</title>
 		<link rel="shortcut icon" href="css/icon1.png" />
 		<meta charset="utf-8">
@@ -21,7 +23,7 @@
 						<p id="welcome">Login or Register with:</p>
 						<a href="/auth/login/facebook" id="notLogin" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
 						<a href="/auth/logout/facebook" class="btn btn-primary" id="logout" style="display:none"><span class="fa fa-facebook"></span> Logout</a>
-						<a href="homepage.html" id="homepage"style="display:none">Homepage</a>  
+						<a href="homepage.html" id="homepage"style="display:none">Homepage</a>
 					</div>
 					</div>
 					<!-- fb end -->
@@ -125,7 +127,7 @@
 		})
 		.error(function(result){
 			console.log("fffffffffffff");
-		});	
+		});
 		}]);
 		</script>
 		<!--randomly show quote and background image-->
@@ -172,7 +174,7 @@
 			document.getElementById("discover").href = "question.html#/"+room[x];
 		</script>
 		<!--Test FB Login-->
-		<!--Todo: 
+		<!--Todo:
 		1. after login, the Facebook login button will disappear and the homepage button will apear
 		2. after login, the "Login or register" will become "welcome back! username"
 		-->
