@@ -138,9 +138,16 @@ td.chbox {
     padding-bottom: 20px;
 }
 
+.question-left {
+    /*display: inline-block;*/
+    max-width: 50px;
+}
+
 .question-right {
+    /*display: inline-block;*/
+    margin-left: 20px;
     border-left: 1px solid #f1f1f1;
-    min-height: 210px;
+    min-height: 150px;
 }
 
 .card h2 {
@@ -148,7 +155,7 @@ td.chbox {
     font-size: 16px;
     font-family: 'Open Sans Bold', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 20px 0 20px 0;
 }
 
 .like-or-not {

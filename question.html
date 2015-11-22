@@ -184,9 +184,9 @@
             <!-- The Pollings -->
             <div ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1">
                 <div class="card" ng-switch on="todo.headLastChar">
-                    <div class="container-fluid">
+                    <div class="container-fluid clearfix">
                         <!-- Left sidebar of question -->
-                        <div class="question-left col-md-2">
+                        <div class="question-left pull-left">
                             <div avatar>
                                 <a src="javascript:void(0)">
                                     <img class="avatar" width=50 height=50 ng-src="{{todo.user.photo}}" src="img/avatar.png"/>
@@ -203,7 +203,7 @@
                             </div> -->
                         </div>
                         <!-- Right content of question -->
-                        <div class="question-right col-md-10">
+                        <div class="question-right pull-right container-fluid">
                             <h2 head>
                                 <span class="label label-danger" ng-show="todo.new">New</span>
                                 <span class="iconStyle glyphicon glyphicon-question-sign"></span>
@@ -225,9 +225,8 @@
 
                         <!-- Status of question -->
 
-                        <div class="clearfix">
+                        <div class="clearfix container-fluid">
                             <div class="pull-right">
-                                <hr/>
                                 <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
                                 <span ng-repeat="tag in todo.tags">
                                     <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
@@ -269,9 +268,9 @@
             <span class="" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|questionFilter:maxQuestion "
             ng-class="{editing: todo == editedTodo}">
                 <div class="card" ng-switch on="todo.headLastChar" ng-style = "{'opacity': (1 + todo.echo * 0.05 >= 0.1) ? 1 + todo.echo * 0.05 : 0.1}">
-                    <div class="container-fluid">
+                    <div class="container-fluid clearfix">
                         <!-- Left sidebar of question -->
-                        <div class="question-left col-md-2">
+                        <div class="question-left pull-left">
                             <div avatar>
                                 <a src="javascript:void(0)">
                                     <img class="avatar" width=50 height=50 ng-src="{{todo.user.photo}}" src="img/avatar.png"/>
@@ -287,7 +286,7 @@
                             </div>
                         </div>
                         <!-- Right content of question -->
-                        <div class="question-right col-md-10">
+                        <div class="question-right pull-left container-fluid">
                             <h2 head>
                                 <span class="label label-danger" ng-show="todo.new">New</span>
                                 <span class="iconStyle glyphicon glyphicon-question-sign"></span>
@@ -299,21 +298,19 @@
                                 Description. Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.
                             </p>
                         </div>
+                    </div>
+                    <!-- Status of question -->
 
-                        <!-- Status of question -->
-
-                        <div class="clearfix">
-                            <div class="pull-right">
-                                <hr/>
-                                <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
-                                <span ng-repeat="tag in todo.tags">
-                                    <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
-                                    &nbsp;&nbsp;
-                                </span>
-                                <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
-                            </div>
+                    <div class="clearfix container-fluid">
+                        <div class="pull-right">
+                            <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
+                            <span ng-repeat="tag in todo.tags">
+                                <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
+                                &nbsp;&nbsp;
+                            </span>
+                            <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
                         </div>
                     </div>
                     <div id="replies-{{$index}}" class="container-fluid collapse">
