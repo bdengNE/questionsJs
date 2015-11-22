@@ -140,6 +140,7 @@ td.chbox {
 
 .question-right {
     border-left: 1px solid #f1f1f1;
+    min-height: 210px;
 }
 
 .card h2 {

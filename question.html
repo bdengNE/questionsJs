@@ -27,7 +27,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body g-controller="TodoCtrl" ng-init="returnFBusername()">
+<body ng-controller="TodoCtrl">
 
     <!-- VISUALIZATION PART BEGINS -->
     <div id="myModal1" class="modal fade" role="dialog">
@@ -85,11 +85,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a data-toggle="modal" data-target="#myModal1">CarryVis</a></li>
-                    <li><a href="auth/login/facebook">Login</a></li>
-                    <!-- TODO: hide these conditionally -->
-                    <li><p class="navbar-text">Howody, {{username}}</p></li>
-                    <li><a href="homepage.html">Personal Homepage</a></li>
-                    <li><a href="auth/logout/facebook">Logout</a></li>
+                    <li ng-class="{hidden: !!currentUser}"><a href="auth/login/facebook">Login</a></li>
+                    <li ng-class="{hidden: !currentUser}"><p class="navbar-text">Howody, {{currentUser.fb.name}}</p></li>
+                    <li ng-class="{hidden: !currentUser}"><a href="homepage.html">Personal Homepage</a></li>
+                    <li ng-class="{hidden: !currentUser}"><a href="auth/logout/facebook">Logout</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -134,18 +133,17 @@
             <!-- The form for new question -->
             <div id="new-question" class="card">
                 <div class="container-fluid">
-                    <!-- TODO: Hide the input depending on click action -->
                     <div id="question-type-choice" class="form-group">
                         <ul class="nav nav-pills">
-                            <li role="presentation" class="active"><a src="javascript:void(0)" ng-click="input.type='question'">New Question</a></li>
-                            <li role="presentation"><a src="javascript:void(0)" ng-click="input.type='polling'">New Polling</a></li>
+                            <li role="presentation" ng-class="{active: (input.type ? input.type=='question' : true)}"><a src="javascript:void(0)" ng-click="input.type='question'">New Question</a></li>
+                            <li role="presentation" ng-class="{active: input.type=='polling'}"><a src="javascript:void(0)" ng-click="input.type='polling'">New Polling</a></li>
                         </ul>
                     </div>
                     <!-- New Question -->
                     <div id="question">
                         <div class="form-group">
                             <label>Title</label>
-                            <input type="text" class="form-control" ng-model="input.title">
+                            <input type="text" class="form-control" placeholder="title is required" ng-model="input.title">
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -153,12 +151,13 @@
                             </div>
                         </div>
                         <!-- For New Polling -->
-                        <div id="polling" class="form-group" ng-class="{collapse: input.type == 'polling'}">
+                        <div id="polling" class="form-group" ng-class="{collapse: input.type != 'polling'}">
                             <label>Polling Choices</label>
-                            <div ng-repeat="choice in input.choices">
-                                <div class="form-group input-group">
+                            <div ng-repeat="choice in input.choices track by $index">
+                                <div class
+                                ="form-group input-group">
                                     <span class="input-group-addon">Choice {{$index+1}}</span>
-                                    <input type="text" class="form-control" ng-model="choice.name">
+                                    <input type="text" class="form-control" ng-model="choice">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -168,7 +167,7 @@
                         <!-- TODO: add a tags package -->
                         <div class="form-group">
                             <label>Tags</label>
-                            <input type="text" class="form-control" ng-model="input.tags">
+                            <input type="text" class="form-control" placeholder="use ',' to separate. e.g.: ios, android, web"ng-model="input.tags">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-default" ng-click="addTodo()">Post</button>
@@ -180,7 +179,7 @@
             <!-- The Questions -->
             <span class="" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|questionFilter:maxQuestion "
             ng-class="{editing: todo == editedTodo}">
-                <div class="card">
+                <div class="card" ng-switch on="todo.headLastChar" ng-style = "{'opacity': (1 + todo.echo * 0.05 >= 0.1) ? 1 + todo.echo * 0.05 : 0.1}">
                     <div class="container-fluid">
                         <!-- Left sidebar of question -->
                         <div class="question-left col-md-2">
@@ -216,13 +215,13 @@
                         <div class="clearfix">
                             <div class="pull-right">
                                 <!-- TODO: add toggle hide of replies -->
-                                <span>Posted: {{todo.createdAt}}</span>
+                                <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a>{{todo.reply.length}} replies</a>
+                                <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
                             </div>
                         </div>
                     </div>
-                    <div id="replies-{{$index}}" class="container-fluid">
+                    <div id="replies-{{$index}}" class="container-fluid collapse">
                         <div class="replies" ng-repeat="reply in todo.reply">
                             <hr/>
                             <div class="media reply">
@@ -232,17 +231,17 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    Reply content. Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.
+                                    {{reply.content}}
                                 </div>
                             </div>
                         </div>
                         <div class="add-reply">
+                            <hr>
                             <div class="form-group">
-                                <label>Add Reply</label>
                                 <textarea type="text" class="form-control" ng-model="todo.newReply" autofocus="autofocus"></textarea>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-default" type="button" ng-click="addReply(todo)">Submit</button>
+                                <button class="btn btn-default" type="button" ng-click="addReply(todo)">Add Reply</button>
                             </div>
                         </div>
                     </div>

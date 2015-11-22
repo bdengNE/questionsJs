@@ -33,9 +33,15 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.users=[];
 	$scope.currentUser=null;
 	$scope.isAdmin=false;
+	$scope.input = {
+		type: 'question',
+		choices: ["a","b"],
+		tags: "",
+		title: "",
+		desc: "",
+	}
 
 
-    
 
  // GET QuestionsList,RoomList, UserList
 	var getQuestions = function (query) {
@@ -118,7 +124,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.allChecked = remaining === 0;
 		$scope.absurl = $location.absUrl();
 	}, true);
-	
+
 	$scope.getAdmin=function(user){
 
 		$http.post(backendUrl + '/api/users/'+user._id, {type:"admin"})
@@ -156,9 +162,9 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
  		}
  		catch(e){Msg=input;}
  			$scope.input = {wholeMsg: Msg};
- 		
+
  	}
- 	
+
 	$scope.getQuestionsByTag=function(tag){
 		$http.get (backendUrl + '/api/questions/?tags='+tag)
 		.success(function(data) {
@@ -168,26 +174,37 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	}
-	
+
 
 
 
 
 	//CUSTOM function adapted to new REST API
 	$scope.addTodo = function () {
-		var title = $scope.input.title.trim();
-		var newTodo = $scope.input.wholeMsg.trim();
+		var newTodo = {
+			type: $scope.input.type,
+			choices: $scope.input.choices,
+			tags: $scope.input.tags,
+			head: $scope.input.title,
+			desc: $scope.input.desc,
+			roomId: $scope.roomId,
+		}
 
 		// No input, so just do nothing
-		if (!newTodo.length) {
+		if (!newTodo.head.length) {
 			return;
 		};
 
-		$http.post(backendUrl + '/api/questions', {head: title, desc: newTodo, roomId: $scope.roomId})
+		$http.post(backendUrl + '/api/questions', newTodo)
 		.success(function(data) {
 			// remove the posted question in the input
-			$scope.input.wholeMsg = '';
-			$scope.input.title = '';
+			$scope.input = {
+				type: $scope.input.type, //keep it unchanged
+				choices: ["",],
+				tags: "",
+				title: "",
+				desc: "",
+			}
 			getQuestions();
 	    })
 	    .error(function(data) {
@@ -195,6 +212,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	    });
 
 	};
+
 	$scope.addReply=function(todo){
 		var newReply=todo.newReply.trim();
 
@@ -228,34 +246,8 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	}
 
 	// add poll questuin
-	$scope.addPolling = function () {
-		var newTodo = $scope.input.wholeMsg.trim();
-		var choice1=$scope.choice1.trim();
-		var choice2=$scope.choice2.trim();
-		console.log(choice1);
-		console.log(choice2);
-		var temp=[choice1,choice2];
-		if (!newTodo.length) {
-			return;
-		};
-		if(!choice1.length){
-			return;
-		}
-		if(!choice2.length){
-			return;
-		}
-		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'polling',choices: temp})
-		.success(function(data) {
-			// remove the posted question and choices on the input form
-			$scope.input.wholeMsg = '';
-			$scope.choice1='';
-			$scope.choice2='';
-			getQuestions();
-	        console.log(data);
-	    })
-	    .error(function(data) {
-	        console.log('Error: ' + data);
-	    });
+	$scope.addChoice = function () {
+		$scope.input.choices.push("");
 	};
 
 	// total votes in one single poll function
@@ -265,12 +257,12 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		.success(function(data){
 			data.choices.forEach(function(choice){
 				$scope.totalVotes=$scope.totalVotes+choice.votes;
-			});			
+			});
 
 		})
 		.error(function(data){
 			 console.log('Error: ' + data);
-		});        
+		});
 	};
 
 
@@ -476,13 +468,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			else{
 				//console.log(result.fb.name);
 				$scope.username = result.fb.name;
-				document.getElementById("loginWord").innerHTML="Carry the world "+result.fb.name;
-				document.getElementById("loginWord").style.fontSize="30px";
-				document.getElementById("logout").style.display="";
-				document.getElementById("logout").style.float="right";
-				document.getElementById("loginWord").style.color="rgb(120,120,120)";
-				document.getElementById("notLogin").innerHTML="Homepage";
-				document.getElementById("notLogin").setAttribute("href","homepage.html");
 			}
 		})
 		.error(function(result){
