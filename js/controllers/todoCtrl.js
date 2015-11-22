@@ -14,20 +14,11 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
-	//DEBUG ONLY
 	var backendUrl = "";
-
-	/*
-	$(window).scroll(function(){
-	if($(window).scrollTop() > 0) {
-	$("#btn_top").show();
-	} else {
-	$("#btn_top").hide();
-	}
-	});
-	*/
+	// For sorting
 	var sortType="createdAt";
 	var sortReverse=false;
+
 	var splits = $location.path().trim().split("/");
 	var roomId = angular.lowercase(splits[1]);
 	if (!roomId || roomId.length === 0) {
@@ -38,14 +29,15 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	//.limitToFirst(1000);
 	// initialize the room list
 	$scope.roomList=[];
-	//initialize the todos list
 	$scope.todos = [];
 	$scope.users=[];
 	$scope.currentUser=null;
 	$scope.isAdmin=false;
 
-    // return all questions
-    // get all questions
+
+    
+
+ // GET QuestionsList,RoomList, UserList
 	var getQuestions = function (query) {
 		//request from backend about the todo
 		query = query || {}
@@ -100,7 +92,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	};
 	$scope.getCurrentUser();
 
-
+// The end of GET part
 
 	$scope.editedTodo = null;
 
@@ -126,12 +118,11 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$scope.allChecked = remaining === 0;
 		$scope.absurl = $location.absUrl();
 	}, true);
-	// dull function, and implement it later
+	
 	$scope.getAdmin=function(user){
 
 		$http.post(backendUrl + '/api/users/'+user._id, {type:"admin"})
 		.success(function(data) {
-			console.log("admin")
 			$scope.isAdmin=true;
 	    })
 	    .error(function(data) {
@@ -144,19 +135,16 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.quitAdmin=function(user){
 		$http.post(backendUrl + '/api/users/'+user._id, {type:"normal"})
 		.success(function(data) {
-			console.log("normal");
 			$scope.isAdmin=false;
-
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
 	        $scope.isAdmin=true;
 	    });
 	    return false;
-
 	}
 
-	 $scope.selectTag = function(input) {
+	$scope.selectTag = function(input) {
  		var Msg;
  		try{
  			if ($scope.input.wholeMsg.trim()){
@@ -170,32 +158,19 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
  			$scope.input = {wholeMsg: Msg};
  		
  	}
+ 	
 	$scope.getQuestionsByTag=function(tag){
 		$http.get (backendUrl + '/api/questions/?tags='+tag)
 		.success(function(data) {
-			todos=data;
-
+			$scope.todos=data;
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
 	    });
 	}
+	
 
 
-	$scope.selectTag = function(input) {
-		var Msg;
-		try{
-			if ($scope.input.wholeMsg.trim()){
-				Msg = $scope.input.wholeMsg.trim() + input;
-			}
-			else{
-				Msg = input;
-			}
-		}
-		catch(e){Msg=input;}
-			$scope.input = {wholeMsg: Msg};
-
-	}
 
 
 	//CUSTOM function adapted to new REST API
@@ -214,7 +189,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			$scope.input.wholeMsg = '';
 			$scope.input.title = '';
 			getQuestions();
-	        console.log(data);
 	    })
 	    .error(function(data) {
 	        console.log('Error: ' + data);
@@ -252,12 +226,10 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		});
 
 	}
+
+	// add poll questuin
 	$scope.addPolling = function () {
 		var newTodo = $scope.input.wholeMsg.trim();
-
-		// No input, so just do nothing
-
-		//var choices=[{names:'test1',votes: 20},{names:'test1',votes: 20}];
 		var choice1=$scope.choice1.trim();
 		var choice2=$scope.choice2.trim();
 		console.log(choice1);
@@ -274,7 +246,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		}
 		$http.post(backendUrl + '/api/questions', {wholeMsg: newTodo, roomId: $scope.roomId, type:'polling',choices: temp})
 		.success(function(data) {
-			// remove the posted question in the input
+			// remove the posted question and choices on the input form
 			$scope.input.wholeMsg = '';
 			$scope.choice1='';
 			$scope.choice2='';
@@ -285,13 +257,20 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
-	$scope.totalVotes=0;
-	$scope.totalVotes=function(todo){
-		$http.get(backendUrl + '/api/questions/')
-		.success(function(data) {
 
-			
-	    });
+	// total votes in one single poll function
+	$scope.totalVotes=function(todo){
+		$scope.totalVotes=0;
+		$http.get(backendUrl + '/api/questions/'+todo._id)
+		.success(function(data){
+			data.choices.forEach(function(choice){
+				$scope.totalVotes=$scope.totalVotes+choice.votes;
+			});			
+
+		})
+		.error(function(data){
+			 console.log('Error: ' + data);
+		});        
 	};
 
 
@@ -407,7 +386,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	        console.log('Error: ' + data);
 	    });
 	};
-
+/*
 	$scope.clearCompletedTodos = function () {
 		$scope.todos.forEach(function (todo) {
 			if (todo.completed) {
@@ -420,6 +399,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		todo.completed = !todo.completed;
 		$scope.doneEditing(todo);
 	};
+*/
 
 	$scope.markAll = function (allCompleted) {
 		$scope.todos.forEach(function (todo) {
@@ -472,10 +452,11 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	// autoscroll
 	angular.element($window).bind("scroll", function() {
 		if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
+			/*
 			console.log('Hit the bottom2. innerHeight' +
 			$window.innerHeight + "scrollY" +
 			$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
-
+			*/
 			// update the max value
 			$scope.increaseMax();
 
@@ -493,7 +474,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 				console.log("Sorry you have to login");
 			}
 			else{
-				console.log(result.fb.name);
+				//console.log(result.fb.name);
 				$scope.username = result.fb.name;
 				document.getElementById("loginWord").innerHTML="Carry the world "+result.fb.name;
 				document.getElementById("loginWord").style.fontSize="30px";
