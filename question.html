@@ -220,9 +220,9 @@
                         <div class="clearfix">
                             <div class="pull-right">
                                 <hr/>
-                                <span ng-class="{hidden: todo.tags.length == 0}">tags:&nbsp;&nbsp;</span>
+                                <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
                                 <span ng-repeat="tag in todo.tags">
-                                    <span>#{{tag}}</span>
+                                    <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
                                     &nbsp;&nbsp;
                                 </span>
                                 <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>

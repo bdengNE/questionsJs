@@ -57,8 +57,12 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			console.log('Error: ' + data);
 		});
 	}
-
 	getQuestions();
+
+
+	$scope.getQuestionsByTag=function(tag){
+		getQuestions({tags: tag});
+	}
 
 	var getUsers = function (query) {
 		//request from backend about the todo
@@ -164,20 +168,6 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
  			$scope.input = {wholeMsg: Msg};
 
  	}
-
-	$scope.getQuestionsByTag=function(tag){
-		$http.get (backendUrl + '/api/questions/?tags='+tag)
-		.success(function(data) {
-			$scope.todos=data;
-	    })
-	    .error(function(data) {
-	        console.log('Error: ' + data);
-	    });
-	}
-
-
-
-
 
 	//CUSTOM function adapted to new REST API
 	$scope.addTodo = function () {
