@@ -22,6 +22,10 @@
 
     <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- font-awesome: dependency of textangular -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- textangular -->
+    <link rel='stylesheet' href='/node_modules/textangular/dist/textAngular.css'>
 
 </head>
 
@@ -78,10 +82,10 @@
                         <!--<div><button type="button" class="btn btn-primary" ng-click="returnFBusername()">test</button></div>-->
                         <!-- Button for VIS -->
                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">
-                            Open CarryVis 
+                            Open CarryVis
                         </button>
                         <button type="button" class="btn btn-info btn-lg"  ng-click="getAdmin(currentUser)">
-                            Admin 
+                            Admin
                         </button>
                         <button type="button" class="btn btn-info btn-lg"  ng-click="quitAdmin(currentUser)">
                             Normal
@@ -103,7 +107,7 @@
 
         <div class="sidebarblock" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1 |questionFilter:maxQuestion "
                   ng-class="{completed: todo.completed, editing: todo == editedTodo}" >
-            
+
             <div class="blocktxt">
                 <p>{{todo.wholeMsg}}</p>
                 <form action="#" method="post" class="form">
@@ -121,13 +125,13 @@
                                 <label for="opt1" ng-click="selectChoice($index,todo)"></label>
                             </td>
                         </tr>
-                        
+
                     </table>
                 </form>
                 <div class="icons" >
                      <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show='isAdmin'>delete </a>
                 </div>
-                
+
             </div>
 
         </div>
@@ -137,13 +141,13 @@
             <div class="blocktxt">
 
                 <ul class="cats" ng-model="tagFilter" ng-repeat="user in users">
-                    
-                    
+
+
                     <li>Midterm</li>
                     <li>Final</li>
                     <li>Assignment</li>
                     <li>All</li>
-                
+
                 </ul>
             </div>
         </div>
@@ -183,9 +187,9 @@
 
                 <form action="#" class="form newtopic" method="post" >
                     <div class="topwrap">
-                        
+
                         <div class="userinfo pull-left">
-                        <!--    
+                        <!--
                             <div class="avatar">
                                 <img src="img/avatar.png" height="42" width="42" alt="" />
                                 <div class="status green"></div>
@@ -196,17 +200,12 @@
                             </div>
                         -->
                         </div>
-                        
+
                         <div class="posttext pull-left">
-                            
-                            <div class ="row questionBar">
-                            <form action="#" method="post" class="form">
-                                    <textarea type="text" class="form-control" placeholder="Post for a question"
-                                           ng-model="input.wholeMsg" autofocus="autofocus">
-                                    </textarea>                    
-                            </form>
+                            <!-- text-angular richtext editor -->
+                            <div text-angular ng-model="input.wholeMsg">
                             </div>
-                            
+
 
 
                             <!--
@@ -217,7 +216,7 @@
                                 <textarea name="desc" id="desc" placeholder="Description"
                                           class="form-control" ></textarea>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <select name="category" id="category"  class="formcontrol" >
@@ -229,9 +228,9 @@
 
                             </div>
                             -->
-                            
+
                             <label>Hot Tag: </label>
-                                
+
                             <!--
                             <button class="btnTag" style="background-color:#FF6666" ng-click="addTodo()"> Assignment</button>
                             <button class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg()"> Final</button>
@@ -284,7 +283,7 @@
                     <div id="img" class="collapse">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="URL of image" aria-describedby="sizing-addon3" ng-model="imgUrl">
-                            
+
                         </div>
                         <div class = "col-md-1">
                             <span class="reply-group-btn">
@@ -330,7 +329,7 @@
                             <div class="icons" >
                              <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" ng-show="isAdmin" >delete</a>
                              <a class="btn btn-danger btn-xs" ng-click=""  data-toggle="collapse" data-target="#reply{{ $index + 1}}" >reply</a>
-                            </div>                       
+                            </div>
                         </div>
 
                         <div class="posttext pull-left">
@@ -351,7 +350,7 @@
                             -->
                         </div>
                         <div class="clearfix"></div>
- 
+
 
                     </div>
 
@@ -379,25 +378,25 @@
                             <ul class="cats" ng-repeat="reply in todo.reply">
                             <li>{{reply.replyContent}}</li>
                             </ul>
-                        </div>       
+                        </div>
                     </div>
                         <span class="listgroup-item" ng-repeat="replyItem in todo.reply">
                                 <li>{{replyItem.content}}</li>
                         </span>
 
 
-                    
+
 
                     <div class="clearfix"></div>
                <!-- Add Reply here-->
                     <div id="reply{{ $index + 1}}" class="collapse">
-                        
+
                         <form action="#" class="form newtopic input-group" method="post" >
                         <textarea type="text" class="form-control" placeholder="Reply for the question{{$index}}"
                             ng-model="todo.newReply" autofocus="autofocus">
                         </textarea>
                         <button class="btn btn-default" type="button" ng-click="addReply(todo)">Submit it</button>
-                        
+
                         </form>
                     </div>
                 </div>
@@ -441,13 +440,13 @@
     <!-- angularJs -->
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
+    <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script> NO NEED FOR textAngular-->
     <script src="js/lib/Autolinker.min.js"></script>
 
     <!-- emoji -->
-    <script type="text/javascript" src="webjs/config.js"></script>
+    <!-- <script type="text/javascript" src="webjs/config.js"></script>
     <script type="text/javascript" src="webjs/emoji.min.js"></script>
-    <link type="text/stylesheet" rel="stylesheet" href="css/emoji.min.css" />
+    <link type="text/stylesheet" rel="stylesheet" href="css/emoji.min.css" /> -->
 
    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
     <script type="text/javascript" src="webjs/jquery.themepunch.plugins.min.js"></script>
@@ -486,6 +485,11 @@
     <script src="js/vis/flow.js"></script>
     <!-- end of vis -->
 
+    <!-- rich text editor -->
+    <script src='/node_modules/textangular/dist/textAngular-rangy.min.js'></script>
+    <script src='/node_modules/textangular/dist/textAngular-sanitize.min.js'></script>
+    <script src='/node_modules/textangular/dist/textAngular.min.js'></script>
+    <!-- /rich text editor -->
 
     <!-- CUSTOM CODE TO RELOAD UPON CHANGE OF ROOM -->
     <script>
