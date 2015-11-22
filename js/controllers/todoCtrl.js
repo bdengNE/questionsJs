@@ -155,10 +155,25 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	    return false;
 
 	}
+
+	 $scope.selectTag = function(input) {
+ 		var Msg;
+ 		try{
+ 			if ($scope.input.wholeMsg.trim()){
+ 				Msg = $scope.input.wholeMsg.trim() + input;
+ 			}
+ 			else{
+ 				Msg = input;
+ 			}
+ 		}
+ 		catch(e){Msg=input;}
+ 			$scope.input = {wholeMsg: Msg};
+ 		
+ 	}
 	$scope.getQuestionsByTag=function(tag){
 		$http.get (backendUrl + '/api/questions/?tags='+tag)
 		.success(function(data) {
-			console.log("normal");
+			todos=data;
 
 	    })
 	    .error(function(data) {
@@ -274,11 +289,10 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.totalVotes=function(todo){
 		$http.get(backendUrl + '/api/questions/')
 		.success(function(data) {
-			data.choices.forEach(choice){
-				$scope.totalVotes=$scope.totalVotes+choice.votes；
-			}
-	    })
-	}
+
+			
+	    });
+	};
 
 
 
