@@ -216,9 +216,15 @@
                         </div>
 
                         <!-- Status of question -->
+
                         <div class="clearfix">
                             <div class="pull-right">
-                                <!-- TODO: add toggle hide of replies -->
+                                <hr/>
+                                <span ng-class="{hidden: todo.tags.length == 0}">tags:&nbsp;&nbsp;</span>
+                                <span ng-repeat="tag in todo.tags">
+                                    <span>#{{tag}}</span>
+                                    &nbsp;&nbsp;
+                                </span>
                                 <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
@@ -240,7 +246,7 @@
                             </div>
                         </div>
                         <div class="add-reply">
-                            <hr>
+                            <hr/>
                             <div class="form-group">
                                 <textarea type="text" class="form-control" ng-model="todo.newReply" autofocus="autofocus"></textarea>
                             </div>
