@@ -76,7 +76,7 @@
 			</div>
 			<!--this div is the  discover existing rooms-->
 			<div class="discover">
-				<a href="#" class="btn">Discover and Explore</a>
+				<a href="#" id="discover" class="btn">Discover and Explore</a>
 			</div>
 
 			<div class="bottom">
@@ -164,6 +164,12 @@
 						: window.location.hash = '';
 				}
 			});
+		</script>
+		<!--Discover and explore-->
+		<script>
+			var room = ["comp3111", "comp3111H", "3111", "comp3511", "math2411", "lang1115", "elec2600","comp3711","comp3711H"];
+			var x = Math.floor(room.length*Math.random());
+			document.getElementById("discover").href = "question.html#/"+room[x];
 		</script>
 		<!--Test FB Login-->
 		<!--Todo: 
