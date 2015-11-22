@@ -89,10 +89,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a data-toggle="modal" data-target="#myModal1">CarryVis</a></li>
-                    <li ng-class="{hidden: !!currentUser}"><a href="auth/login/facebook">Login</a></li>
-                    <li ng-class="{hidden: !currentUser}"><p class="navbar-text">Howody, {{currentUser.fb.name}}</p></li>
-                    <li ng-class="{hidden: !currentUser}"><a href="homepage.html">Personal Homepage</a></li>
-                    <li ng-class="{hidden: !currentUser}"><a href="auth/logout/facebook">Logout</a></li>
+                    <li ng-class="{hidden: !!$root.currentUser}"><a href="auth/login/facebook">Login</a></li>
+                    <li ng-class="{hidden: !$root.currentUser}"><p class="navbar-text">Howody, {{$root.currentUser.fb.name}}</p></li>
+                    <li ng-class="{hidden: !$root.currentUser}"><img class="avatar" width=50 height=50 ng-src="{{$root.currentUser.photo}}"></li>
+                    <li ng-class="{hidden: !$root.currentUser}"><a href="homepage.html">Personal Homepage</a></li>
+                    <li ng-class="{hidden: !$root.currentUser}"><a href="auth/logout/facebook">Logout</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -161,7 +162,7 @@
                                 <div class
                                 ="form-group input-group">
                                     <span class="input-group-addon">Choice {{$index+1}}</span>
-                                    <input type="text" class="form-control" ng-model="choice">
+                                    <input type="text" class="form-control" ng-model="choice.name">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -180,6 +181,90 @@
 
                 </div>
             </div>
+            <!-- The Pollings -->
+            <div ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1">
+                <div class="card" ng-switch on="todo.headLastChar">
+                    <div class="container-fluid">
+                        <!-- Left sidebar of question -->
+                        <div class="question-left col-md-2">
+                            <div avatar>
+                                <a src="javascript:void(0)">
+                                    <img class="avatar" width=50 height=50 ng-src="{{todo.user.photo}}" src="img/avatar.png"/>
+                                    {{todo.user.photo}}
+                                </a>
+                            </div>
+                            <!-- <div class="text-center like-or-not form-group">
+                                <div class="row"><span class="glyphicon glyphicon-chevron-up"
+                                ng-click="!$storage[todo._id]? addEcho(todo) : ($storage[todo._id] == 'echoed' ? minusEcho(todo) : void(0));"
+                                ng-disabled="!!$storage[todo._id]"></span></div>
+                                <div class="row"><span class=""> {{todo.echo}}</span></div>
+                                <div class="row"><span class="glyphicon glyphicon-chevron-down" ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
+                                ng-disabled="!!$storage[todo._id]"></span></div>
+                            </div> -->
+                        </div>
+                        <!-- Right content of question -->
+                        <div class="question-right col-md-10">
+                            <h2 head>
+                                <span class="label label-danger" ng-show="todo.new">New</span>
+                                <span class="iconStyle glyphicon glyphicon-question-sign"></span>
+                                <span ng-bind-html="todo.head">Header</span>
+                                <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
+                                <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
+                            </h2>
+                            <div ng-repeat="choice in todo.choices">
+                                <a class="vote" ng-click="(!$storage[todo._id]) ? selectChoice(choice, $parent.todo) : void(0)" ng-class="{enabled: (!$storage[todo._id])}">
+                                    <label>{{choice.name}}</label>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{1 + 99 * choice.votes / $parent.todo.totalVote}}%;">
+                                        {{choice.votes}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Status of question -->
+
+                        <div class="clearfix">
+                            <div class="pull-right">
+                                <hr/>
+                                <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
+                                <span ng-repeat="tag in todo.tags">
+                                    <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
+                                    &nbsp;&nbsp;
+                                </span>
+                                <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="replies-{{$index}}" class="container-fluid collapse">
+                        <div class="replies" ng-repeat="reply in todo.reply">
+                            <hr/>
+                            <div class="media reply">
+                                <div class="media-left">
+                                    <a src="javascript:void(0)">
+                                        <img class="media-object avatar" ng-src="{{reply.user.photo}}" src="img/avatar.png" width=50 height=50 alt="..."/>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    {{reply.content}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-reply">
+                            <hr/>
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" ng-model="todo.newReply" autofocus="autofocus"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-default" type="button" ng-click="addReply(todo)">Add Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- The Questions -->
             <span class="" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|questionFilter:maxQuestion "
             ng-class="{editing: todo == editedTodo}">
@@ -189,7 +274,7 @@
                         <div class="question-left col-md-2">
                             <div avatar>
                                 <a src="javascript:void(0)">
-                                    <img class="img-responsive" src="img/avatar.png"/>
+                                    <img class="avatar" width=50 height=50 ng-src="{{todo.user.photo}}" src="img/avatar.png"/>
                                 </a>
                             </div>
                             <div class="text-center like-or-not form-group">
@@ -237,7 +322,7 @@
                             <div class="media reply">
                                 <div class="media-left">
                                     <a src="javascript:void(0)">
-                                        <img class="media-object" src="img/avatar.png" width=64 height=64 alt="..."/>
+                                        <img class="media-object avatar" ng-src="{{reply.user.photo}}" src="img/avatar.png" width=50 height=50 alt="..."/>
                                     </a>
                                 </div>
                                 <div class="media-body">

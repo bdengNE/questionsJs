@@ -7,8 +7,8 @@
 * - exposes the model to the template and provides event handlers
 */
 todomvc.controller('TodoCtrl',
-['$scope', '$location', '$http', '$sce', '$localStorage', '$window',
-function ($scope, $location, $http, $sce, $localStorage, $window) {
+['$rootScope', '$scope', '$location', '$http', '$sce', '$localStorage', '$window',
+function ($rootScope, $scope, $location, $http, $sce, $localStorage, $window) {
 	// set local storage
 	$scope.$storage = $localStorage;
 
@@ -31,11 +31,11 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.roomList=[];
 	$scope.todos = [];
 	$scope.users=[];
-	$scope.currentUser=null;
+	$rootScope.currentUser=null;
 	$scope.isAdmin=false;
 	$scope.input = {
 		type: 'question',
-		choices: ["a","b"],
+		choices: [{name:""}],
 		tags: [],
 		title: "",
 		desc: "",
@@ -52,6 +52,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 		$http.get(`/api/questions?${params}`)
 		.success(function(data) {
 			$scope.todos = data;
+			console.log(data);
 		})
 		.error(function(data) {
 			console.log('Error: ' + data);
@@ -92,7 +93,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.getCurrentUser = function () {
 		$http.get(backendUrl+'/api/users/current')
 		.success(function(data) {
-			$scope.currentUser=data;
+			$rootScope.currentUser=data;
 
 		})
 		.error(function(data) {
@@ -173,17 +174,20 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 	$scope.addTodo = function () {
 		var newTodo = {
 			type: $scope.input.type,
-			choices: $scope.input.choices,
+			choices: [],
 			tags: [],
 			head: $scope.input.title,
 			desc: $scope.input.desc,
 			roomId: $scope.roomId,
 		}
+		//transform the choices
+		for (var key in $scope.input.choices) {
+			newTodo.choices.push($scope.input.choices[key].name);
+		}
 		//transform the tags
 		for (var key in $scope.input.tags) {
 			newTodo.tags.push($scope.input.tags[key].text);
 		}
-		console.log(newTodo.tags);
 		// No input, so just do nothing
 		if (!newTodo.head.length) {
 			return;
@@ -194,7 +198,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 			// remove the posted question in the input
 			$scope.input = {
 				type: $scope.input.type, //keep it unchanged
-				choices: ["",],
+				choices: [{name:""}],
 				tags: [],
 				title: "",
 				desc: "",
@@ -222,10 +226,10 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 	}
 	//vote up for a polling
-	$scope.selectChoice=function($index,todo){
-		console.log($index);
+	$scope.selectChoice=function(choice,todo){
+		console.log(choice);
 
-		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+todo.choices[$index]._id+'/vote-up')
+		$http.get(backendUrl+'/api/questions/' + todo._id + '/'+choice._id+'/vote-up')
 		.success(function(data) {
 
 			getQuestions();
@@ -241,7 +245,7 @@ function ($scope, $location, $http, $sce, $localStorage, $window) {
 
 	// add poll questuin
 	$scope.addChoice = function () {
-		$scope.input.choices.push("");
+		$scope.input.choices.push({name:""});
 	};
 
 	// total votes in one single poll function

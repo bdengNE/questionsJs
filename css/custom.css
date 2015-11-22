@@ -161,3 +161,31 @@ td.chbox {
     line-height: 16px;
     margin-bottom: 5px;
 }
+
+a.vote {
+    display: block;
+    position: relative;
+    padding: 0;
+}
+
+a.vote:after {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    content:'Vote';
+    position:absolute;
+    width:100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity:0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+a.vote.enabled:hover:after {
+    opacity: 1;
+}
+
+img.avatar {
+    /*background-image: url("../img/avatar.png");*/
+}
