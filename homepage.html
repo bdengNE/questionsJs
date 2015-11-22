@@ -295,17 +295,17 @@
 					
 					$scope.likes = totalLike;
 					$scope.dislikes = totalDislike;
-					if(totalLike > 20 && totalLike < 50){
-						document.getElementById("medal").src = "img/medal/20.png";
-						document.getElementById("achievementWords").innerHTML = "You recieve more than 20 likes!"
+					if(totalLike > 2 && totalLike < 5){
+						document.getElementById("medal").src = "img/medal/2.png";
+						document.getElementById("achievementWords").innerHTML = "You recieve more than 2 likes!"
 					}
-					else if(totalLike>50 && totalLike < 100){
-						document.getElementById("medal").src = "img/medal/50.png";
-						document.getElementById("achievementWords").innerHTML = "You recieve more than 50 likes!"	
+					else if(totalLike>=5 && totalLike < 10){
+						document.getElementById("medal").src = "img/medal/5.png";
+						document.getElementById("achievementWords").innerHTML = "You recieve more than 5 likes!"	
 					}
-					else if(totalLike > 100){
-						document.getElementById("medal").src = "img/medal/100.png";
-						document.getElementById("achievementWords").innerHTML = "You recieve more than 100 likes!"		
+					else if(totalLike >= 10){
+						document.getElementById("medal").src = "img/medal/10.png";
+						document.getElementById("achievementWords").innerHTML = "You recieve more than 10 likes!"		
 					}
 				}
 				})
