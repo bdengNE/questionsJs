@@ -175,18 +175,15 @@
 					document.getElementById("username").innerHTML="This is your homepage "+result.fb.name+"! Enjoy your day!"; 
 					var totalQuestion = result.questions.length;
 					$scope.totalQuestion = totalQuestion;
-					console.log($scope.totalQuestion);
 					var totalLike = 0;
 					var totalDislike = 0;
 					//var a = "2015-11-19T09:08:59.081Z";
 					//var b = "2015-11-19T09:05:17.692Z";
 					if(totalQuestion == 0){
-						console.log("I get into totalQuestion = 0 if ")
 						document.getElementById('q0').style.display="";
 						document.getElementById('q0').innerHTML="You haven't answer question yet!"
 						document.getElementById('q0').style.fontSize="20px";
 					}
-					console.log("total question is "+ totalQuestion);
 					var questionid = result.questionIds;
 
 					var updateLike = function(i){
@@ -269,13 +266,9 @@
 							}
 						}
 						
-						console.log("data length " +date.length);
 						
-						var testing = [1,2,4,5,100, 6];
-						console.log("largest is "+findsecond(testing))
+
 						var firstIndex = findlargest(date);
-						console.log("first index is" +firstIndex);
-						console.log(result.questions[firstIndex].wholeMsg);
 						document.getElementById('q0').style.display="";
 						document.getElementById('q0').innerHTML=result.questions[firstIndex].desc;
 						document.getElementById('like0').style.display="";
