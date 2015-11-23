@@ -226,6 +226,10 @@
                                 <div class="row"><span class="glyphicon glyphicon-chevron-down" ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
                                 ng-disabled="!!$storage[todo._id]"></span></div>
                             </div> -->
+                            <div delete ng-show='$root.currentUser.type == "admin"'>
+                                <hr>
+                                <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" >delete </a>
+                            </div>
                         </div>
                         <!-- Right content of question -->
                         <div class="question-right container-fluid">
@@ -308,6 +312,10 @@
                                 <div class="row"><span class=""> {{todo.echo}}</span></div>
                                 <div class="row"><span class="glyphicon glyphicon-chevron-down" ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
                                 ng-disabled="!!$storage[todo._id]"></span></div>
+                            </div>
+                            <div delete ng-show='$root.currentUser.type == "admin"'>
+                                <hr>
+                                <a class="btn btn-danger btn-xs" ng-click="removeTodo(todo)" >delete </a>
                             </div>
                         </div>
                         <!-- Right content of question -->
