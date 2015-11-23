@@ -16,14 +16,30 @@
 
 <body class="zhi" ng-controller="homepageMani" ng-init="returnFBusername()">
 
+    <nav class="navbar navbar-default navbar-carry-room navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Carry Room</a>
+            </div>
+        </div>
+    </nav>
+
 <div class="page-wraper">
 <div class="username">
 	<h1 id="username" style="color:rgb(80,80,80);"></h1>
 	<a href="/auth/logout/facebook" class="btn btn-primary" style="float:right;"><span class="fa fa-facebook"></span> Logout</a>
 </div>
 <div class="nav">
-	<a href="question.html#/comp3111h">Go back to comp3111h to Carry</a>
+	<a href="index.html">Go back to choose a carry room</a>
 </div>
+
 
 <div class="profile-navbar clearfix">
 	<a class="item home first active"
@@ -173,6 +189,7 @@
 				else{			
 					console.log(result.fb.name);
 					document.getElementById("username").innerHTML="This is your homepage "+result.fb.name+"! Enjoy your day!"; 
+					document.getElementById("username").style.fontSize="25px";
 					var totalQuestion = result.questions.length;
 					$scope.totalQuestion = totalQuestion;
 					var totalLike = 0;
