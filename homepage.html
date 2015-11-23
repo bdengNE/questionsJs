@@ -203,12 +203,15 @@
 							document.getElementById('q'+i).style.display="";
 							document.getElementById('q'+i).innerHTML=result.questions[i].desc;
 							document.getElementById('q'+i).style.fontSize="20px";
-							document.getElementById('q'+i).style.color="rgb(80,80,80)";
+							document.getElementById('q'+i).style.color="rgb(100,100,100)";
 							document.getElementById('like'+i).style.display="";
 							var thislike = result.questions[i].upVote;
 							var thisdislike = result.questions[i].downVote;
 							document.getElementById('like'+i).innerHTML=thislike - thisdislike;
 							document.getElementById('likes'+i).style.display='';
+							document.getElementById('questions'+i).innerHTML=result.questions[i].head;
+							document.getElementById('questions'+i).style.fontSize="18px";
+							document.getElementById('questions'+i).style.color="rgb(70,70,70)";
 						}
 
 					}
