@@ -237,3 +237,14 @@ img.avatar {
     font-size: 20px;
     font-weight: bold !important;
 }
+
+.ta-editor.ta-html, .ta-scroll-window.form-control, .ta-scroll-window > .ta-bind {
+    min-height: 200px !important;
+}
+
+span.active {
+    color: #337ab7;
+}
+span.deactive {
+    color: #eee;
+}

@@ -331,10 +331,10 @@
                             <div class="text-center like-or-not form-group">
                                 <div class="row"><span class="glyphicon glyphicon-chevron-up"
                                 ng-click="!$storage[todo._id]? addEcho(todo) : ($storage[todo._id] == 'echoed' ? minusEcho(todo) : void(0));"
-                                ng-disabled="!!$storage[todo._id]"></span></div>
+                                ng-class="{active: ($storage[todo._id] == 'echoed'), deactive: ($storage[todo._id] == 'voteddown')}"></span></div>
                                 <div class="row"><span class=""> {{todo.echo}}</span></div>
                                 <div class="row"><span class="glyphicon glyphicon-chevron-down" ng-click="!$storage[todo._id]? voteDown(todo) : ($storage[todo._id] == 'voteddown' ? voteDownCancel(todo) : void(0));"
-                                ng-disabled="!!$storage[todo._id]"></span></div>
+                                ng-class="{active: ($storage[todo._id] == 'voteddown'), deactive: ($storage[todo._id] == 'echoed')}"></span></div>
                             </div>
                             <div delete ng-show='$root.currentUser.type == "admin"'>
                                 <hr>
