@@ -38,17 +38,17 @@ todomvc.filter('questionFilter', function () {
     return newQuestions.concat(sorted);
   };
 });
-
-todomvc.filter('questionFilter_1',function(){
+/*
+todomvc.filter('questionFilter_3',function(){
   return function(inputArray){
         var array = [];
         for(var i=0;i<inputArray.length;i++){
-            if(inputArray[i].type==='polling'){
+            if(inputArray[i].type==='question'){
                 array.push(inputArray[i]);
             }
         }
         for(var i=0;i<inputArray.length;i++){
-            if(inputArray[i].type==='question'){
+            if(inputArray[i].type==='polling'){
                 array.push(inputArray[i]);
             }
         }
@@ -56,8 +56,8 @@ todomvc.filter('questionFilter_1',function(){
     }
 
 });
-/*
-todomvc.filter('questionFilter_2',function(){
+*/
+todomvc.filter('questionFilter_1',function(){
   return function(inputArray){
         var array = [];
         for(var i=0;i<inputArray.length;i++){
@@ -71,11 +71,11 @@ todomvc.filter('questionFilter_2',function(){
 });
 
 
-todomvc.filter('tagsFilter',function(){
+todomvc.filter('questionFilter_2',function(){
   return function(inputArray,tags){
         var array = [];
         for(var i=0;i<inputArray.length;i++){
-            if(inputArray[i].type !=tags){
+            if(inputArray[i].type !='question'){
                 array.push(inputArray[i]);
             }
         }
@@ -83,4 +83,4 @@ todomvc.filter('tagsFilter',function(){
     }
 
 });
-*/
+

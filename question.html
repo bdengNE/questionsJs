@@ -117,10 +117,36 @@
             <div class="sidebarblock">
                 <h3>Sort by</h3>
                 <div class="divline"></div>
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">Likes</button>
-                    <button type="button" class="btn btn-default">Times</button>
-                </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Post-time
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li ng-click="sortType ='createdAt'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
+                          <li ng-click="sortType ='createdAt'; sortReverse = false"><a href="javascript:void(0)">Descending</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Likes
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li ng-click="sortType ='echo'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
+                          <li ng-click="sortType ='echo'; sortReverse = true"><a href="javascript:void(0)">Descending</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Replis
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li ng-click="sortType ='reply.length'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
+                          <li ng-click="sortType ='reply.length'; sortReverse = true"><a href="javascript:void(0)">Descending</a></li>
+                        </ul>
+                    </div>
             </div>
             <div class="sidebarblock">
                 <h3>Try more classrooms</h3>
@@ -182,7 +208,7 @@
                 </div>
             </div>
             <!-- The Pollings -->
-            <div ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_1">
+            <div ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|orderBy:sortType:sortReverse">
                 <div class="card" ng-switch on="todo.headLastChar">
                     <div class="container-fluid clearfix">
                         <!-- Left sidebar of question -->
@@ -265,7 +291,7 @@
                 </div>
             </div>
             <!-- The Questions -->
-            <span class="" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter:maxQuestion "
+            <span class="" ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter:maxQuestion|questionFilter_1|orderBy:sortType:sortReverse "
             ng-class="{editing: todo == editedTodo}">
                 <div class="card" ng-switch on="todo.headLastChar" ng-style = "{'opacity': (1 + todo.echo * 0.05 >= 0.1) ? 1 + todo.echo * 0.05 : 0.1}">
                     <div class="container-fluid clearfix">
@@ -310,10 +336,10 @@
                             </span>
                             <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
+                            <a data-toggle="collapse" data-target="#Questionreplies-{{$index}}">{{todo.reply.length}} replies</a>
                         </div>
                     </div>
-                    <div id="replies-{{$index}}" class="container-fluid collapse">
+                    <div id="Questionreplies-{{$index}}" class="container-fluid collapse">
                         <div class="replies" ng-repeat="reply in todo.reply">
                             <hr/>
                             <div class="media reply">

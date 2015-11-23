@@ -180,6 +180,8 @@ function ($rootScope, $scope, $location, $http, $sce, $localStorage, $window) {
 			desc: $scope.input.desc,
 			roomId: $scope.roomId,
 		}
+		//console.log(newTodo.type);
+
 		//transform the choices
 		for (var key in $scope.input.choices) {
 			newTodo.choices.push($scope.input.choices[key].name);
