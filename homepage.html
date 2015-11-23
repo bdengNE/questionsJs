@@ -79,7 +79,7 @@
 		<!-- want to have three most recent answers here-->
 			<div class="zm-profile-section-main">
 				<h2 class="zm-profile-question">
-					<p id="question0">test
+					<p id="question0">first question title
 					<p class="question_link question" id="q0" style="display:none">You haven't aer question yet!</p>
 				</h2>
 
@@ -94,7 +94,7 @@
 		<!-- want to have three most recent answers here-->
 			<div class="zm-profile-section-main">
 				<h2 class="zm-profile-question">
-					<p id="question1">test
+					<p id="question1">second question title
 					<p class="question_link question" id="q1" style="display:none">Question2</p>
 				</h2>
 
@@ -109,7 +109,7 @@
 		<!-- want to have three most recent answers here-->
 			<div class="zm-profile-section-main">
 				<h2 class="zm-profile-question">
-					<p id="question2">test
+					<p id="question2">third question title
 					<p class="question_link question" id="q2" style="display:none">Question3</p>
 				</h2>
 	</div>
@@ -302,6 +302,10 @@
 						document.getElementById('question0').style.fontSize="18px";
 						document.getElementById('question1').style.fontSize="18px";
 						document.getElementById('question2').style.fontSize="18px";
+						//question title get
+						document.getElementById('question0').innerHTML=result.questions[firstIndex];
+						document.getElementById('question1').innerHTML=result.questions[secondIndex];
+						document.getElementById('question2').innerHTML=result.questions[thirdIndex];
 					}
 					
 					$scope.likes = totalLike;
