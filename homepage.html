@@ -28,14 +28,16 @@
                 </button>
                 <a class="navbar-brand" href="index.html">Carry Room</a>
             </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/auth/logout/facebook">Logout</a></li>
+                </ul>
         </div>
     </nav>
 
 <div class="page-wraper">
 <div class="username">
 	<h1 id="username" style="color:rgb(80,80,80);"></h1>
-	<a href="/auth/logout/facebook" class="btn btn-primary" style="float:right;"><span class="fa fa-facebook"></span> Logout</a>
-</div>
 <div class="nav">
 	<a href="index.html">Go back to choose a carry room</a>
 </div>
@@ -188,7 +190,7 @@
 				}
 				else{			
 					console.log(result.fb.name);
-					document.getElementById("username").innerHTML="This is your homepage "+result.fb.name+"! Enjoy your day!"; 
+					document.getElementById("username").innerHTML="How is your day "+result.fb.name+"!"; 
 					document.getElementById("username").style.fontSize="25px";
 					var totalQuestion = result.questions.length;
 					$scope.totalQuestion = totalQuestion;
