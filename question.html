@@ -255,23 +255,14 @@
                                 <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
                             </p>
                             <div ng-repeat="choice in todo.choices">
-                                <div class = row>
-                                    <div class="col-md-1"></div>
-                                    <div class = "col-md-4">
-                                    <input type="radio"  name="radio"
-                                           ng-click="(!$storage[todo._id]) ? selectChoice(choice, $parent.todo) : void(0)"
-                                           ng-class="{enabled: (!$storage[todo._id])}">
-                                    <label>&nbsp; {{choice.name}}</label></input>
-                                    </div>
-                                    <div class="progress col-md-4">
-                                        <div class="progress-bar" role="progressbar"
-                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                             style="width: {{1 + 99 * choice.votes / $parent.todo.totalVote}}%;">
-                                            {{choice.votes}}
+                                <a class="vote" ng-click="(!$storage[todo._id]) ? selectChoice(choice, $parent.todo) : void(0)" ng-class="{enabled: (!$storage[todo._id])}">
+                                    <label>{{choice.name}}</label>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{1 + 99 * choice.votes / $parent.todo.totalVote}}%;">
+                                        {{choice.votes}}
                                         </div>
                                     </div>
-                                    <div class="col-md-3"></div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
