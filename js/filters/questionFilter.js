@@ -47,11 +47,16 @@ todomvc.filter('questionFilter_1',function(){
                 array.push(inputArray[i]);
             }
         }
+        for(var i=0;i<inputArray.length;i++){
+            if(inputArray[i].type==='question'){
+                array.push(inputArray[i]);
+            }
+        }
         return array;
     }
 
 });
-
+/*
 todomvc.filter('questionFilter_2',function(){
   return function(inputArray){
         var array = [];
@@ -78,3 +83,4 @@ todomvc.filter('tagsFilter',function(){
     }
 
 });
+*/

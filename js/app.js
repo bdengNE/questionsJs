@@ -7,7 +7,7 @@
 *
 * @type {angular.Module}
 */
-var todomvc = angular.module('todomvc', ['ngStorage', 'textAngular', 'ngTagsInput']);
+var todomvc = angular.module('todomvc', ['ngStorage', ]);
 
 /*
 angular.module('todomvc').config(function($locationProvider){
