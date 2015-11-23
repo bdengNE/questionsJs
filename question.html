@@ -210,13 +210,12 @@
             <!-- The Pollings -->
             <div ng-repeat="todo in todos |filter: {roomId : roomId}|questionFilter_2|orderBy:sortType:sortReverse">
                 <div class="card" ng-switch on="todo.headLastChar">
-                    <div class="container-fluid clearfix">
+                    <div class="container-fluid">
                         <!-- Left sidebar of question -->
                         <div class="question-left pull-left">
                             <div avatar>
                                 <a src="javascript:void(0)">
                                     <img class="avatar" width=50 height=50 ng-src="{{todo.user.photo}}" src="img/avatar.png"/>
-                                    {{todo.user.photo}}
                                 </a>
                             </div>
                             <!-- <div class="text-center like-or-not form-group">
@@ -229,7 +228,7 @@
                             </div> -->
                         </div>
                         <!-- Right content of question -->
-                        <div class="question-right pull-right container-fluid">
+                        <div class="question-right container-fluid">
                             <h2 head>
                                 <span class="label label-danger" ng-show="todo.new">New</span>
                                 <span class="iconStyle glyphicon glyphicon-question-sign"></span>
@@ -248,23 +247,23 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
 
                         <!-- Status of question -->
 
-                        <div class="clearfix container-fluid">
-                            <div class="pull-right">
-                                <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
-                                <span ng-repeat="tag in todo.tags">
-                                    <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
-                                    &nbsp;&nbsp;
-                                </span>
-                                <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <a data-toggle="collapse" data-target="#replies-{{$index}}">{{todo.reply.length}} replies</a>
-                            </div>
+                    <div class="clearfix container-fluid">
+                        <div class="pull-right">
+                            <span ng-class="{hidden: !todo.tags.length}">tags:&nbsp;&nbsp;</span>
+                            <span ng-repeat="tag in todo.tags">
+                                <a ng-click="getQuestionsByTag(tag)">#{{tag}}</a>
+                                &nbsp;&nbsp;
+                            </span>
+                            <span>Posted: {{todo.createdAt | date:'yyyy-MM-dd HH:mm'}}</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a data-toggle="collapse" data-target="#Pollingreplies-{{$index}}">{{todo.reply.length}} replies</a>
                         </div>
                     </div>
-                    <div id="replies-{{$index}}" class="container-fluid collapse">
+                    <div id="Pollingreplies-{{$index}}" class="container-fluid collapse">
                         <div class="replies" ng-repeat="reply in todo.reply">
                             <hr/>
                             <div class="media reply">
@@ -312,7 +311,7 @@
                             </div>
                         </div>
                         <!-- Right content of question -->
-                        <div class="question-right pull-left container-fluid">
+                        <div class="question-right container-fluid">
                             <h2 head>
                                 <span class="label label-danger" ng-show="todo.new">New</span>
                                 <span class="iconStyle glyphicon glyphicon-question-sign"></span>

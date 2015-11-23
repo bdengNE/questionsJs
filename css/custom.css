@@ -140,12 +140,12 @@ td.chbox {
 
 .question-left {
     /*display: inline-block;*/
-    max-width: 50px;
+    width: 50px;
 }
 
 .question-right {
     /*display: inline-block;*/
-    margin-left: 20px;
+    margin-left: 70px;
     border-left: 1px solid #f1f1f1;
     min-height: 150px;
 }
