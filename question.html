@@ -31,7 +31,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="TodoCtrl">
+<body ng-controller="TodoCtrl" data-spy="scroll" data-target=".bs-docs-sidebar">
 
     <!-- VISUALIZATION PART BEGINS -->
     <div id="myModal1" class="modal fade" role="dialog">
@@ -72,7 +72,7 @@
     <!-- VISUALIZATION PART ENDS -->
 
     <!-- Navbar -->
-    <nav class="navbar navbar-default navbar-carry-room">
+    <nav class="navbar navbar-default navbar-carry-room navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -91,7 +91,7 @@
                     <li><a data-toggle="modal" data-target="#myModal1">CarryVis</a></li>
                     <li ng-class="{hidden: !!$root.currentUser}"><a href="auth/login/facebook">Login</a></li>
                     <li ng-class="{hidden: !$root.currentUser}"><p class="navbar-text">Howody, {{$root.currentUser.fb.name}}</p></li>
-                    <li ng-class="{hidden: !$root.currentUser}"><img class="avatar" width=50 height=50 ng-src="{{$root.currentUser.photo}}"></li>
+                    <li ng-class="{hidden: !$root.currentUser}"><img class="avatarNav" ng-src="{{$root.currentUser.photo}}"></li>
                     <li ng-class="{hidden: !$root.currentUser}"><a href="homepage.html">Personal Homepage</a></li>
                     <li ng-class="{hidden: !$root.currentUser}"><a href="auth/logout/facebook">Logout</a></li>
                 </ul>
@@ -99,9 +99,9 @@
         </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid mainViewSection">
         <!-- Sidebar -->
-        <div class="col-md-3">
+        <div class="col-md-3 bs-docs-sidebar">
             <!-- <div class="sidebarblock">
                 <h3>Hashtags</h3>
                 <div class="divline"></div>
@@ -114,49 +114,60 @@
                     </ul>
                 </div>
             </div> -->
-            <div class="sidebarblock">
-                <h3>Sort by</h3>
-                <div class="divline"></div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Post-time
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li ng-click="sortType ='createdAt'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
-                          <li ng-click="sortType ='createdAt'; sortReverse = false"><a href="javascript:void(0)">Descending</a></li>
-                        </ul>
+
+
+                <!-- Here goes the content view -->
+                <div class="panel panel-success">
+                    <div class="panel-heading">Sort By</div>
+                    <div class="panel-body">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Created
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-click="sortType ='createdAt'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
+                                <li ng-click="sortType ='createdAt'; sortReverse = false"><a href="javascript:void(0)">Descending</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Likes
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-click="sortType ='echo'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
+                                <li ng-click="sortType ='echo'; sortReverse = true"><a href="javascript:void(0)">Descending</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Replies
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li ng-click="sortType ='reply.length'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
+                                <li ng-click="sortType ='reply.length'; sortReverse = true"><a href="javascript:void(0)">Descending</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Likes
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li ng-click="sortType ='echo'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
-                          <li ng-click="sortType ='echo'; sortReverse = true"><a href="javascript:void(0)">Descending</a></li>
-                        </ul>
+                </div><!-- content view ends -->
+
+
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Try more classrooms</div>
+                    <div class="panel-body">
+                        <div class="blocktxt">
+                            <ul
+                                ng-class-odd="'nav nav-list bs-docs-sidenav cats oddList'"
+                                ng-class-even="'nav nav-list bs-docs-sidenav cats evenList'"
+                                ng-repeat="room in roomList">
+                                <li class><a ng-href="#{{room.name}}" ng-bind="room.name"></a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Replis
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li ng-click="sortType ='reply.length'; sortReverse = false"><a href="javascript:void(0)">Ascending</a></li>
-                          <li ng-click="sortType ='reply.length'; sortReverse = true"><a href="javascript:void(0)">Descending</a></li>
-                        </ul>
-                    </div>
-            </div>
-            <div class="sidebarblock">
-                <h3>Try more classrooms</h3>
-                <div class="divline"></div>
-                <div class="blocktxt">
-                    <ul class="cats" ng-repeat="room in roomList">
-                        <li><a ng-href="#{{room.name}}" ng-bind="room.name"></a></li>
-                    </ul>
                 </div>
-            </div>
+
         </div>
 
         <!-- Main Content -->
@@ -170,6 +181,9 @@
                             <li role="presentation" ng-class="{active: input.type=='polling'}"><a src="javascript:void(0)" ng-click="input.type='polling'">New Polling</a></li>
                         </ul>
                     </div>
+
+
+
                     <!-- New Question -->
                     <div id="question">
                         <div class="form-group">
@@ -233,22 +247,31 @@
                         </div>
                         <!-- Right content of question -->
                         <div class="question-right container-fluid">
-                            <h2 head>
+                            <p head class="outheader">
                                 <span class="label label-danger" ng-show="todo.new">New</span>
                                 <span class="iconStyle glyphicon glyphicon-question-sign"></span>
                                 <span ng-bind-html="todo.head">Header</span>
                                 <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
                                 <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-                            </h2>
+                            </p>
                             <div ng-repeat="choice in todo.choices">
-                                <a class="vote" ng-click="(!$storage[todo._id]) ? selectChoice(choice, $parent.todo) : void(0)" ng-class="{enabled: (!$storage[todo._id])}">
-                                    <label>{{choice.name}}</label>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{1 + 99 * choice.votes / $parent.todo.totalVote}}%;">
-                                        {{choice.votes}}
+                                <div class = row>
+                                    <div class="col-md-1"></div>
+                                    <div class = "col-md-4">
+                                    <input type="radio"  name="radio"
+                                           ng-click="(!$storage[todo._id]) ? selectChoice(choice, $parent.todo) : void(0)"
+                                           ng-class="{enabled: (!$storage[todo._id])}">
+                                    <label>&nbsp; {{choice.name}}</label></input>
+                                    </div>
+                                    <div class="progress col-md-4">
+                                        <div class="progress-bar" role="progressbar"
+                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{1 + 99 * choice.votes / $parent.todo.totalVote}}%;">
+                                            {{choice.votes}}
                                         </div>
                                     </div>
-                                </a>
+                                    <div class="col-md-3"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -276,9 +299,9 @@
                                         <img class="media-object avatar" ng-src="{{reply.user.photo}}" src="img/avatar.png" width=50 height=50 alt="..."/>
                                     </a>
                                 </div>
-                                <div class="media-body">
+                                <p class="question-right-reply container-fluid media-body">
                                     {{reply.content}}
-                                </div>
+                                </p>
                             </div>
                         </div>
                         <div class="add-reply">
@@ -320,13 +343,13 @@
                         </div>
                         <!-- Right content of question -->
                         <div class="question-right container-fluid">
-                            <h2 head>
+                            <p head class = "outheader">
                                 <span class="label label-danger" ng-show="todo.new">New</span>
                                 <span class="iconStyle glyphicon glyphicon-question-sign"></span>
                                 <span ng-bind-html="todo.head">Header</span>
                                 <span ng-switch-when="?" class="iconStyle glyphicon glyphicon-question-sign"></span>
                                 <span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-                            </h2>
+                            </p>
                             <p content ng-bind-html="todo.linkedDesc">
                                 Description. Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.Puma's are large, cat-like animals which are found in America. When reports came into London zoo that a wild puma has been spotted 45 miles south of London, they were not taken seriously. However, when evidence began to accumulate, the experts at the zoo felt obliged to investigate.
                             </p>
