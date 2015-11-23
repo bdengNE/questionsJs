@@ -160,7 +160,7 @@ describe('TodoCtrl', function() {
 
 
       })
-
+/*
       it('doneEditing testing',function(){
         var ctrl = controller('TodoCtrl', {
           $scope: scope,
@@ -204,6 +204,7 @@ describe('TodoCtrl', function() {
 
 
       })
+*/
       it('autoscroll Testing part1', function() {
 
         var ctrl = controller('TodoCtrl', {

@@ -298,24 +298,25 @@ function ($rootScope, $scope, $location, $http, $sce, $localStorage, $window) {
 	};
 
 	//CUSTOM method for our new RESTAPI
-	// $scope.doneEditing = function (todo) {
-	// 	todo.desc = todo.desc.trim();
-	// 	if (todo.desc) {
-	// 		//update the todo
-	// 		$http.post(backendUrl+'/api/questions/'+todo._id, todo)
-	// 		.success(function(data) {
-	// 			$scope.editedTodo = null;
-	// 			getQuestions();
-	// 		})
-	// 		.error(function(data) {
-	// 			console.log('Error: ' + data);
-	// 		});
-	// 	} else {
-	// 		//remove the todo
-	// 		$scope.removeTodo(todo);
-	// 	}
-	// };
-
+	/*
+	$scope.doneEditing = function (todo) {
+		todo.desc = todo.desc.trim();
+	 	if (todo.desc) {
+	 		//update the todo
+	 		$http.post(backendUrl+'/api/questions/'+todo._id, todo)
+	 		.success(function(data) {
+	 			$scope.editedTodo = null;
+	 			getQuestions();
+	 		})
+			.error(function(data) {
+	 			console.log('Error: ' + data);
+	 		});
+	 	} else {
+	 		//remove the todo
+	 		$scope.removeTodo(todo);
+	 	}
+	};
+	*/
 	//ADAPTED for RESTAPI
 	$scope.addEcho = function (todo) {
 		$http.get(backendUrl+'/api/questions/' + todo._id + "/add-echo")
@@ -478,5 +479,27 @@ function ($rootScope, $scope, $location, $http, $sce, $localStorage, $window) {
 		returnFBusername();
     //call it here
 	});*/
+
+	// This function exists for testing
+	$scope.getFirstAndRestSentence = function($string) {
+	var head = $string;
+	var desc = "";
+
+	var separators = [". ", "? ", "! ", '\n'];
+
+	var firstIndex = -1;
+	for (var i in separators) {
+		var index = $string.indexOf(separators[i]);
+		if (index == -1) continue;
+		if (firstIndex == -1) {firstIndex = index; continue;}
+		if (firstIndex > index) {firstIndex = index;}
+	}
+
+	if (firstIndex !=-1) {
+		head = $string.slice(0, firstIndex+1);
+		desc = $string.slice(firstIndex+1);
+	}
+	return [head, desc];
+};
 
 }]);
